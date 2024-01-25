@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29391a5366d28b946a24ad2dc5995fad, type: 3}
+  m_Name: "1_\u82AF\u6167\u63A2\u671B"
+  m_EditorClassIdentifier: 
+  _so: {fileID: 11400000}
+  _name: "\u82AF\u6167\u63A2\u671B"
+  id: 1
+  _sceneContent: {fileID: 8073558838520778418, guid: 88c97710b2c29a445b6fd3a29c92596b, type: 3}
+  Type: 1
+  Left:
+    Type: 2
+    Role: {fileID: 11400000, guid: b4716af195d5b4f46adfcc65f2f51ca4, type: 2}
+    Demo:
+      Header:
+        Text: []
+      Lines:
+        Text:
+        - ......
+  Right:
+    Type: 0
+    Role: {fileID: 0}
+    Demo:
+      Header:
+        Text: []
+      Lines:
+        Text: []
+  Solo:
+    Type: 0
+    Role: {fileID: 0}
+    Demo:
+      Header:
+        Text: []
+      Lines:
+        Text: []
+  Description: "\u8FD9\u662F\u54E5\u54E5\u5E26\u6765\u7684\u8BFB\u4E66\u4EBA?"

@@ -1,0 +1,1528 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7766168684631496820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22b3ef83a32156d4292a09405c7bc460, type: 3}
+  m_Name: "40_\u81EA\u7531\u6D3B\u52A8_Options"
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 520, y: -1272}
+  folded: 0
+  ports:
+    keys:
+    - _next
+    values:
+    - _fieldName: _next
+      _node: {fileID: -7766168684631496820}
+      _typeQualifiedName: OccasionNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: SoloInteraction
+        node: {fileID: 7502765753103980561}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  _next: {fileID: 7502765753103980561}
+  _interactionType: 1
+  _orientation:
+    Face: []
+    Back: []
+  _options:
+    Default:
+      Label: "\u7761\u89C9"
+      Results:
+      - Tag: {fileID: 11400000, guid: 949d2ca2bdcc55e418405d6f564eb050, type: 2}
+        Value: 2
+    Options: []
+--- !u!114 &-7759707305521945398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c705a74e4cd84f438af884c5425cb54, type: 3}
+  m_Name: "40_\u81EA\u7531\u6D3B\u52A8"
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -168, y: -616}
+  folded: 0
+  ports:
+    keys:
+    - _prev
+    - _next
+    - Occasion
+    - _prev 0
+    - _next 0
+    - _prev 1
+    values:
+    - _fieldName: _prev
+      _node: {fileID: -7759707305521945398}
+      _typeQualifiedName: EpisodeNodeBase[], _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _next
+      _node: {fileID: -7759707305521945398}
+      _typeQualifiedName: EpisodeNodeBase[], _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Occasion
+      _node: {fileID: -7759707305521945398}
+      _typeQualifiedName: OccasionNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: Node
+        node: {fileID: 9050995437444371866}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _prev 0
+      _node: {fileID: -7759707305521945398}
+      _typeQualifiedName: EpisodeNodeBase[], _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _next 0
+        node: {fileID: -6692404964994340398}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: _next 0
+      _node: {fileID: -7759707305521945398}
+      _typeQualifiedName: EpisodeNodeBase, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _prev 0
+        node: {fileID: 3907797210872842091}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: _prev 1
+      _node: {fileID: -7759707305521945398}
+      _typeQualifiedName: EpisodeNodeBase[], _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _next 0
+        node: {fileID: -7288623482229755542}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+  Occasion: {fileID: 9050995437444371866}
+  _prev:
+  - {fileID: -6692404964994340398}
+  - {fileID: -7288623482229755542}
+  _next:
+  - {fileID: 3907797210872842091}
+--- !u!114 &-7288623482229755542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c705a74e4cd84f438af884c5425cb54, type: 3}
+  m_Name: "32_\u82AF\u6167\u9001\u996D"
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -483.14432, y: -323.93546}
+  folded: 0
+  ports:
+    keys:
+    - _prev
+    - _next
+    - Occasion
+    - _prev 0
+    - _next 0
+    values:
+    - _fieldName: _prev
+      _node: {fileID: -7288623482229755542}
+      _typeQualifiedName: EpisodeNodeBase[], _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _next
+      _node: {fileID: -7288623482229755542}
+      _typeQualifiedName: EpisodeNodeBase[], _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Occasion
+      _node: {fileID: -7288623482229755542}
+      _typeQualifiedName: OccasionNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: Node
+        node: {fileID: 3459693399802653469}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _prev 0
+      _node: {fileID: -7288623482229755542}
+      _typeQualifiedName: EpisodeNodeBase[], _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _next 0
+        node: {fileID: 6077990464565235665}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: _next 0
+      _node: {fileID: -7288623482229755542}
+      _typeQualifiedName: EpisodeNodeBase, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _prev 1
+        node: {fileID: -7759707305521945398}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+  Occasion: {fileID: 3459693399802653469}
+  _prev:
+  - {fileID: 6077990464565235665}
+  _next:
+  - {fileID: -7759707305521945398}
+--- !u!114 &-6692404964994340398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c705a74e4cd84f438af884c5425cb54, type: 3}
+  m_Name: "31_\u4FEE\u6167\u9001\u996D"
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -520, y: -648}
+  folded: 0
+  ports:
+    keys:
+    - _prev
+    - _next
+    - Occasion
+    - _prev 0
+    - _next 0
+    values:
+    - _fieldName: _prev
+      _node: {fileID: -6692404964994340398}
+      _typeQualifiedName: EpisodeNodeBase[], _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _next
+      _node: {fileID: -6692404964994340398}
+      _typeQualifiedName: EpisodeNodeBase[], _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Occasion
+      _node: {fileID: -6692404964994340398}
+      _typeQualifiedName: OccasionNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: Node
+        node: {fileID: 8719750171953061481}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _prev 0
+      _node: {fileID: -6692404964994340398}
+      _typeQualifiedName: EpisodeNodeBase[], _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _next 0
+        node: {fileID: -4896857159236409387}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: _next 0
+      _node: {fileID: -6692404964994340398}
+      _typeQualifiedName: EpisodeNodeBase, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _prev 0
+        node: {fileID: -7759707305521945398}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+  Occasion: {fileID: 8719750171953061481}
+  _prev:
+  - {fileID: -4896857159236409387}
+  _next:
+  - {fileID: -7759707305521945398}
+--- !u!114 &-6420307706426898154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dcf22bee2529e1438adb5717b81fd65, type: 3}
+  m_Name: "22_\u6797\u5BB6\u59D0\u59B9\u82B1_Occasion"
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -1176, y: -216}
+  folded: 0
+  ports:
+    keys:
+    - Node
+    - SoloInteraction
+    - LeftInteraction
+    - RightInteraction
+    values:
+    - _fieldName: Node
+      _node: {fileID: -6420307706426898154}
+      _typeQualifiedName: EpisodeNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: Occasion
+        node: {fileID: 6077990464565235665}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: SoloInteraction
+      _node: {fileID: -6420307706426898154}
+      _typeQualifiedName: InteractionNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: LeftInteraction
+      _node: {fileID: -6420307706426898154}
+      _typeQualifiedName: InteractionNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: RightInteraction
+      _node: {fileID: -6420307706426898154}
+      _typeQualifiedName: InteractionNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  So: {fileID: 11400000, guid: 1ea87e312ddc9704f8316add4bffb29c, type: 2}
+  Node: {fileID: 6077990464565235665}
+  Set:
+    Type: 0
+    Solo:
+      Type: 0
+      Role: {fileID: 0}
+    Left:
+      Type: 2
+      Role: {fileID: 0}
+    Right:
+      Type: 2
+      Role: {fileID: 0}
+  SoloInteraction: {fileID: 0}
+  LeftInteraction: {fileID: 0}
+  RightInteraction: {fileID: 0}
+--- !u!114 &-5750143295724829005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22b3ef83a32156d4292a09405c7bc460, type: 3}
+  m_Name: "40_\u81EA\u7531\u6D3B\u52A8_Options"
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 152, y: -1288}
+  folded: 0
+  ports:
+    keys:
+    - _next
+    values:
+    - _fieldName: _next
+      _node: {fileID: -5750143295724829005}
+      _typeQualifiedName: OccasionNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: SoloInteraction
+        node: {fileID: 309493938915219828}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  _next: {fileID: 309493938915219828}
+  _interactionType: 1
+  _orientation:
+    Face: []
+    Back: []
+  _options:
+    Default:
+      Label: "\u7761\u89C9"
+      Results:
+      - Tag: {fileID: 11400000, guid: 949d2ca2bdcc55e418405d6f564eb050, type: 2}
+        Value: 2
+    Options: []
+--- !u!114 &-4896857159236409387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c705a74e4cd84f438af884c5425cb54, type: 3}
+  m_Name: "21_\u6797\u5BB6\u59D0\u59B9\u82B1"
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -856, y: -712}
+  folded: 0
+  ports:
+    keys:
+    - _prev
+    - _next
+    - Occasion
+    - _prev 0
+    - _next 0
+    values:
+    - _fieldName: _prev
+      _node: {fileID: -4896857159236409387}
+      _typeQualifiedName: EpisodeNodeBase[], _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _next
+      _node: {fileID: -4896857159236409387}
+      _typeQualifiedName: EpisodeNodeBase[], _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Occasion
+      _node: {fileID: -4896857159236409387}
+      _typeQualifiedName: OccasionNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: Node
+        node: {fileID: 2478379968462466750}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _prev 0
+      _node: {fileID: -4896857159236409387}
+      _typeQualifiedName: EpisodeNodeBase[], _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _next 0
+        node: {fileID: 726135271940830063}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: _next 0
+      _node: {fileID: -4896857159236409387}
+      _typeQualifiedName: EpisodeNodeBase, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _prev 0
+        node: {fileID: -6692404964994340398}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+  Occasion: {fileID: 2478379968462466750}
+  _prev:
+  - {fileID: 726135271940830063}
+  _next:
+  - {fileID: -6692404964994340398}
+--- !u!114 &-2376570413203001196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b08480ee700d70419134c562e461bb1, type: 3}
+  m_Name: "22_\u6797\u5BB6\u59D0\u59B9\u82B1_Plot"
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -1176, y: -488}
+  folded: 0
+  ports:
+    keys:
+    - _prev
+    - _next
+    values:
+    - _fieldName: _prev
+      _node: {fileID: -2376570413203001196}
+      _typeQualifiedName: EpisodeNodeBase, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _next 1
+        node: {fileID: 726135271940830063}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _next
+      _node: {fileID: -2376570413203001196}
+      _typeQualifiedName: EpisodeNodeBase, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _prev 0
+        node: {fileID: 6077990464565235665}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  _prev: {fileID: 726135271940830063}
+  _conditions:
+  - PlotTag: {fileID: 11400000, guid: 350d39e9bf0185c4daa88a8f0f2663c3, type: 2}
+    Compare: 0
+    Value: 0
+  "\u4F18\u5148": 1
+  _next: {fileID: 6077990464565235665}
+--- !u!114 &-939915819503644074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22b3ef83a32156d4292a09405c7bc460, type: 3}
+  m_Name: "1_\u82AF\u6167\u63A2\u671B_Orientation"
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -1528, y: -616}
+  folded: 0
+  ports:
+    keys:
+    - _next
+    values:
+    - _fieldName: _next
+      _node: {fileID: -939915819503644074}
+      _typeQualifiedName: OccasionNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: RightInteraction
+        node: {fileID: 3484558066593358441}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  _next: {fileID: 3484558066593358441}
+  _interactionType: 0
+  _orientation:
+    Face: []
+    Back:
+    - Tag: {fileID: 11400000, guid: 350d39e9bf0185c4daa88a8f0f2663c3, type: 2}
+      Value: 0
+  _options:
+    Default:
+      Label: 
+      Results: []
+    Options: []
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc9e77d3ae9774e42af2e30b5c7bd30c, type: 3}
+  m_Name: "0#\u5B9D\u6A1F\u5BEE"
+  m_EditorClassIdentifier: 
+  nodes:
+  - {fileID: 3484558066593358441}
+  - {fileID: 726135271940830063}
+  - {fileID: -939915819503644074}
+  - {fileID: 2478379968462466750}
+  - {fileID: -4896857159236409387}
+  - {fileID: -6692404964994340398}
+  - {fileID: 8719750171953061481}
+  - {fileID: -7759707305521945398}
+  - {fileID: 9050995437444371866}
+  - {fileID: 309493938915219828}
+  - {fileID: 3907797210872842091}
+  - {fileID: 1085030388865749270}
+  - {fileID: 7502765753103980561}
+  - {fileID: 5505256115319369660}
+  - {fileID: -7766168684631496820}
+  - {fileID: -5750143295724829005}
+  - {fileID: -6420307706426898154}
+  - {fileID: 6077990464565235665}
+  - {fileID: -2376570413203001196}
+  - {fileID: -7288623482229755542}
+  - {fileID: 3459693399802653469}
+  _so: {fileID: 11400000}
+  _name: "\u5B9D\u6A1F\u5BEE"
+  id: 0
+  Brief: "\u8FD9\u662F\u4E00\u4E2A\u79BB\u60E0\u6765\u9547\u4E0D\u8FDC\u7684\u5F3A\u76D7\u7A9D\u3002
+    \u4F46\u8FD9\u91CC\u7684\u5C45\u6C11\u5FC3\u5730\u5374\u5F88\u5584\u826F\u3002"
+--- !u!114 &309493938915219828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dcf22bee2529e1438adb5717b81fd65, type: 3}
+  m_Name: "40_\u81EA\u7531\u6D3B\u52A8_Occasion"
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 152, y: -936}
+  folded: 0
+  ports:
+    keys:
+    - Node
+    - SoloInteraction
+    - LeftInteraction
+    - RightInteraction
+    values:
+    - _fieldName: Node
+      _node: {fileID: 309493938915219828}
+      _typeQualifiedName: EpisodeNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: Occasion
+        node: {fileID: 3907797210872842091}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: SoloInteraction
+      _node: {fileID: 309493938915219828}
+      _typeQualifiedName: InteractionNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _next
+        node: {fileID: -5750143295724829005}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: LeftInteraction
+      _node: {fileID: 309493938915219828}
+      _typeQualifiedName: InteractionNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: RightInteraction
+      _node: {fileID: 309493938915219828}
+      _typeQualifiedName: InteractionNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  So: {fileID: 11400000, guid: 7d21c6e372bbc074b938a87048bc7677, type: 2}
+  Node: {fileID: 3907797210872842091}
+  Set:
+    Type: 0
+    Solo:
+      Type: 0
+      Role: {fileID: 0}
+    Left:
+      Type: 0
+      Role: {fileID: 0}
+    Right:
+      Type: 0
+      Role: {fileID: 0}
+  SoloInteraction: {fileID: -5750143295724829005}
+  LeftInteraction: {fileID: 0}
+  RightInteraction: {fileID: 0}
+--- !u!114 &726135271940830063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84fa194c541ed574b938132d0fd537b2, type: 3}
+  m_Name: "1_\u82AF\u6167\u63A2\u671B"
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -1144, y: -728}
+  folded: 0
+  ports:
+    keys:
+    - _next
+    - Occasion
+    - _next 0
+    - _next 1
+    values:
+    - _fieldName: _next
+      _node: {fileID: 726135271940830063}
+      _typeQualifiedName: EpisodeNodeBase[], _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Occasion
+      _node: {fileID: 726135271940830063}
+      _typeQualifiedName: OccasionNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: Node
+        node: {fileID: 3484558066593358441}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _next 0
+      _node: {fileID: 726135271940830063}
+      _typeQualifiedName: EpisodeNodeBase, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _prev 0
+        node: {fileID: -4896857159236409387}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: _next 1
+      _node: {fileID: 726135271940830063}
+      _typeQualifiedName: EpisodeNodeBase, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _prev
+        node: {fileID: -2376570413203001196}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+  Occasion: {fileID: 3484558066593358441}
+  _next:
+  - {fileID: -4896857159236409387}
+  - {fileID: 6077990464565235665}
+--- !u!114 &1085030388865749270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbd49695ddcae044a86678b983b1e0b5, type: 3}
+  m_Name: "40_\u81EA\u7531\u6D3B\u52A8"
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 504, y: -536}
+  folded: 0
+  ports:
+    keys:
+    - _prev
+    - Occasion
+    - _prev 0
+    values:
+    - _fieldName: _prev
+      _node: {fileID: 1085030388865749270}
+      _typeQualifiedName: EpisodeNodeBase[], _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Occasion
+      _node: {fileID: 1085030388865749270}
+      _typeQualifiedName: OccasionNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: Node
+        node: {fileID: 7502765753103980561}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _prev 0
+      _node: {fileID: 1085030388865749270}
+      _typeQualifiedName: EpisodeNodeBase[], _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _next 0
+        node: {fileID: 3907797210872842091}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+  Occasion: {fileID: 7502765753103980561}
+  _prev:
+  - {fileID: 3907797210872842091}
+--- !u!114 &2478379968462466750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dcf22bee2529e1438adb5717b81fd65, type: 3}
+  m_Name: "21_\u6797\u5BB6\u59D0\u59B9\u82B1_Occasion"
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -936, y: -1000}
+  folded: 0
+  ports:
+    keys:
+    - Node
+    - SoloInteraction
+    - LeftInteraction
+    - RightInteraction
+    values:
+    - _fieldName: Node
+      _node: {fileID: 2478379968462466750}
+      _typeQualifiedName: EpisodeNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: Occasion
+        node: {fileID: -4896857159236409387}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: SoloInteraction
+      _node: {fileID: 2478379968462466750}
+      _typeQualifiedName: InteractionNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: LeftInteraction
+      _node: {fileID: 2478379968462466750}
+      _typeQualifiedName: InteractionNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: RightInteraction
+      _node: {fileID: 2478379968462466750}
+      _typeQualifiedName: InteractionNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  So: {fileID: 11400000, guid: 78b2659d9a307c9458899bb9eaa4c6b3, type: 2}
+  Node: {fileID: -4896857159236409387}
+  Set:
+    Type: 0
+    Solo:
+      Type: 0
+      Role: {fileID: 0}
+    Left:
+      Type: 2
+      Role: {fileID: 0}
+    Right:
+      Type: 2
+      Role: {fileID: 0}
+  SoloInteraction: {fileID: 0}
+  LeftInteraction: {fileID: 0}
+  RightInteraction: {fileID: 0}
+--- !u!114 &3459693399802653469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dcf22bee2529e1438adb5717b81fd65, type: 3}
+  m_Name: "32_\u82AF\u6167\u9001\u996D_Occasion"
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -792, y: -152}
+  folded: 0
+  ports:
+    keys:
+    - Node
+    - SoloInteraction
+    - LeftInteraction
+    - RightInteraction
+    values:
+    - _fieldName: Node
+      _node: {fileID: 3459693399802653469}
+      _typeQualifiedName: EpisodeNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: Occasion
+        node: {fileID: -7288623482229755542}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: SoloInteraction
+      _node: {fileID: 3459693399802653469}
+      _typeQualifiedName: InteractionNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: LeftInteraction
+      _node: {fileID: 3459693399802653469}
+      _typeQualifiedName: InteractionNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: RightInteraction
+      _node: {fileID: 3459693399802653469}
+      _typeQualifiedName: InteractionNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  So: {fileID: 11400000, guid: 480801ed25764674f9d7f4dcdc94730f, type: 2}
+  Node: {fileID: -7288623482229755542}
+  Set:
+    Type: 0
+    Solo:
+      Type: 0
+      Role: {fileID: 0}
+    Left:
+      Type: 2
+      Role: {fileID: 0}
+    Right:
+      Type: 0
+      Role: {fileID: 0}
+  SoloInteraction: {fileID: 0}
+  LeftInteraction: {fileID: 0}
+  RightInteraction: {fileID: 0}
+--- !u!114 &3484558066593358441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dcf22bee2529e1438adb5717b81fd65, type: 3}
+  m_Name: "1_\u82AF\u6167\u63A2\u671B_Occasion"
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -1528, y: -856}
+  folded: 0
+  ports:
+    keys:
+    - Node
+    - SoloInteraction
+    - LeftInteraction
+    - RightInteraction
+    values:
+    - _fieldName: Node
+      _node: {fileID: 3484558066593358441}
+      _typeQualifiedName: EpisodeNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: Occasion
+        node: {fileID: 726135271940830063}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: SoloInteraction
+      _node: {fileID: 3484558066593358441}
+      _typeQualifiedName: InteractionNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: LeftInteraction
+      _node: {fileID: 3484558066593358441}
+      _typeQualifiedName: InteractionNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: RightInteraction
+      _node: {fileID: 3484558066593358441}
+      _typeQualifiedName: InteractionNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _next
+        node: {fileID: -939915819503644074}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  So: {fileID: 11400000, guid: e6b56662fc57f0c46abb7ca76c96ee0f, type: 2}
+  Node: {fileID: 726135271940830063}
+  Set:
+    Type: 0
+    Solo:
+      Type: 0
+      Role: {fileID: 0}
+    Left:
+      Type: 2
+      Role: {fileID: 0}
+    Right:
+      Type: 0
+      Role: {fileID: 0}
+  SoloInteraction: {fileID: 0}
+  LeftInteraction: {fileID: 0}
+  RightInteraction: {fileID: -939915819503644074}
+--- !u!114 &3907797210872842091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c705a74e4cd84f438af884c5425cb54, type: 3}
+  m_Name: "40_\u81EA\u7531\u6D3B\u52A8"
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 168, y: -616}
+  folded: 0
+  ports:
+    keys:
+    - _prev
+    - _next
+    - Occasion
+    - _prev 0
+    - _next 0
+    values:
+    - _fieldName: _prev
+      _node: {fileID: 3907797210872842091}
+      _typeQualifiedName: EpisodeNodeBase[], _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _next
+      _node: {fileID: 3907797210872842091}
+      _typeQualifiedName: EpisodeNodeBase[], _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Occasion
+      _node: {fileID: 3907797210872842091}
+      _typeQualifiedName: OccasionNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: Node
+        node: {fileID: 309493938915219828}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _prev 0
+      _node: {fileID: 3907797210872842091}
+      _typeQualifiedName: EpisodeNodeBase[], _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _next 0
+        node: {fileID: -7759707305521945398}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: _next 0
+      _node: {fileID: 3907797210872842091}
+      _typeQualifiedName: EpisodeNodeBase, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _prev 0
+        node: {fileID: 1085030388865749270}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+  Occasion: {fileID: 309493938915219828}
+  _prev:
+  - {fileID: -7759707305521945398}
+  _next:
+  - {fileID: 1085030388865749270}
+--- !u!114 &5505256115319369660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22b3ef83a32156d4292a09405c7bc460, type: 3}
+  m_Name: "40_\u81EA\u7531\u6D3B\u52A8_Options"
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -232, y: -1400}
+  folded: 0
+  ports:
+    keys:
+    - _next
+    values:
+    - _fieldName: _next
+      _node: {fileID: 5505256115319369660}
+      _typeQualifiedName: OccasionNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: SoloInteraction
+        node: {fileID: 9050995437444371866}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  _next: {fileID: 9050995437444371866}
+  _interactionType: 1
+  _orientation:
+    Face: []
+    Back: []
+  _options:
+    Default:
+      Label: 
+      Results: []
+    Options:
+    - Label: "\u7761\u89C9"
+      Results:
+      - Tag: {fileID: 11400000, guid: 949d2ca2bdcc55e418405d6f564eb050, type: 2}
+        Value: 2
+--- !u!114 &6077990464565235665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c705a74e4cd84f438af884c5425cb54, type: 3}
+  m_Name: "22_\u6797\u5BB6\u59D0\u59B9\u82B1"
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -792, y: -408}
+  folded: 0
+  ports:
+    keys:
+    - _prev
+    - _next
+    - Occasion
+    - _prev 0
+    - _next 0
+    values:
+    - _fieldName: _prev
+      _node: {fileID: 6077990464565235665}
+      _typeQualifiedName: EpisodeNodeBase[], _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _next
+      _node: {fileID: 6077990464565235665}
+      _typeQualifiedName: EpisodeNodeBase[], _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Occasion
+      _node: {fileID: 6077990464565235665}
+      _typeQualifiedName: OccasionNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: Node
+        node: {fileID: -6420307706426898154}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: _prev 0
+      _node: {fileID: 6077990464565235665}
+      _typeQualifiedName: EpisodeNodeBase[], _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _next
+        node: {fileID: -2376570413203001196}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+    - _fieldName: _next 0
+      _node: {fileID: 6077990464565235665}
+      _typeQualifiedName: EpisodeNodeBase, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _prev 0
+        node: {fileID: -7288623482229755542}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 1
+  Occasion: {fileID: -6420307706426898154}
+  _prev:
+  - {fileID: 726135271940830063}
+  _next:
+  - {fileID: -7288623482229755542}
+--- !u!114 &7502765753103980561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dcf22bee2529e1438adb5717b81fd65, type: 3}
+  m_Name: "40_\u81EA\u7531\u6D3B\u52A8_Occasion"
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 504, y: -936}
+  folded: 0
+  ports:
+    keys:
+    - Node
+    - SoloInteraction
+    - LeftInteraction
+    - RightInteraction
+    values:
+    - _fieldName: Node
+      _node: {fileID: 7502765753103980561}
+      _typeQualifiedName: EpisodeNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: Occasion
+        node: {fileID: 1085030388865749270}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: SoloInteraction
+      _node: {fileID: 7502765753103980561}
+      _typeQualifiedName: InteractionNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _next
+        node: {fileID: -7766168684631496820}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: LeftInteraction
+      _node: {fileID: 7502765753103980561}
+      _typeQualifiedName: InteractionNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: RightInteraction
+      _node: {fileID: 7502765753103980561}
+      _typeQualifiedName: InteractionNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  So: {fileID: 11400000, guid: 7d21c6e372bbc074b938a87048bc7677, type: 2}
+  Node: {fileID: 1085030388865749270}
+  Set:
+    Type: 0
+    Solo:
+      Type: 0
+      Role: {fileID: 0}
+    Left:
+      Type: 0
+      Role: {fileID: 0}
+    Right:
+      Type: 0
+      Role: {fileID: 0}
+  SoloInteraction: {fileID: -7766168684631496820}
+  LeftInteraction: {fileID: 0}
+  RightInteraction: {fileID: 0}
+--- !u!114 &8719750171953061481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dcf22bee2529e1438adb5717b81fd65, type: 3}
+  m_Name: "31_\u4FEE\u6167\u9001\u996D_Occasion"
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -568, y: -984}
+  folded: 0
+  ports:
+    keys:
+    - Node
+    - SoloInteraction
+    - LeftInteraction
+    - RightInteraction
+    values:
+    - _fieldName: Node
+      _node: {fileID: 8719750171953061481}
+      _typeQualifiedName: EpisodeNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: Occasion
+        node: {fileID: -6692404964994340398}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: SoloInteraction
+      _node: {fileID: 8719750171953061481}
+      _typeQualifiedName: InteractionNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: LeftInteraction
+      _node: {fileID: 8719750171953061481}
+      _typeQualifiedName: InteractionNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: RightInteraction
+      _node: {fileID: 8719750171953061481}
+      _typeQualifiedName: InteractionNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  So: {fileID: 11400000, guid: 3a64e193f2d19514b8689e12944154d0, type: 2}
+  Node: {fileID: -6692404964994340398}
+  Set:
+    Type: 0
+    Solo:
+      Type: 0
+      Role: {fileID: 0}
+    Left:
+      Type: 2
+      Role: {fileID: 0}
+    Right:
+      Type: 0
+      Role: {fileID: 0}
+  SoloInteraction: {fileID: 0}
+  LeftInteraction: {fileID: 0}
+  RightInteraction: {fileID: 0}
+--- !u!114 &9050995437444371866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dcf22bee2529e1438adb5717b81fd65, type: 3}
+  m_Name: "40_\u81EA\u7531\u6D3B\u52A8_Occasion"
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -232, y: -968}
+  folded: 0
+  ports:
+    keys:
+    - Node
+    - SoloInteraction
+    - LeftInteraction
+    - RightInteraction
+    values:
+    - _fieldName: Node
+      _node: {fileID: 9050995437444371866}
+      _typeQualifiedName: EpisodeNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: Occasion
+        node: {fileID: -7759707305521945398}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: SoloInteraction
+      _node: {fileID: 9050995437444371866}
+      _typeQualifiedName: InteractionNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: _next
+        node: {fileID: 5505256115319369660}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: LeftInteraction
+      _node: {fileID: 9050995437444371866}
+      _typeQualifiedName: InteractionNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: RightInteraction
+      _node: {fileID: 9050995437444371866}
+      _typeQualifiedName: InteractionNode, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+  So: {fileID: 11400000, guid: 7d21c6e372bbc074b938a87048bc7677, type: 2}
+  Node: {fileID: -7759707305521945398}
+  Set:
+    Type: 0
+    Solo:
+      Type: 0
+      Role: {fileID: 0}
+    Left:
+      Type: 0
+      Role: {fileID: 0}
+    Right:
+      Type: 0
+      Role: {fileID: 0}
+  SoloInteraction: {fileID: 5505256115319369660}
+  LeftInteraction: {fileID: 0}
+  RightInteraction: {fileID: 0}
