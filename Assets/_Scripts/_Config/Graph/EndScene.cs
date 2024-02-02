@@ -1,33 +1,13 @@
 ﻿using System;
 using _Data;
+using MyBox;
 using UnityEngine;
 using XNode;
 
-[CreateNodeMenu("EndScene"),NodeTint(0.5f, 0f, 0f)] public class EndScene : EpisodeNode
+[CreateNodeMenu("EndScene"),NodeTint(0.25f, 0.24f, 0.26f)] public class EndScene : ActiveEpisodeNode
 {
-    [Input(ShowBackingValue.Always,ConnectionType.Override,dynamicPortList = true),SerializeField] private EpisodeNodeBase[] _prev;
+    [Input(ShowBackingValue.Never),SerializeField,ReadOnly] private EpisodeNode _prev;
 
-    public override Occasion.Phase Phase => _Data.Occasion.Phase.End;
+    public override Occasion.Phase Phase => Occasion.Phase.End;
     public override IEpisodeNode[] GetNextNodes() => Array.Empty<IEpisodeNode>();
-
-    #region Node Connection
-    public override void OnCreateConnection(NodePort from, NodePort to)
-    {
-        OnPortConnected(to, nameof(_prev), () =>
-        {
-            var prevNode = from.node as EpisodeNodeBase;
-            prevNode?.SetNextNode(GetNameIndex(from), this);
-        });
-        base.OnCreateConnection(from, to);
-    }
-
-    public override void OnRemoveConnection(NodePort port)
-    {
-        OnPortDisconnected(nameof(_prev), () => _prev = null);
-        base.OnRemoveConnection(port);
-    }
-
-    public override void SetPrevNode(int index, EpisodeNodeBase node) => _prev[index] = node;
-    public override void SetNextNode(int index, EpisodeNodeBase node) => throw new System.NotImplementedException($"End node should not set Next! index = {index}");
-    #endregion
 }

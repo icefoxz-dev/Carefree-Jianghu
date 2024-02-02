@@ -1,6 +1,7 @@
 using System;
 using _Data;
 using _Game;
+using _Game._Models;
 using UniMvc.Views;
 using UnityEngine;
 using UnityEngine.Events;
@@ -12,7 +13,7 @@ namespace _Views.StoryPage
     public class View_Story : UiBase
     {
         private readonly Element_Occasion[] _occasions = new Element_Occasion[6];
-        public View_Story(IView v,UnityAction<(int occasionIndex, Role.Index roleIndex)> onRoleClickAction, bool display = true) : base(v, display)
+        public View_Story(IView v,UnityAction<(int occasionIndex, RolePlacing.Index roleIndex)> onRoleClickAction, bool display = true) : base(v, display)
         {
             for (var i = 0; i < _occasions.Length; i++)
             {
@@ -34,19 +35,19 @@ namespace _Views.StoryPage
         //    }
         //    throw new NullReferenceException($"No occasion set!");
         //}
-        public void SetEpisode(IEpisode ep)
+        public void SetEpisode(EpisodeBase ep)
         {
             for (var i = 0; i < _occasions.Length; i++)
             {
                 IOccasion oc = null;
-                if (i < ep.Occasions.Length) 
-                    oc = ep.Occasions[i];
+                if (i < ep.FrameMap.Count)
+                    oc = ep.FrameMap[i];
                 _occasions[i].Set(oc);
             }
         }
         public void OnOccasionUpdate(int occasionIndex)
         {
-            var oc = Game.World.CurrentEp.Occasions[occasionIndex];
+            var oc = Game.World.CurrentEp.FrameMap[occasionIndex];
             _occasions[occasionIndex].Set(oc);
         }
 
@@ -59,7 +60,7 @@ namespace _Views.StoryPage
                 var (isInFrame, placeIndex) = oc.UpdateFrame(pointerEventData);
                 if (isInFrame) return (index, placeIndex);
             }
-            return (-1,-1);
+            return (-1, -1);
         }
 
         //SetRole ? todo : 设定角色方法
@@ -80,11 +81,11 @@ namespace _Views.StoryPage
             private Image img_pic { get; }
             private Text text_brief { get; }
 
-            public Element_Occasion(IView v, UnityAction<Role.Index> onRoleClickAction, bool display = false) : base(v, display)
+            public Element_Occasion(IView v, UnityAction<RolePlacing.Index> onRoleClickAction, bool display = false) : base(v, display)
             {
-                element_role_left = new Element_Role(v.Get<View>("element_role_left"), () => onRoleClickAction(Role.Index.Left));
-                element_role_right = new Element_Role(v.Get<View>("element_role_right"), () => onRoleClickAction(Role.Index.Right));
-                element_role_solo = new Element_Role(v.Get<View>("element_role_solo"), () => onRoleClickAction(Role.Index.Solo));
+                element_role_left = new Element_Role(v.Get<View>("element_role_left"), RolePlacing.Index.Left, onRoleClickAction);
+                element_role_right = new Element_Role(v.Get<View>("element_role_right"), RolePlacing.Index.Right, onRoleClickAction);
+                element_role_solo = new Element_Role(v.Get<View>("element_role_solo"), RolePlacing.Index.Solo, onRoleClickAction);
                 view_frame = new View_Frame(v.Get<View>("view_frame"));
                 img_pic = v.Get<Image>("img_pic");
                 text_brief = v.Get<Text>("text_brief");
@@ -93,17 +94,19 @@ namespace _Views.StoryPage
 
             public (bool isInFrame, int placeIndex) UpdateFrame(PointerEventData pointerEventData)
             {
-                var isInFrame = RectTransformUtility.RectangleContainsScreenPoint(RectTransform, pointerEventData.position);
+                // 检查点是否在 RectTransform 内
+                bool isInFrame = RectTransformUtility.RectangleContainsScreenPoint(RectTransform, pointerEventData.position, Game.MainCamera);
+                //var isInFrame = RectTransformUtility.RectangleContainsScreenPoint(RectTransform, pointerEventData.position);
                 var roles = GetRolesByMode();
                 for (var index = 0; index < roles.Length; index++)
                 {
                     var role = roles[index];
                     var isInRoleFrame =
-                        RectTransformUtility.RectangleContainsScreenPoint(role.RectTransform,
-                            pointerEventData.position);
+                        RectTransformUtility.RectangleContainsScreenPoint(role.RectTransform, pointerEventData.position, Game.MainCamera);
+                    //RectTransformUtility.RectangleContainsScreenPoint(role.RectTransform, pointerEventData.position);
                     //Debug.Log($"{GameObject.name}.UpdateFrame: IsInFrame={isInFrame}, {role.GameObject.name} isInFrame = {isInRoleFrame}");
                     role.SetSelected(isInRoleFrame && isInFrame);
-                    if (isInRoleFrame && isInFrame) return (true, index);
+                    if (isInRoleFrame && isInFrame) return (true, (int)role.PlaceIndex);
                 }
                 return (isInFrame, -1);
             }
@@ -121,10 +124,10 @@ namespace _Views.StoryPage
 
             public void Set(IOccasion? oc)
             {
-                var mode = oc?.PlaceMode switch
+                var mode = oc?.Modes switch
                 {
-                    Occasion.PlaceMode.Versus => Modes.Versus,
-                    Occasion.PlaceMode.Solo => Modes.Solo,
+                    Occasion.Modes.Versus => Modes.Versus,
+                    Occasion.Modes.Solo => Modes.Solo,
                     _ => Modes.None
                 };
                 text_brief.text = oc?.Description ?? string.Empty;
@@ -141,16 +144,16 @@ namespace _Views.StoryPage
                             break;
                         case Modes.Versus:
                         {
-                            var leftRole = o.Roles[0];
-                            var rightRole = o.Roles[1];
-                            element_role_left.Set(leftRole);
-                            element_role_right.Set(rightRole);
+                            var leftChar = o.Interaction.GetCharacter(RolePlacing.Index.Left);
+                            var rightChar = o.Interaction.GetCharacter(RolePlacing.Index.Right);
+                            element_role_left.Set(leftChar);
+                            element_role_right.Set(rightChar);
                             break;
                         }
                         case Modes.Solo:
                         {
-                            var soloRole = o.Roles[0];
-                            element_role_solo.Set(soloRole);
+                            var soloChar = o.Interaction.GetCharacter(RolePlacing.Index.Solo);
+                            element_role_solo.Set(soloChar);
                             break;
                         }
                         default:
@@ -172,21 +175,23 @@ namespace _Views.StoryPage
             {
                 private Prefab_RolePlay prefab_rolePlay { get; }
                 private Image img_selected { get; }
+                public RolePlacing.Index PlaceIndex { get; }
 
-                public Element_Role(IView v, UnityAction onclickAction, bool display = false) : base(v, display)
+                public Element_Role(IView v, RolePlacing.Index index ,UnityAction<RolePlacing.Index> onclickAction, bool display = false) : base(v, display)
                 {
-                    prefab_rolePlay = new Prefab_RolePlay(v.Get<View>("prefab_rolePlay"), onclickAction);
+                    PlaceIndex = index;
+                    prefab_rolePlay = new Prefab_RolePlay(v.Get<View>("prefab_rolePlay"), () => onclickAction(PlaceIndex));
                     img_selected = v.Get<Image>("img_selected");
                 }
 
-                public void Set(IRolePlay? role)
+                public void Set(ICharacter character)
                 {
-                    if(role is null)
+                    if(character is null)
                     {
                         prefab_rolePlay.ResetUi();
                         return;
                     }
-                    prefab_rolePlay.Set(role);
+                    prefab_rolePlay.Set(character);
                 }
 
                 public void SetSelected(bool selected) => img_selected.gameObject.SetActive(selected);
@@ -208,11 +213,11 @@ namespace _Views.StoryPage
                         btn_click.onClick.AddListener(onclickAction);
                     }
 
-                    public void Set(IRolePlay rolePlay)
+                    public void Set(ICharacter character)
                     {
                         element_text_header.Set(string.Empty);
-                        element_text_name.Set(rolePlay.Name);
-                        element_text_message.Set(rolePlay.Description);
+                        element_text_name.Set(character.Name);
+                        element_text_message.Set(character.Description);
                     }
 
                     public override void ResetUi()

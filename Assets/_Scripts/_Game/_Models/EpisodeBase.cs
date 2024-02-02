@@ -5,37 +5,37 @@ using _Data;
 namespace _Game._Models
 {
     /// <summary>
-    /// 剧集, 这个类代表故事的一个独立片段。它是玩家在特定场景中交互的基本单位，根据故事的配置和玩家的行为确定下一步的故事走向。<see cref="IPlot"/>
+    /// 剧集, 这个类代表故事的一个独立片段。它是玩家在特定场景中交互的基本单位，根据故事的配置和玩家的行为确定下一步的故事走向。
     /// </summary>
-    public abstract class EpisodeBase : ModelBase, IPlot, IEpisode
+    public abstract class EpisodeBase : ModelBase, IEpisode
     {
-        public abstract int Id { get; }
+
+        public int Id { get; }
         public string Brief { get; }
-        IOccasion[] IEpisode.Occasions => Occasions;
+        public Dictionary<int, List<IEpisodeNode>> Map { get; }
+        public Dictionary<int,EpisodeFrame> FrameMap { get; }
 
-        protected abstract EpisodeFrame[] Occasions { get; }
-        public abstract IPlot Next();
-
-        public EpisodeFrame GetOccasion(int index) => Occasions[index];
-
-        public void SetOccasion(int occasionIndex, int placeIndex, RolePlay rolePlay)
+        protected EpisodeBase(IEpisode ep)
         {
-            Occasions[occasionIndex].SetRole(rolePlay, placeIndex);
+            Id = ep.Id;
+            Brief = ep.Brief;
+            Map = ep.Map;
+            FrameMap = new Dictionary<int, EpisodeFrame>();
+            foreach (var pair in Map)
+                FrameMap.Add(pair.Key, new EpisodeFrame(pair.Value[0].Occasion, pair.Key));
+        }
+
+        public void SetOccasion(int occasionIndex, RolePlacing.Index place, Character character)
+        {
+            FrameMap[occasionIndex].PlaceCharacter(place,character);
             SendEvent(GameEvent.Episode_Occasion_Update, occasionIndex);
         }
     }
 
     public class TestEpisode : EpisodeBase
     {
-        public TestEpisode(IEpisode ep)
+        public TestEpisode(IEpisode ep): base(ep)
         {
-            Id = ep.Id;
-            Occasions = ep.Occasions.Select(o => new EpisodeFrame(o)).ToArray();
         }
-
-        public override int Id { get; }
-
-        protected override EpisodeFrame[] Occasions { get; }
-        public override IPlot Next() => null;
     }
 }

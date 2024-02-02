@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace _Data
 {
@@ -6,13 +7,17 @@ namespace _Data
     {
         int Id { get; }
         string Brief { get; }
-        IOccasion[] Occasions { get; }
+        Dictionary<int, List<IEpisodeNode>> Map { get; }
     }
-    [Serializable]public record EpisodeData(int Id, string Brief, OccasionData[] OccasionData) : IEpisode
+    [Serializable]public record EpisodeData(
+        int Id,
+        string Brief,
+        IOccasion[] Occasions,
+        Dictionary<int, List<IEpisodeNode>> Map) : IEpisode
     {
         public int Id { get; } = Id;
         public string Brief { get; } = Brief;
-        public IOccasion[] Occasions => OccasionData;
-        public OccasionData[] OccasionData { get; } = OccasionData;
+        public IOccasion[] Occasions { get; } = Occasions;
+        public Dictionary<int, List<IEpisodeNode>> Map { get; } = Map;
     }
 }

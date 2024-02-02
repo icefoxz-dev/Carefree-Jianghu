@@ -15,32 +15,20 @@ MonoBehaviour:
   _so: {fileID: 11400000}
   _name: "\u6797\u5BB6\u59D0\u59B9\u82B1"
   id: 21
-  _sceneContent: {fileID: 8073558838520778418, guid: 88c97710b2c29a445b6fd3a29c92596b, type: 3}
-  Type: 1
+  _sceneContent: {fileID: 8073558838520778418, guid: b61cf77157b7b9e4ba23e748289df75f, type: 3}
+  Mode: 1
   Left:
-    Type: 2
+    PlaceMode: 2
     Role: {fileID: 11400000, guid: 18c051e97ea6f254b990007097496cf6, type: 2}
-    Demo:
-      Header:
-        Text: []
-      Lines:
-        Text:
-        - "\u548B\u4E86\uFF1F"
+    Lines:
+    - "\u548B\u4E86\uFF1F"
   Right:
-    Type: 2
+    PlaceMode: 2
     Role: {fileID: 11400000, guid: b4716af195d5b4f46adfcc65f2f51ca4, type: 2}
-    Demo:
-      Header:
-        Text: []
-      Lines:
-        Text:
-        - "\u602A\u4EBA...."
+    Lines:
+    - "\u602A\u4EBA..."
   Solo:
-    Type: 0
+    PlaceMode: 0
     Role: {fileID: 0}
-    Demo:
-      Header:
-        Text: []
-      Lines:
-        Text: []
+    Lines: []
   Description: 

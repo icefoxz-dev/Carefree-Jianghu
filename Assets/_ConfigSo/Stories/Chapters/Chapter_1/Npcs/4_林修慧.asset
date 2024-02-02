@@ -15,4 +15,10 @@ MonoBehaviour:
   _so: {fileID: 11400000}
   _name: "\u6797\u4FEE\u6167"
   id: 4
+  _prefab: {fileID: 0}
   _description: "\u4E00\u4E2A\u53EF\u7231\u7684\u5C11\u5973, \u6797\u5BB6\u59D0\u59D0\u3002"
+  "\u6027\u683C":
+  - _so: {fileID: 11400000, guid: 459598a9331847f43a08019e25e98b3a, type: 2}
+    _value: 0
+  "\u5C5E\u6027": []
+  "\u6280\u80FD": []

@@ -8,8 +8,8 @@ namespace _Config.So
     {
         public EpisodeData GetEpisode(int index) => _epCfg.GetEpisode(index);
         [SerializeField] private EpisodeConfigSo _epCfg;
-        public IRolePlay GetRole(int index) => _roleCfg.GetRole(index);
-        public IRolePlay[] GetRoles() => _roleCfg.GetRoles();
+        public ICharacter GetCharacter(int index) => _roleCfg.GetCharacter(index);
+        public ICharacter[] GetCharacters() => _roleCfg.GetCharacters();
         [SerializeField] private RoleConfigSo _roleCfg;
     }
 }

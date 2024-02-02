@@ -44,7 +44,7 @@ namespace _Views.StoryPage
                     Cursor_SelectedRole.Hide();
                     var (occasionIndex, placeIndex) = view_story.UpdateOnRoleDrag(p);
                     if (occasionIndex < 0 || placeIndex < 0) return;
-                    StoryController.PlaceRoleToOccasion(teamIndex, placeIndex, occasionIndex);
+                    StoryController.PlaceRoleToOccasion(teamIndex, (RolePlacing.Index)placeIndex, occasionIndex);
                     break;
                 }
                 default:
@@ -62,7 +62,7 @@ namespace _Views.StoryPage
         }
 
 
-        private void OnOccasionRoleClick(int occasionIndex, Role.Index roleIndex)
+        private void OnOccasionRoleClick(int occasionIndex, RolePlacing.Index rolePlace)
         {
             //角色点击事件
             //occasionIndex: 0-5, roleIndex: 0=solo, 1=left, 2=right

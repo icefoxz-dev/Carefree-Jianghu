@@ -11,8 +11,10 @@ namespace _Game
     public static class Game
     {
         public static Canvas MainCanvas { get; private set; }
+        public static Camera MainCamera => MainCanvas.worldCamera;
         private static MonoService _monoService;
         private static GameWorld _world = new GameWorld();
+        private static GameScene _scene;
         private static bool IsRunning { get; set; }
         private static ControllerServiceContainer ServiceContainer { get; set; }
 
@@ -50,21 +52,24 @@ namespace _Game
             }
             private set => _monoService = value;
         }
+        public static IGameScene Scene => _scene;
 
         public static void Run(Res res, MonoService monoService, Canvas mainCanvas, UiManagerBase uiManager,
-            ConfigSo config)
+            ConfigSo config, GameScene scene)
         {
             if (IsRunning)
                 throw new NotImplementedException("App is running!");
             IsRunning = true;
             Config = config;
             _monoService = monoService;
+            _scene = scene;
             MainCanvas = mainCanvas;
             Res = res;
             MainThread = MonoService.gameObject.AddComponent<MainThreadDispatcher>();
             ServiceContainer = new ControllerServiceContainer();
             RegEvents();
             uiManager.Init();
+            scene.Init();
             return;
 
             void RegEvents()

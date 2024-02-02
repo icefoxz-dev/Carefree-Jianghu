@@ -15,31 +15,19 @@ MonoBehaviour:
   _so: {fileID: 11400000}
   _name: "\u4FEE\u6167\u9001\u996D"
   id: 31
-  _sceneContent: {fileID: 8073558838520778418, guid: 88c97710b2c29a445b6fd3a29c92596b, type: 3}
-  Type: 1
+  _sceneContent: {fileID: 8073558838520778418, guid: 4820121946f69ec4189f37eeef8f0004, type: 3}
+  Mode: 1
   Left:
-    Type: 2
+    PlaceMode: 2
     Role: {fileID: 11400000, guid: 18c051e97ea6f254b990007097496cf6, type: 2}
-    Demo:
-      Header:
-        Text: []
-      Lines:
-        Text:
-        - "\u809A\u5B50\u997F\u4E86\u5417\uFF1F"
+    Lines:
+    - "\u809A\u5B50\u997F\u4E86\u5417\uFF1F"
   Right:
-    Type: 0
+    PlaceMode: 0
     Role: {fileID: 0}
-    Demo:
-      Header:
-        Text: []
-      Lines:
-        Text: []
+    Lines: []
   Solo:
-    Type: 0
+    PlaceMode: 0
     Role: {fileID: 0}
-    Demo:
-      Header:
-        Text: []
-      Lines:
-        Text: []
-  Description: "\u8FD9\u662F\u54E5\u54E5\u5E26\u6765\u7684\u8BFB\u4E66\u4EBA?"
+    Lines: []
+  Description: "\u8FD9\u662F\u5927\u5F53\u5BB6\u5E26\u6765\u7684\u8BFB\u4E66\u4EBA?"

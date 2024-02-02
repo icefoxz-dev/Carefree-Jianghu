@@ -10,6 +10,7 @@ namespace _Game
     public class AppLaunch : MonoBehaviour
     {
         [SerializeField] private Canvas _mainCanvas;
+        [SerializeField] private GameScene _gameScene;
         [SerializeField] private UiManagerBase _uiManager;
         [SerializeField] private Res _res;
         [SerializeField] private MonoService _monoService;
@@ -18,7 +19,7 @@ namespace _Game
 
         void Start()
         {
-            Game.Run(_res, _monoService, _mainCanvas, _uiManager, _config);
+            Game.Run(_res, _monoService, _mainCanvas, _uiManager, _config, _gameScene);
         }
 
 #if UNITY_EDITOR

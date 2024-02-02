@@ -10,26 +10,58 @@ namespace _Config.So
     public class OccasionSo : AutoUnderscoreNamingObject
     {
         [SerializeField]private SceneContent _sceneContent;
-        [FormerlySerializedAs("Type")]public Occasion.PlaceMode PlaceMode;
-        [HideIf(nameof(PlaceMode), Occasion.PlaceMode.Solo)] [SerializeField] private InteractionSet Left;
-        [HideIf(nameof(PlaceMode), Occasion.PlaceMode.Solo)] [SerializeField] private InteractionSet Right;
-        [ShowIf(nameof(PlaceMode), Occasion.PlaceMode.Solo)] [SerializeField] private InteractionSet Solo;
+        [FormerlySerializedAs("Modes")]public Occasion.Modes Mode;
+        [HideIf(nameof(Mode), Occasion.Modes.Solo)] [SerializeField] private InteractionSet Left;
+        [HideIf(nameof(Mode), Occasion.Modes.Solo)] [SerializeField] private InteractionSet Right;
+        [ShowIf(nameof(Mode), Occasion.Modes.Solo)] [SerializeField] private InteractionSet Solo;
+        [TextArea] public string Description;
 
-        public Role.InteractionType GetInteractionType(Role.Index index) =>
-            index switch
+        public SceneContent SceneContent => _sceneContent;
+
+        public string GetLine(RolePlacing.Index role,int index)
+        {
+            var line = role switch
             {
-                Role.Index.Solo => Solo.Type,
-                Role.Index.Left => Left.Type,
-                Role.Index.Right => Right.Type,
+                RolePlacing.Index.Solo => Solo.Lines[index],
+                RolePlacing.Index.Left => Left.Lines[index],
+                RolePlacing.Index.Right => Right.Lines[index],
                 _ => throw new ArgumentOutOfRangeException(nameof(index), index, null)
             };
-        public SceneContent GetSceneContent() => _sceneContent;
+            return line;
+        }
+        public (RolePlacing.Index index,RolePlacing.Modes mode,CharacterSo character)[] GetRolePlacingInfos()
+        {
+            return Mode switch
+            {
+                Occasion.Modes.Solo => new[]
+                {
+                    (RolePlacing.Index.Solo, Solo.PlaceMode, Solo.Role)
+                },
+                Occasion.Modes.Versus => new[]
+                {
+                    (RolePlacing.Index.Left, Left.PlaceMode, Left.Role),
+                    (RolePlacing.Index.Right, Right.PlaceMode, Right.Role),
+                },
+                _ => throw new ArgumentOutOfRangeException()
+            };
+        }
 
-        [TextArea] public string Description;
+        public (RolePlacing.Modes, CharacterSo) GetRolePlacingInfo(RolePlacing.Index index)
+        {
+            return index switch
+            {
+                RolePlacing.Index.Solo => (Solo.PlaceMode, Solo.Role),
+                RolePlacing.Index.Left => (Left.PlaceMode, Left.Role),
+                RolePlacing.Index.Right => (Right.PlaceMode, Right.Role),
+                _ => throw new ArgumentOutOfRangeException(nameof(index), index, null)
+            };
+        }
+
         [Serializable] private class InteractionSet //交互设定
         {
-            public Role.InteractionType Type; //交互类型
-            [ShowIf(nameof(Type), _Data.Role.InteractionType.Fixed)] public RoleSo Role; //交互角色
+            [FormerlySerializedAs("Type")]public RolePlacing.Modes PlaceMode; //交互类型
+            [ShowIf(nameof(PlaceMode), _Data.RolePlacing.Modes.Fixed)] public CharacterSo Role; //交互角色
+            [TextArea] public string[] Lines;
         }
     }
 }

@@ -1,39 +1,46 @@
 ﻿using System.Linq;
 using _Data;
+using MyBox;
+using UnityEditor.Experimental.GraphView;
 using XNode;
 
-[CreateNodeMenu("RootScene"), NodeTint(0.7f, 0.25f, 0f)] public class RootScene : EpisodeNode
+[CreateNodeMenu("RootScene"), NodeTint(0.31f, 0.34f, 0.26f)]
+public class RootScene : ActiveEpisodeNode
 {
-    [Output(ShowBackingValue.Always, 
-        ConnectionType.Override, 
+    [Output(ShowBackingValue.Always,
+        ConnectionType.Override,
         dynamicPortList = true)]
-    public EpisodeNodeBase[] _next;
+    [ReadOnly]
+    public EpisodeNode[] _next;
 
-    public override Occasion.Phase Phase => _Data.Occasion.Phase.Root;
+    public override Occasion.Phase Phase => Occasion.Phase.Root;
 
     public override IEpisodeNode[] GetNextNodes() => _next.Cast<IEpisodeNode>().ToArray();
 
-    #region Node Connection
-    public override void OnCreateConnection(NodePort from, NodePort to)
+    public override object GetValue(NodePort port)
     {
-        OnPortConnected(from,nameof(_next), () =>
-        {
-            var nextNode = (to.node as EpisodeNodeBase);
-            nextNode?.SetPrevNode(GetNameIndex(to), this);
-        });
-        base.OnCreateConnection(from, to);
-    }
-    public override void OnRemoveConnection(NodePort port)
-    {
-        OnPortDisconnected(nameof(_next), () =>
+        if (port.fieldName.StartsWith(nameof(_next)))
         {
             var index = GetNameIndex(port);
-            _next[index] = null;
-        });
-        base.OnRemoveConnection(port);
+            return index >= 0 ? _next[index] : null;
+        }
+        return base.GetValue(port);
     }
 
-    public override void SetPrevNode(int index, EpisodeNodeBase node) => throw new System.NotImplementedException("Root node should not set prev");
-    public override void SetNextNode(int index, EpisodeNodeBase node) => _next[index] = node;
-    #endregion
+    public override void UpdateNode()
+    {
+        base.UpdateNode();
+        UpdatePortListConnection(nameof(_next), _next.Length, p =>
+        {
+            var index = GetNameIndex(p);
+            if (index < 0) return;
+            _next[index] = GetConnectionNodeFromPort(p);
+        }, p =>
+        {
+            var index = GetNameIndex(p);
+            if (index < 0) return;
+            _next[index] = null;
+        });
+    }
+
 }
