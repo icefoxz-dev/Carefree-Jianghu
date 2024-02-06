@@ -14,7 +14,7 @@ public class SceneContent : MonoBehaviour, ISceneContent
     [SerializeField] private Transform _rightRole;
     [SerializeField] private Transform _soloRole;
     public Transform Bg => _bg;
-    public UnityEvent<RolePlacing.Index, int> OnRoleLineEvent { get; } = new UnityEvent<RolePlacing.Index, int>();
+    public UnityEvent<RolePlacing.Index, string> OnRoleLineEvent { get; } = new UnityEvent<RolePlacing.Index, string>();
     public UnityEvent OnEndEvent { get; } = new UnityEvent();
     private Animator _leftRoleAnimator;
     private Animator _rightRoleAnimator;
@@ -32,8 +32,13 @@ public class SceneContent : MonoBehaviour, ISceneContent
     {
         var cmd = roleIndex_lineIndex.Split(',');
         var index = int.Parse(cmd[0]);
-        var lineIndex = int.Parse(cmd[1]);
-        OnRoleLineEvent.Invoke((RolePlacing.Index)index, lineIndex);
+        var line = cmd[1];
+        if (int.TryParse(line, out var lineIndex))
+        {
+            //todo : 实现根据lineIndex找到对应的台词
+            line = $"未实现获取台词方法！Line = {cmd[1]}";
+        }
+        OnRoleLineEvent.Invoke((RolePlacing.Index)index, line);
     }
     private void OnRoleAnim(RolePlacing.Index place, string animName)
     {

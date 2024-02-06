@@ -5,6 +5,7 @@ using UnityEngine;
 
 public interface IGameScene
 {
+    IComicScene ComicScene { get; }
     SceneFrame GetFrame(int index);
 }
 
@@ -18,8 +19,11 @@ public class GameScene : MonoBehaviour, IGameScene
      */
     [SerializeField] private Camera _sceneCamera;//场景摄像头
     [SerializeField] private Camera _focusCamera;//重点摄像头
-    [SerializeField] private FrameField _frame;
     [SerializeField] private int _frameDiv = 5;//场景单位分割
+    [SerializeField] private FrameField _frame;
+    [SerializeField] private ComicScene _comicScene;//漫画场景
+
+    public IComicScene ComicScene => _comicScene;
 
     public void Init()
     {
@@ -30,7 +34,13 @@ public class GameScene : MonoBehaviour, IGameScene
         {
             yield return new WaitForSeconds(0.2f);
             FramesAlignment();
+            AlignComicContent();
         }
+    }
+
+    [Button, GUIColor("cyan")] public void AlignComicContent()
+    {
+        AlignByParentSize(_comicScene.Content, (RectTransform)_comicScene.Content.parent, _frameDiv);
     }
 
     [Button,GUIColor("red")] public void FramesAlignment()

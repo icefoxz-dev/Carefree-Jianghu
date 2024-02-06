@@ -11,6 +11,7 @@ namespace _Game._Models
         ICharacter[] Team { get; }
         EpisodeBase CurrentEp { get; }
         PlayerData Player { get; }
+        string[] Occasions { get; }
     }
     
     public class GameWorld : ModelBase, IGameWorld
@@ -18,6 +19,7 @@ namespace _Game._Models
         public EpisodeBase CurrentEp { get; private set; }
         public Character[] Team { get; private set; }
         public PlayerData Player { get; private set; }
+        public string[] Occasions { get; private set; }
 
         ICharacter[] IGameWorld.Team => Team;
 
@@ -29,6 +31,7 @@ namespace _Game._Models
 
         private void TestInit()
         {
+            Occasions = new string[] { "睡觉" };
             CurrentEp = new TestEpisode(Game.Config.GetEpisode(0));
             Team = Game.Config.GetCharacters().Select(r=>new Character(r)).ToArray();
             foreach (var (index, frame) in CurrentEp.FrameMap) 

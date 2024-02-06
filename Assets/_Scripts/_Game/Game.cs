@@ -86,5 +86,7 @@ namespace _Game
         }
 
         public static void RegEvent(string eventName, Action<DataBag> callbackAction) => MessagingManager.RegEvent(eventName, callbackAction);
+
+        public static bool IsInRect(RectTransform rect,Vector2 screenPoint,Camera camera) => RectTransformUtility.RectangleContainsScreenPoint(rect, screenPoint, camera);
     }
 }

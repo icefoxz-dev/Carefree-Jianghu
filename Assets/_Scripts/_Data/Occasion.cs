@@ -62,6 +62,7 @@ namespace _Data
         /// <returns></returns>
         IRoleInteraction GetRoleInteraction(RolePlacing.Index place);
     }
+
     /// <summary>
     /// 故事场景, 表示玩家可以互动的具体场景。这是玩家在故事剧情中做出选择和行动的地方，直接影响故事的发展。
     /// </summary>
@@ -80,7 +81,7 @@ namespace _Data
     {
         Transform Bg { get; }
         GameObject gameObject { get; }
-        UnityEvent<RolePlacing.Index, int> OnRoleLineEvent { get; }
+        UnityEvent<RolePlacing.Index, string> OnRoleLineEvent { get; }
         UnityEvent OnEndEvent { get; }
         void Play(int index);
         void SetRole(RolePlacing.Index place, ICharacter character);

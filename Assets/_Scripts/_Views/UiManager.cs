@@ -13,14 +13,14 @@ namespace _Views
         private Page_Story page_story { get; set; }
         [SerializeField] private View page_mainView;
         private Page_Main page_main { get; set; }
-        [SerializeField] private View cursor_selectedRoleView;
-        private Cursor_SelectedRole cursor_selectedRole { get; set; }
+        [SerializeField] private View cursor_uiView;
+        private Cursor_Ui cursor_ui { get; set; }
 
         public override void Init()
         {
             page_story = new Page_Story(page_storyView);
             page_main = new Page_Main(page_mainView, true);
-            cursor_selectedRole = new Cursor_SelectedRole(cursor_selectedRoleView, false);
+            cursor_ui = new Cursor_Ui(cursor_uiView, false);
         }
     }
 }

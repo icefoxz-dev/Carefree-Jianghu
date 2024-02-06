@@ -60,7 +60,7 @@ namespace _Config.So
         [Serializable] private class InteractionSet //交互设定
         {
             [FormerlySerializedAs("Type")]public RolePlacing.Modes PlaceMode; //交互类型
-            [ShowIf(nameof(PlaceMode), _Data.RolePlacing.Modes.Fixed)] public CharacterSo Role; //交互角色
+            [ShowIf(nameof(PlaceMode), RolePlacing.Modes.Fixed)] public CharacterSo Role; //交互角色
             [TextArea] public string[] Lines;
         }
     }

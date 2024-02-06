@@ -95,14 +95,13 @@ namespace _Views.StoryPage
             public (bool isInFrame, int placeIndex) UpdateFrame(PointerEventData pointerEventData)
             {
                 // 检查点是否在 RectTransform 内
-                bool isInFrame = RectTransformUtility.RectangleContainsScreenPoint(RectTransform, pointerEventData.position, Game.MainCamera);
+                var isInFrame = Game.IsInRect(RectTransform, pointerEventData.position, Game.MainCamera);
                 //var isInFrame = RectTransformUtility.RectangleContainsScreenPoint(RectTransform, pointerEventData.position);
                 var roles = GetRolesByMode();
                 for (var index = 0; index < roles.Length; index++)
                 {
                     var role = roles[index];
-                    var isInRoleFrame =
-                        RectTransformUtility.RectangleContainsScreenPoint(role.RectTransform, pointerEventData.position, Game.MainCamera);
+                    var isInRoleFrame = Game.IsInRect(role.RectTransform, pointerEventData.position, Game.MainCamera);
                     //RectTransformUtility.RectangleContainsScreenPoint(role.RectTransform, pointerEventData.position);
                     //Debug.Log($"{GameObject.name}.UpdateFrame: IsInFrame={isInFrame}, {role.GameObject.name} isInFrame = {isInRoleFrame}");
                     role.SetSelected(isInRoleFrame && isInFrame);
