@@ -16,7 +16,6 @@ namespace _Game._Models
         #region IOccasion
         private readonly IOccasion _ref;
         public Occasion.Modes Modes => _ref.Modes;
-        public IEpisodeNode EpNode => _ref.EpNode;
         public string Name => _ref.Name;
         public string Description => _ref.Description;
         public IOccasionInteraction Interaction => _ref.Interaction;

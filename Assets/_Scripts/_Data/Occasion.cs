@@ -24,21 +24,6 @@ namespace _Data
         }
     }
     
-    public interface IEpisodeNode
-    {
-        /// <summary>
-        /// 场景阶段，开始，过渡，结束
-        /// </summary>
-        Occasion.Phase Phase { get; }
-        IEpisodeNode[] GetNextNodes();
-        IOccasion Occasion { get; }
-        /// <summary>
-        /// 获取Node在场合中的顺序, 如果不在<see cref="IRoleTerm"/>条件内，返回-1
-        /// </summary>
-        /// <param name="role"></param>
-        /// <returns></returns>
-        int GetEpNodeOrder(IRoleTerm role);
-    }
     /// <summary>
     /// 场合交互接口
     /// </summary>
@@ -69,7 +54,6 @@ namespace _Data
     public interface IOccasion
     {
         Occasion.Modes Modes { get; }
-        IEpisodeNode EpNode { get; }
         string Name { get; }
         string Description { get; }
         IOccasionInteraction Interaction { get; }

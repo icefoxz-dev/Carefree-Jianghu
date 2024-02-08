@@ -12,17 +12,13 @@ namespace _Game._Models
 
         public int Id { get; }
         public string Brief { get; }
-        public Dictionary<int, List<IEpisodeNode>> Map { get; }
         public Dictionary<int,EpisodeFrame> FrameMap { get; }
 
         protected EpisodeBase(IEpisode ep)
         {
             Id = ep.Id;
             Brief = ep.Brief;
-            Map = ep.Map;
             FrameMap = new Dictionary<int, EpisodeFrame>();
-            foreach (var pair in Map)
-                FrameMap.Add(pair.Key, new EpisodeFrame(pair.Value[0].Occasion, pair.Key));
         }
 
         public void SetOccasion(int occasionIndex, RolePlacing.Index place, Character character)
