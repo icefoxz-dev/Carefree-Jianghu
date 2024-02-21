@@ -12,14 +12,12 @@ namespace _Views.StoryPage
 {
     public class View_Story : UiBase
     {
-        private readonly Element_Occasion[] _occasions = new Element_Occasion[6];
-        public View_Story(IView v,UnityAction<(int occasionIndex, RolePlacing.Index roleIndex)> onRoleClickAction, bool display = true) : base(v, display)
+        private View_Occasion view_occasion { get; }
+
+        public View_Story(IView v, UnityAction<RolePlacing.Index> onRoleClickAction,
+            bool display = true) : base(v, display)
         {
-            for (var i = 0; i < _occasions.Length; i++)
-            {
-                var occasionIndex = i;
-                _occasions[i] = new Element_Occasion(v.Get<View>($"element_occasion_{i + 1}"), r => onRoleClickAction((occasionIndex, r)));
-            }
+            view_occasion = new View_Occasion(v.Get<View>("view_occasion"), onRoleClickAction);
         }
 
         //Methods:
@@ -35,36 +33,21 @@ namespace _Views.StoryPage
         //    }
         //    throw new NullReferenceException($"No occasion set!");
         //}
-        public void SetEpisode(EpisodeBase ep)
-        {
-            for (var i = 0; i < _occasions.Length; i++)
-            {
-                IOccasion oc = null;
-                if (i < ep.FrameMap.Count)
-                    oc = ep.FrameMap[i];
-                _occasions[i].Set(oc);
-            }
-        }
-        public void OnOccasionUpdate(int occasionIndex)
-        {
-            var oc = Game.World.CurrentEp.FrameMap[occasionIndex];
-            _occasions[occasionIndex].Set(oc);
-        }
 
-        //当拖动角色时检查是否在框内
-        public (int occasionIndex, int placeIndex) UpdateOnRoleDrag(PointerEventData pointerEventData)
+        public void OnOccasionUpdate() => view_occasion.Set(Game.World.CurrentOccasion);
+
+        /// <summary>
+        /// 当拖动角色时检查是否在框内,返回PlaceIndex
+        /// </summary>
+        /// <param name="pointerEventData"></param>
+        /// <returns></returns>
+        public (bool isInFrame,RolePlacing.Index) UpdateOnRoleDrag(PointerEventData pointerEventData)
         {
-            for (var index = 0; index < _occasions.Length; index++)
-            {
-                var oc = _occasions[index];
-                var (isInFrame, placeIndex) = oc.UpdateFrame(pointerEventData);
-                if (isInFrame) return (index, placeIndex);
-            }
-            return (-1, -1);
+            return view_occasion.UpdateFrame(pointerEventData);
         }
 
         //SetRole ? todo : 设定角色方法
-        private class Element_Occasion : UiBase
+        private class View_Occasion : UiBase
         {
             private Modes _mode;
 
@@ -81,7 +64,7 @@ namespace _Views.StoryPage
             private Image img_pic { get; }
             private Text text_brief { get; }
 
-            public Element_Occasion(IView v, UnityAction<RolePlacing.Index> onRoleClickAction, bool display = false) : base(v, display)
+            public View_Occasion(IView v, UnityAction<RolePlacing.Index> onRoleClickAction, bool display = false) : base(v, display)
             {
                 element_role_left = new Element_Role(v.Get<View>("element_role_left"), RolePlacing.Index.Left, onRoleClickAction);
                 element_role_right = new Element_Role(v.Get<View>("element_role_right"), RolePlacing.Index.Right, onRoleClickAction);
@@ -92,7 +75,7 @@ namespace _Views.StoryPage
                 SetMode(Modes.None);
             }
 
-            public (bool isInFrame, int placeIndex) UpdateFrame(PointerEventData pointerEventData)
+            public (bool isInFrame, RolePlacing.Index placeIndex) UpdateFrame(PointerEventData pointerEventData)
             {
                 // 检查点是否在 RectTransform 内
                 var isInFrame = Game.IsInRect(RectTransform, pointerEventData.position, Game.MainCamera);
@@ -105,9 +88,9 @@ namespace _Views.StoryPage
                     //RectTransformUtility.RectangleContainsScreenPoint(role.RectTransform, pointerEventData.position);
                     //Debug.Log($"{GameObject.name}.UpdateFrame: IsInFrame={isInFrame}, {role.GameObject.name} isInFrame = {isInRoleFrame}");
                     role.SetSelected(isInRoleFrame && isInFrame);
-                    if (isInRoleFrame && isInFrame) return (true, (int)role.PlaceIndex);
+                    if (isInRoleFrame && isInFrame) return (true, role.PlaceIndex);
                 }
-                return (isInFrame, -1);
+                return (isInFrame, 0);
             }
 
             private Element_Role[] GetRolesByMode()
@@ -123,7 +106,7 @@ namespace _Views.StoryPage
 
             public void Set(IOccasion? oc)
             {
-                var mode = oc?.Modes switch
+                var mode = oc?.Mode switch
                 {
                     Occasion.Modes.Versus => Modes.Versus,
                     Occasion.Modes.Solo => Modes.Solo,
@@ -137,22 +120,26 @@ namespace _Views.StoryPage
 
                 void SetRoles(IOccasion o)
                 {
+                    if (o == null) return;
                     switch (_mode)
                     {
                         case Modes.None:
                             break;
                         case Modes.Versus:
-                        {
-                            var leftChar = o.Interaction.GetCharacter(RolePlacing.Index.Left);
-                            var rightChar = o.Interaction.GetCharacter(RolePlacing.Index.Right);
-                            element_role_left.Set(leftChar);
-                            element_role_right.Set(rightChar);
-                            break;
-                        }
                         case Modes.Solo:
                         {
-                            var soloChar = o.Interaction.GetCharacter(RolePlacing.Index.Solo);
-                            element_role_solo.Set(soloChar);
+                            var infos = o.GetPlacingInfos();
+                            foreach (var info in infos)
+                            {
+                                var element = info.Place switch
+                                {
+                                    RolePlacing.Index.Solo => element_role_solo,
+                                    RolePlacing.Index.Left => element_role_left,
+                                    RolePlacing.Index.Right => element_role_right,
+                                    _ => throw new ArgumentOutOfRangeException()
+                                };
+                                element.Set(info.Character);
+                            }
                             break;
                         }
                         default:

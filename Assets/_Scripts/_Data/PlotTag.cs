@@ -8,16 +8,21 @@ namespace _Data
     /// <summary>
     /// 功能标签，代表游戏中的一个功能标签。每个标签都有一个名称，表示玩家在游戏中的选择和行动。
     /// </summary>
-    public interface IFuncTag : IPlotTag
+    public interface IFuncTag 
     {
+        IGameTag GameTag { get; }
+        string Name => GameTag.Name;
+        double Value { get; }
         void SetPlayer(IPlayerData player);
     }
     
     /// <summary>
     /// 剧情标签, 代表故事中的一个交互标签。每个标签都有一个名称和一个数值，表示玩家在故事中的选择和行动。
     /// </summary>
-    public interface IPlotTag: IGameTag
+    public interface IPlotTag
     {
+        IGameTag GameTag { get; }
+        string Name => GameTag.Name;
         double Value { get; }
     }
 
@@ -40,10 +45,11 @@ namespace _Data
     public record PlotTag (IPlotTag Tag) : IPlotTag
     {
         private IPlotTag Tag { get; } = Tag;
+        IGameTag IPlotTag.GameTag { get; } = Tag.GameTag;
         public string Name { get; } = Tag.Name;
         public double Value { get; } = Tag.Value;
         public bool IsInTerm(IPlotTag other, PlotTagClause clause) => PlotTagExtension.IsInTerm(this, other, clause);
-        public ITagManager GetTagManager(IPlayerProperty property) => Tag.GetTagManager(property);
+        public ITagManager GetTagManager(IPlayerProperty property) => Tag.GameTag.GetTagManager(property);
     }
 
     public static class PlotTagExtension

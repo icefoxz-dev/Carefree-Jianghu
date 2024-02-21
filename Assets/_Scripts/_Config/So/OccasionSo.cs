@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 
 namespace _Config.So
 {
-    [CreateAssetMenu(fileName = "OccasionSo", menuName = "配置/故事/场合")]
+    [CreateAssetMenu(fileName = "OccasionSo", menuName = "配置/场合/一般")]
     public class OccasionSo : AutoUnderscoreNamingObject
     {
         [SerializeField]private SceneContent _sceneContent;
@@ -17,6 +17,8 @@ namespace _Config.So
         [TextArea] public string Description;
 
         public SceneContent SceneContent => _sceneContent;
+
+        public virtual IFuncTag[] Results => Array.Empty<IFuncTag>();
 
         public string GetLine(RolePlacing.Index role,int index)
         {
@@ -29,32 +31,35 @@ namespace _Config.So
             };
             return line;
         }
-        public (RolePlacing.Index index,RolePlacing.Modes mode,CharacterSo character)[] GetRolePlacingInfos()
+        public IRolePlacing[] GetRolePlacingInfos()
         {
             return Mode switch
             {
-                Occasion.Modes.Solo => new[]
+                Occasion.Modes.Solo => new IRolePlacing[]
                 {
-                    (RolePlacing.Index.Solo, Solo.PlaceMode, Solo.Role)
+                    new RolePlacingInfo(RolePlacing.Index.Solo, Solo.PlaceMode, Solo.Role)
                 },
-                Occasion.Modes.Versus => new[]
+                Occasion.Modes.Versus => new IRolePlacing[]
                 {
-                    (RolePlacing.Index.Left, Left.PlaceMode, Left.Role),
-                    (RolePlacing.Index.Right, Right.PlaceMode, Right.Role),
+                    new RolePlacingInfo(RolePlacing.Index.Left, Left.PlaceMode, Left.Role),
+                    new RolePlacingInfo(RolePlacing.Index.Right, Right.PlaceMode, Right.Role),
                 },
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
 
-        public (RolePlacing.Modes, CharacterSo) GetRolePlacingInfo(RolePlacing.Index index)
+        private class RolePlacingInfo : IRolePlacing
         {
-            return index switch
+            public RolePlacing.Index Place { get; }
+            public RolePlacing.Modes Mode { get; }
+            public ICharacter Character { get; }
+
+            public RolePlacingInfo(RolePlacing.Index place, RolePlacing.Modes mode, ICharacter character)
             {
-                RolePlacing.Index.Solo => (Solo.PlaceMode, Solo.Role),
-                RolePlacing.Index.Left => (Left.PlaceMode, Left.Role),
-                RolePlacing.Index.Right => (Right.PlaceMode, Right.Role),
-                _ => throw new ArgumentOutOfRangeException(nameof(index), index, null)
-            };
+                Place = place;
+                Mode = mode;
+                Character = character;
+            }
         }
 
         [Serializable] private class InteractionSet //交互设定

@@ -16,6 +16,8 @@ namespace _Config.So
                 [SerializeField] private PlotTagClause _clause;
                 [SerializeField] private GameTag _tag;
                 [SerializeField] private double _value;
+
+                public IGameTag GameTag => _tag;
                 public string Name => _tag.Name;
                 public double Value => _value;
                 public ITagManager GetTagManager(IPlayerProperty property) => _tag.GetTagManager(property);

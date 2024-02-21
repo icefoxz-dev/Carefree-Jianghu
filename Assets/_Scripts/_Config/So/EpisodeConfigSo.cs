@@ -1,5 +1,6 @@
 using _Data;
 using System;
+using System.Linq;
 using UnityEngine;
 
 namespace _Config.So

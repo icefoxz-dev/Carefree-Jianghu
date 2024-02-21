@@ -8,7 +8,6 @@ namespace _Data
     {
         RolePlacing.Index Place { get; }
         RolePlacing.Modes Mode { get; }
-        RolePlacing.Interactions Interaction { get; }
         ICharacter Character { get; }
     }
 
@@ -40,13 +39,6 @@ namespace _Data
             Fixed,
         }
 
-        public enum Interactions
-        {
-            None,
-            Orientation,
-            Options
-        }
-
         public enum Facing
         {
             Front,
@@ -55,18 +47,22 @@ namespace _Data
 
         public Index Place { get; }
         public Modes Mode { get; }
-        public Interactions Interaction { get; }
         public ICharacter Character { get; private set; }
         /// <summary>
         /// 交互值，<see cref="Facing"/>将会被转换为<see cref="int"/>，初始为-1表示未选择，如果是Options，将会是选项的索引
         /// </summary>
         public int Selection { get; private set; } = -1;
 
+        public RolePlacing(Index place, Modes mode, ICharacter character)
+        {
+            Place = place;
+            Mode = mode;
+            Character = character;
+        }
         public RolePlacing(IRolePlacing place)
         {
             Place = place.Place;
             Mode = place.Mode;
-            Interaction = place.Interaction;
             Character = place.Character;
         }
 
@@ -75,13 +71,6 @@ namespace _Data
             if (Mode == Modes.Fixed)
                 throw new Exception($"角色{Character.Name}位置是固定！");
             Character = character;
-        }
-
-        public void SetInteraction(int selection)
-        {
-            if (Interaction == Interactions.None)
-                throw new Exception($"角色{Character.Name}没有交互！");
-            Selection = selection;
         }
     }
 

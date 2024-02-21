@@ -12,19 +12,19 @@ namespace _Game._Models
 
         public int Id { get; }
         public string Brief { get; }
-        public Dictionary<int,EpisodeFrame> FrameMap { get; }
+        public Dictionary<int,OccasionFrame> FrameMap { get; }
 
         protected EpisodeBase(IEpisode ep)
         {
             Id = ep.Id;
             Brief = ep.Brief;
-            FrameMap = new Dictionary<int, EpisodeFrame>();
+            FrameMap = new Dictionary<int, OccasionFrame>();
         }
 
         public void SetOccasion(int occasionIndex, RolePlacing.Index place, Character character)
         {
             FrameMap[occasionIndex].PlaceCharacter(place,character);
-            SendEvent(GameEvent.Episode_Occasion_Update, occasionIndex);
+            SendEvent(GameEvent.Occasion_Update, occasionIndex);
         }
     }
 

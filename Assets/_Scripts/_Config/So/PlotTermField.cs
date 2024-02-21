@@ -9,15 +9,15 @@ namespace _Config.So
     [Serializable]
     public class PlotTermField : IPlotTerm
     {
-        string IGameTag.Name => GameTag.Name;
-
+        public IGameTag GameTag => _gameTag;
+        public string Name => _gameTag.Name;
         double IPlotTag.Value => Value;
-        public GameTag GameTag;
+        [FormerlySerializedAs("GameTag")]public GameTag _gameTag;
         [FormerlySerializedAs("Compare"), SerializeField] public PlotTagClause _clause;
         PlotTagClause IPlotTerm.Clause => _clause;
         bool IPlotTerm.IsInTerm(IPlotTag other) => this.IsInTerm(other, _clause);
 
-        public ITagManager GetTagManager(IPlayerProperty property) => GameTag.GetTagManager(property);
+        public ITagManager GetTagManager(IPlayerProperty property) => _gameTag.GetTagManager(property);
         [ConditionalField(nameof(_clause), true, PlotTagClause.HasTag)] public double Value;
     }
 }

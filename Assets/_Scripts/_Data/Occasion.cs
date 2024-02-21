@@ -25,40 +25,21 @@ namespace _Data
     }
     
     /// <summary>
-    /// 场合交互接口
+    /// 故事场景, 表示玩家可以互动的具体场景。这是玩家在故事剧情中做出选择和行动的地方，直接影响故事的发展。
     /// </summary>
-    public interface IOccasionInteraction
+    public interface IOccasion
     {
+        Occasion.Modes Mode { get; }
+        string Name { get; }
+        string Description { get; }
+        ISceneContent SceneContent { get; }
         /// <summary>
         /// 获取放置信息
         /// </summary>
         /// <returns></returns>
         IRolePlacing[] GetPlacingInfos();
-        /// <summary>
-        /// 获取角色
-        /// </summary>
-        /// <param name="place"></param>
-        /// <returns></returns>
-        ICharacter GetCharacter(RolePlacing.Index place);
-        /// <summary>
-        /// 获取交互
-        /// </summary>
-        /// <param name="place"></param>
-        /// <returns></returns>
-        IRoleInteraction GetRoleInteraction(RolePlacing.Index place);
-    }
-
-    /// <summary>
-    /// 故事场景, 表示玩家可以互动的具体场景。这是玩家在故事剧情中做出选择和行动的地方，直接影响故事的发展。
-    /// </summary>
-    public interface IOccasion
-    {
-        Occasion.Modes Modes { get; }
-        string Name { get; }
-        string Description { get; }
-        IOccasionInteraction Interaction { get; }
-        ISceneContent SceneContent { get; }
         string GetLine(RolePlacing.Index role, int index);
+        void SetRole(RolePlacing.Index placeIndex, ICharacter role);
     }
 
     public interface ISceneContent

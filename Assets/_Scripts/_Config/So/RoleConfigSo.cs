@@ -8,8 +8,8 @@ namespace _Config.So
     public class RoleConfigSo : ScriptableObject
     {
         [SerializeField]private CharacterSo[] _roles;
-        public ICharacter GetCharacter(int index) => _roles[index].GetCharacter();
+        public ICharacter GetCharacter(int index) => _roles[index];
 
-        public ICharacter[] GetCharacters()=>_roles.Select(role => role.GetCharacter()).ToArray();
+        public ICharacter[] GetCharacters()=>_roles;
     }
 }

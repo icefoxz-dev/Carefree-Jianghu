@@ -39,13 +39,20 @@ namespace _Game._Models
         private class Tag : IFuncTag
         {
             public IFuncTag Func { get; }
+
+            public IGameTag GameTag { get; }
+
             public string Name => Func.Name;
             private double value;
             public double Value => value;
-            public Tag(IFuncTag func) => Func = func;
+            public Tag(IFuncTag func)
+            {
+                Func = func;
+                GameTag = func.GameTag;
+            }
 
             public void SetPlayer(IPlayerData player) => Func.SetPlayer(player);
-            public ITagManager GetTagManager(IPlayerProperty property) => Func.GetTagManager(property);
+            public ITagManager GetTagManager(IPlayerProperty property) => Func.GameTag.GetTagManager(property);
             public void AddValue(double v) => value += v;
         }
     }

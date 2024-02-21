@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using _Data;
 using MyBox;
@@ -21,7 +20,8 @@ namespace _Config.So
 
         public EpisodeData GetEpisode()
         {
-            throw new NotImplementedException();
+            Debug.Log("未载入Occasion!");
+            return new EpisodeData(_id, Description, Array.Empty<IOccasion>());
         }
     }
 
@@ -65,7 +65,9 @@ namespace _Config.So
                 p => Next = null);
             var prevPort = GetPort(nameof(Prev));
             var nextPort = GetPort(nameof(Options));
-            NextList = nextPort.GetConnections().Select(c => c.node).Cast<EpNodeBase>().ToArray();
+            var nextList = nextPort.GetConnections().Select(c => c.node).Cast<EpNodeBase>().ToList();
+            if (Next) nextList.Insert(0, Next);
+            NextList = nextList.ToArray();
             PrevList = prevPort.GetConnections().Select(c => c.node).Cast<EpNodeBase>().ToArray();
         }
     }

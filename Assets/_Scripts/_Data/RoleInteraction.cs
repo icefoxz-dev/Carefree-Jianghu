@@ -12,7 +12,6 @@ namespace _Data
         ITagManager Skill { get; }
         ITagManager EpisodeTag { get; }
         ITagManager ChapterTag { get; }
-        ITagManager FuncTag { get; }
     }
 
     /// <summary>
@@ -28,26 +27,5 @@ namespace _Data
         void AddTag(IFuncTag tag);
         void RemoveTag(IFuncTag tag);
         void AddTagValue(IFuncTag tag);
-    }
-    
-    /// <summary>
-    /// 角色交互接口
-    /// </summary>
-    public interface IRoleInteraction
-    {
-        RolePlacing.Interactions InteractionType { get; }
-        IInteractionOption[] GetOptions();
-        /// <summary>
-        /// 根据交互类型和选择获取标签
-        /// </summary>
-        /// <param name="op"></param>
-        /// <returns></returns>
-        IFuncTag[] GetTags(IInteractionOption op);
-    }
-
-    public interface IInteractionOption
-    {
-        string Label { get; }
-        int SelectionIndex { get; }
     }
 }

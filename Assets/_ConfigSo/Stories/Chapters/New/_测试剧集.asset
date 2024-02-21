@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Next
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 952, y: -152}
+  position: {x: 952, y: -136}
   folded: 0
   ports:
     keys:
@@ -37,6 +37,7 @@ MonoBehaviour:
   Prev: []
   PrevList:
   - {fileID: 5867948489593031797}
+  - {fileID: 951287867507571903}
 --- !u!114 &-1256263882269058779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50,7 +51,7 @@ MonoBehaviour:
   m_Name: Next
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 1000, y: 152}
+  position: {x: 1000, y: 168}
   folded: 0
   ports:
     keys:
@@ -88,9 +89,11 @@ MonoBehaviour:
   - {fileID: -4669686309550009428}
   - {fileID: -1256263882269058779}
   - {fileID: 8440336717370748792}
-  - {fileID: 5867948489593031797}
   - {fileID: 951287867507571903}
   - {fileID: 382977006728196095}
+  - {fileID: 5867948489593031797}
+  - {fileID: 6790098885246042698}
+  - {fileID: 7122558645407429092}
   _so: {fileID: 11400000}
   _name: "\u6D4B\u8BD5\u5267\u96C6"
   _id: 0
@@ -106,10 +109,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8282c1fa9b921c34cb5a3c603c043830, type: 3}
-  m_Name: "-1_\u7761\u89C9"
+  m_Name: "31_\u4FEE\u6167\u9001\u996D"
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 168, y: 40}
+  position: {x: 104, y: 104}
   folded: 0
   ports:
     keys:
@@ -135,7 +138,7 @@ MonoBehaviour:
         PublicKeyToken=null
       connections:
       - fieldName: Prev
-        node: {fileID: 5867948489593031797}
+        node: {fileID: 7122558645407429092}
         reroutePoints: []
       _direction: 1
       _connectionType: 1
@@ -150,19 +153,26 @@ MonoBehaviour:
       _connectionType: 0
       _typeConstraint: 0
       _dynamic: 0
-  Occasion: {fileID: 11400000, guid: 65f907a94045f1f4998d9e62b9a38c1f, type: 2}
+  Occasion: {fileID: 11400000, guid: 3a64e193f2d19514b8689e12944154d0, type: 2}
   Prev: []
-  Next: {fileID: 5867948489593031797}
+  Next: {fileID: 7122558645407429092}
   Options: []
   PrevList:
   - {fileID: 8440336717370748792}
-  NextList: []
-  _triggerType: 0
+  NextList:
+  - {fileID: 7122558645407429092}
+  roundTrigger: 1
   _roundSet:
     _count: 5
     _option: 2
   _tagSet:
-    _fields: []
+    _fields:
+    - _gameTag: {fileID: 11400000, guid: 459598a9331847f43a08019e25e98b3a, type: 2}
+      _clause: 2
+      Value: 5
+    - _gameTag: {fileID: 11400000, guid: 1620360bfe19b3d4ba122218bf55ea4d, type: 2}
+      _clause: 0
+      Value: 5
 --- !u!114 &943995324038568651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,7 +186,7 @@ MonoBehaviour:
   m_Name: Root
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -392, y: -232}
+  position: {x: -408, y: -248}
   folded: 0
   ports:
     keys:
@@ -210,7 +220,7 @@ MonoBehaviour:
   m_Name: "32_\u82AF\u6167\u9001\u996D"
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 427.33658, y: -230.80508}
+  position: {x: 328, y: -152}
   folded: 0
   ports:
     keys:
@@ -257,7 +267,8 @@ MonoBehaviour:
   Options: []
   PrevList:
   - {fileID: 8440336717370748792}
-  NextList: []
+  NextList:
+  - {fileID: -4669686309550009428}
 --- !u!114 &5867948489593031797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,7 +282,7 @@ MonoBehaviour:
   m_Name: "1_\u82AF\u6167\u63A2\u671B"
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: 536, y: 136}
+  position: {x: 664, y: 104}
   folded: 0
   ports:
     keys:
@@ -285,7 +296,7 @@ MonoBehaviour:
         PublicKeyToken=null
       connections:
       - fieldName: Next
-        node: {fileID: 382977006728196095}
+        node: {fileID: 7122558645407429092}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
@@ -320,24 +331,127 @@ MonoBehaviour:
   Next: {fileID: -4669686309550009428}
   Options: []
   PrevList:
-  - {fileID: 382977006728196095}
+  - {fileID: 7122558645407429092}
   NextList:
+  - {fileID: -4669686309550009428}
   - {fileID: -1256263882269058779}
-  _triggerType: 1
+  roundTrigger: 0
   _roundSet:
     _count: 0
     _option: 0
   _tagSet:
     _fields:
-    - GameTag: {fileID: 11400000, guid: 350d39e9bf0185c4daa88a8f0f2663c3, type: 2}
+    - _gameTag: {fileID: 11400000, guid: 350d39e9bf0185c4daa88a8f0f2663c3, type: 2}
       _clause: 0
       Value: 0
-    - GameTag: {fileID: 11400000, guid: 459598a9331847f43a08019e25e98b3a, type: 2}
+    - _gameTag: {fileID: 11400000, guid: 459598a9331847f43a08019e25e98b3a, type: 2}
       _clause: 0
       Value: 0
-    - GameTag: {fileID: 11400000, guid: 1620360bfe19b3d4ba122218bf55ea4d, type: 2}
+    - _gameTag: {fileID: 11400000, guid: 1620360bfe19b3d4ba122218bf55ea4d, type: 2}
       _clause: 0
       Value: 0
+--- !u!114 &6790098885246042698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e87d703d28df30b48a190bd6377e2c49, type: 3}
+  m_Name: Root
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: -408, y: -56}
+  folded: 0
+  ports:
+    keys:
+    - Next
+    values:
+    - _fieldName: Next
+      _node: {fileID: 6790098885246042698}
+      _typeQualifiedName: _Config.So.EpRoundNode[], _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: Prev
+        node: {fileID: 8440336717370748792}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  roundTrigger: 0
+  _roundSet:
+    _count: 0
+    _option: 2
+  _tagSet:
+    _fields: []
+  Next: []
+  NextList:
+  - {fileID: 8440336717370748792}
+--- !u!114 &7122558645407429092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf4606a49b450b043a3c54111bcbf8b6, type: 3}
+  m_Name: "22_\u6797\u5BB6\u59D0\u59B9\u82B1"
+  m_EditorClassIdentifier: 
+  graph: {fileID: 11400000}
+  position: {x: 360, y: 280}
+  folded: 0
+  ports:
+    keys:
+    - Prev
+    - Next
+    - Options
+    values:
+    - _fieldName: Prev
+      _node: {fileID: 7122558645407429092}
+      _typeQualifiedName: _Config.So.EpNodeBase[], _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: Next
+        node: {fileID: 382977006728196095}
+        reroutePoints: []
+      _direction: 0
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Next
+      _node: {fileID: 7122558645407429092}
+      _typeQualifiedName: _Config.So.EpNodeBase, _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections:
+      - fieldName: Prev
+        node: {fileID: 5867948489593031797}
+        reroutePoints: []
+      _direction: 1
+      _connectionType: 1
+      _typeConstraint: 0
+      _dynamic: 0
+    - _fieldName: Options
+      _node: {fileID: 7122558645407429092}
+      _typeQualifiedName: _Config.So.EpNodeBase[], _Config, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      connections: []
+      _direction: 1
+      _connectionType: 0
+      _typeConstraint: 0
+      _dynamic: 0
+  Occasion: {fileID: 11400000, guid: 1ea87e312ddc9704f8316add4bffb29c, type: 2}
+  Prev: []
+  Next: {fileID: 5867948489593031797}
+  Options: []
+  PrevList:
+  - {fileID: 382977006728196095}
+  NextList:
+  - {fileID: 5867948489593031797}
 --- !u!114 &8440336717370748792
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,7 +465,7 @@ MonoBehaviour:
   m_Name: "-1_\u7761\u89C9"
   m_EditorClassIdentifier: 
   graph: {fileID: 11400000}
-  position: {x: -88, y: -216}
+  position: {x: -152, y: -136}
   folded: 0
   ports:
     keys:
@@ -366,6 +480,9 @@ MonoBehaviour:
       connections:
       - fieldName: Next
         node: {fileID: 943995324038568651}
+        reroutePoints: []
+      - fieldName: Next
+        node: {fileID: 6790098885246042698}
         reroutePoints: []
       _direction: 0
       _connectionType: 0
@@ -401,5 +518,7 @@ MonoBehaviour:
   Options: []
   PrevList:
   - {fileID: 943995324038568651}
+  - {fileID: 6790098885246042698}
   NextList:
+  - {fileID: 951287867507571903}
   - {fileID: 382977006728196095}

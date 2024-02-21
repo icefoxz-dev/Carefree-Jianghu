@@ -2,10 +2,6 @@ using System;
 
 namespace _Data
 {
-    public interface IRoundNode
-    {
-
-    }
     public interface IEpisode
     {
         int Id { get; }

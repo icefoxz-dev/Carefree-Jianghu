@@ -12,36 +12,40 @@ namespace _Views.StoryPage
 {
     public class View_CardSelector : UiBase
     {
-        private ListView_Scroll<Prefab_Role> RoleListView { get; }
-        private event UnityAction<(PointerEventData pointer, DragHelper.DragEvent dragEvent, int avatarIndex,int index)> OnDrag;
+        private ListView_Scroll<Prefab_Card> RoleListView { get; }
+        private event UnityAction<(PointerEventData pointer, DragHelper.DragEvent dragEvent, int cardType, int index)> OnDrag;
 
-        public View_CardSelector(IView v,UnityAction<(PointerEventData pointer, DragHelper.DragEvent dragEvent, int avatarIndex, int index)> onDragEvent, bool display = true) : 
+        public View_CardSelector(IView v,UnityAction<(PointerEventData pointer, DragHelper.DragEvent dragEvent, int cardType, int index)> onDragEvent, bool display = true) : 
             base(v, display)
         {
             OnDrag = onDragEvent;
-            RoleListView = new ListView_Scroll<Prefab_Role>(v, "prefab_card", "scroll_cards");
+            RoleListView = new ListView_Scroll<Prefab_Card>(v, "prefab_card", "scroll_cards");
         }
 
-        public void SetCards((string name, string description,int avatarIndex)[] arg)
+        /// <summary>
+        /// cardType : 0 = role, 1 = occasion
+        /// </summary>
+        /// <param name="arg"></param>
+        public void SetCards((string name, string description, int cardType)[] arg)
         {
             RoleListView.ClearList(u => u.Destroy());
-            var group = arg.GroupBy(a => a.avatarIndex).ToList();
+            var group = arg.GroupBy(a => a.cardType).ToList();
             foreach (var list in group.Select(g => g.ToList()))
             {
                 for (var i = 0; i < list.Count; i++)
                 {
                     var index = i;
-                    var (name, description, avatarIndex) = list[i];
+                    var (name, description, cardType) = list[i];
                     var ui = RoleListView.Instance(v =>
-                        new Prefab_Role(v, (p, e) => OnDrag?.Invoke((p, e, avatarIndex, index))));
+                        new Prefab_Card(v, (p, e) => OnDrag?.Invoke((p, e, cardType, index))));
                     ui.Set(name, description);
-                    ui.SelectAvatar(avatarIndex);
+                    ui.SelectAvatar(cardType);
                 }
             }
         }
 
         //methods: Set, SelectAvatar, SetAvatar
-        private class Prefab_Role : UiBase
+        private class Prefab_Card : UiBase
         {
             private Image img_avatar_1 { get; }
             private Image img_avatar_2 { get; }
@@ -49,7 +53,7 @@ namespace _Views.StoryPage
             private Text text_description { get; }
             private UiDragHandler dragHandler { get; }
 
-            public Prefab_Role(IView v, UnityAction<PointerEventData, DragHelper.DragEvent> onDrag, bool display = true) 
+            public Prefab_Card(IView v, UnityAction<PointerEventData, DragHelper.DragEvent> onDrag, bool display = true) 
                 : base(v, display)
             {
                 img_avatar_1 = v.Get<Image>("img_avatar_1");
