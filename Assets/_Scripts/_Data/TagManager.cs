@@ -40,6 +40,11 @@ namespace _Data
         public void AddTagValue(IFuncTag tag)
         {
             var t = GetFirstOrDefault(tag);
+            if (t == default)
+            {
+                AddTag(tag);
+                t = GetFirstOrDefault(tag);
+            }
             t.AddValue(tag.Value);
         }
 
@@ -71,12 +76,6 @@ namespace _Data
         {
             GameTag = tag;
             Value = value;
-        }
-
-        public void SetPlayer(IRoleData player)
-        {
-            var manager = GameTag.GetTagManager(player.Prop);
-            manager.AddTagValue(this);
         }
 
         public ITagManager GetTagManager(IRoleProperty property) => GameTag.GetTagManager(property);

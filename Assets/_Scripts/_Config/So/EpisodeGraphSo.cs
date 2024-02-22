@@ -34,7 +34,7 @@ namespace _Config.So
 
     public abstract class EpRoundNode : EpNodeBase
     {
-        public OccasionSo Occasion;
+        public FuncOccasionSo Occasion;
 
         private string _nodeName;
         public override string NodeName

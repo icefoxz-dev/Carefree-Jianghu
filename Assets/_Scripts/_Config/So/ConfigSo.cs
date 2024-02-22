@@ -16,5 +16,6 @@ namespace _Config.So
         public IRoleData GetPresetPlayer() => _player.GetRoleData();
         [SerializeField] private CharacterAttributeMapSo _characterAttributeMap;
         public ICharacterAttributeMap CharacterAttributeMap => _characterAttributeMap;
+        [SerializeField]public ActivityConfigSo ActivityCfg;
     }
 }

@@ -32,14 +32,14 @@ namespace _Data
         Occasion.Modes Mode { get; }
         string Name { get; }
         string Description { get; }
-        ISceneContent SceneContent { get; }
+        //ISceneContent SceneContent { get; }
         /// <summary>
         /// 获取放置信息
         /// </summary>
         /// <returns></returns>
         IRolePlacing[] GetPlacingInfos();
         string GetLine(RolePlacing.Index role, int index);
-        void SetRole(RolePlacing.Index placeIndex, ICharacter role);
+        IFuncTag[] Results { get; }
     }
 
     public interface ISceneContent

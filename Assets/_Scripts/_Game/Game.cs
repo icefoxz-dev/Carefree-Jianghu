@@ -40,7 +40,7 @@ namespace _Game
         public static IMainThreadDispatcher MainThread { get; private set; }
         public static ConfigSo Config { get; private set; }
 
-        public static IGameWorld World => _world;
+        public static GameWorld World => _world;
 
         public static MonoService MonoService
         {

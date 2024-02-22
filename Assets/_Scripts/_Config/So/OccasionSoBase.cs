@@ -6,20 +6,16 @@ using UnityEngine.Serialization;
 
 namespace _Config.So
 {
-    [CreateAssetMenu(fileName = "OccasionSo", menuName = "配置/场合/一般")]
-    public class OccasionSo : AutoUnderscoreNamingObject
+    public class OccasionSoBase : AutoUnderscoreNamingObject, IOccasion
     {
-        [SerializeField]private SceneContent _sceneContent;
         [FormerlySerializedAs("Modes")]public Occasion.Modes Mode;
         [HideIf(nameof(Mode), Occasion.Modes.Solo)] [SerializeField] private InteractionSet Left;
         [HideIf(nameof(Mode), Occasion.Modes.Solo)] [SerializeField] private InteractionSet Right;
         [ShowIf(nameof(Mode), Occasion.Modes.Solo)] [SerializeField] private InteractionSet Solo;
         [TextArea] public string Description;
-
-        public SceneContent SceneContent => _sceneContent;
-
+        Occasion.Modes IOccasion.Mode => Mode;
+        string IOccasion.Description => Description;
         public virtual IFuncTag[] Results => Array.Empty<IFuncTag>();
-
         public string GetLine(RolePlacing.Index role,int index)
         {
             var line = role switch
@@ -31,7 +27,8 @@ namespace _Config.So
             };
             return line;
         }
-        public IRolePlacing[] GetRolePlacingInfos()
+
+        public IRolePlacing[] GetPlacingInfos()
         {
             return Mode switch
             {
@@ -62,7 +59,8 @@ namespace _Config.So
             }
         }
 
-        [Serializable] private class InteractionSet //交互设定
+        [Serializable]
+        protected class InteractionSet //交互设定
         {
             [FormerlySerializedAs("Type")]public RolePlacing.Modes PlaceMode; //交互类型
             [ShowIf(nameof(PlaceMode), RolePlacing.Modes.Fixed)] public CharacterSo Role; //交互角色

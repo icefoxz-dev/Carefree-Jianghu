@@ -5,25 +5,36 @@ using _Data;
 
 namespace _Game._Models
 {
-    public class TestOccasion : ModelBase, IOccasion
+    public class OccasionModel : ModelBase, IOccasion
     {
         public Occasion.Modes Mode => Occasion.Modes.Solo;
         public string Name { get; }
         public string Description { get; }
-        public ISceneContent SceneContent { get; }
 
         public RolePlacing[] PlacingList { get; }
 
-        public TestOccasion(string name, IRolePlacing[] placingList)
+        public OccasionModel(string name, IRolePlacing[] placingList)
         {
             Name = name;
             PlacingList = placingList.Select(p=>new RolePlacing(p)).ToArray();
             Description = name;
+            Results = Array.Empty<IFuncTag>();
+        }
+
+        public OccasionModel(IOccasion o)
+        {
+            Name = o.Name;
+            PlacingList = o.GetPlacingInfos().Select(p => new RolePlacing(p)).ToArray();
+            Description = o.Description;
+            Results = o.Results;
         }
 
         public IRolePlacing[] GetPlacingInfos() => PlacingList.ToArray();
 
         public string GetLine(RolePlacing.Index role, int index) => $"测试, role = {role}, index = {index}";
+
+        public IFuncTag[] Results { get; }
+
         public void SetRole(RolePlacing.Index placeIndex, ICharacter role)
         {
             var placing = PlacingList.FirstOrDefault(p => p.Place == placeIndex);
@@ -54,6 +65,8 @@ namespace _Game._Models
         public IRolePlacing[] GetPlacingInfos() => _ref.GetPlacingInfos();
 
         public string GetLine(RolePlacing.Index role, int index) => _ref.GetLine(role, index);
+        public IFuncTag[] Results => _ref.Results;
+
         public void SetRole(RolePlacing.Index placeIndex, ICharacter role)
         {
             var c = _characters.FirstOrDefault(c => c.Place == placeIndex);
@@ -64,16 +77,16 @@ namespace _Game._Models
 
         private readonly List<RolePlacing> _characters;
         public IReadOnlyList<RolePlacing> Characters => _characters;
-        public ISceneContent SceneContent => SceneFrame.CurrentScene;
-        public SceneFrame SceneFrame { get; }
+        //public ISceneContent SceneContent => SceneFrame.CurrentScene;
+        //public SceneFrame SceneFrame { get; }
         public int FrameIndex { get; }
 
         public OccasionFrame(IOccasion o, int frameIndex)
         {
             _ref = o;
             FrameIndex = frameIndex;
-            SceneFrame = Game.Scene.GetFrame(frameIndex);
-            SceneFrame.SetSceneContent(o.SceneContent);
+            //SceneFrame = Game.Scene.GetFrame(frameIndex);
+            //SceneFrame.SetSceneContent(o.SceneContent);
             _characters = o.GetPlacingInfos().Select(p => new RolePlacing(p)).ToList();
         }
 
@@ -88,7 +101,7 @@ namespace _Game._Models
         {
             var rolePlacing = GetRolePlacing(place);
             rolePlacing.PlaceCharacter(character);
-            SceneContent.SetRole(place, character);
+            //SceneContent.SetRole(place, character);
         }
     }
 

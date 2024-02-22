@@ -6,17 +6,6 @@ using UnityEngine;
 namespace _Data
 {
     /// <summary>
-    /// 功能标签，代表游戏中的一个功能标签。每个标签都有一个名称，表示玩家在游戏中的选择和行动。
-    /// </summary>
-    public interface IFuncTag 
-    {
-        IGameTag GameTag { get; }
-        string Name => GameTag.Name;
-        double Value { get; }
-        void SetPlayer(IRoleData player);
-    }
-    
-    /// <summary>
     /// 剧情标签, 代表故事中的一个交互标签。每个标签都有一个名称和一个数值，表示玩家在故事中的选择和行动。
     /// </summary>
     public interface IPlotTag

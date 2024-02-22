@@ -16,7 +16,23 @@ MonoBehaviour:
   _name: "\u6D4B\u8BD5\u73A9\u5BB6"
   id: 0
   _prefab: {fileID: 1212601801446756811, guid: 5094621a989db5649947ee0b2db5aebf, type: 3}
-  _description: 
+  _description: "\u8FD9\u662F\u4E00\u4E2A\u6D4B\u8BD5\u7528\u7684\u73A9\u5BB6\u3002"
   "\u6027\u683C": []
-  "\u5C5E\u6027": []
-  "\u6280\u80FD": []
+  "\u5C5E\u6027":
+  - _so: {fileID: 11400000, guid: 83ed7d03b9d441f46864ccd11b855cd8, type: 2}
+    _value: 1
+  - _so: {fileID: 11400000, guid: f379862fc79c78840bd6e2acc30b446e, type: 2}
+    _value: 2
+  - _so: {fileID: 11400000, guid: 1ce3ddb612c6392418895c4b15fd7d3b, type: 2}
+    _value: 3
+  - _so: {fileID: 11400000, guid: 1823638c329732044a87b2c62d3e75ef, type: 2}
+    _value: 4
+  - _so: {fileID: 11400000, guid: 949d2ca2bdcc55e418405d6f564eb050, type: 2}
+    _value: 5
+  - _so: {fileID: 11400000, guid: a9db1508b2bc9374b9db8370f7203f5c, type: 2}
+    _value: 6
+  - _so: {fileID: 11400000, guid: a812a1cd5db922f408a27f31accadfab, type: 2}
+    _value: 7
+  "\u6280\u80FD":
+  - _so: {fileID: 11400000, guid: 0c148d16bde3d084d9b4e7f1ad6a4a3f, type: 2}
+    _value: 5

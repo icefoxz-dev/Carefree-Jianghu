@@ -14,3 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _epCfg: {fileID: 11400000, guid: a9de62e8d5f5247419a145c175999a3c, type: 2}
   _roleCfg: {fileID: 11400000, guid: 186ac81a2852ae343a6b4876ea46caed, type: 2}
+  _player: {fileID: 11400000, guid: bcd4b4627f86ef6488e36d25efad271d, type: 2}
+  _characterAttributeMap: {fileID: 11400000, guid: 64d5872030c1dd64388cdedfb3a1b928, type: 2}
+  ActivityCfg: {fileID: 11400000, guid: ff26dbeb4c55b304f9b3288554446594, type: 2}

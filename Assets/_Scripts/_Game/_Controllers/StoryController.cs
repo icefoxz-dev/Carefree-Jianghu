@@ -1,4 +1,5 @@
 using _Data;
+using _Game._Models;
 
 namespace _Game._Controllers
 {
@@ -11,9 +12,14 @@ namespace _Game._Controllers
             World.CurrentOccasion.SetRole(placeIndex, role);
         }
 
-        public void SetOccasion(IOccasion occasion)
+        public void SetOccasion(OccasionModel occasion)
         {
             World.SetCurrentOccasion(occasion);
+        }
+
+        public void ConfirmRound()
+        {
+            World.NextRound();
         }
     }
 }

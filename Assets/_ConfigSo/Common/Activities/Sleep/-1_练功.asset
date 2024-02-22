@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 29391a5366d28b946a24ad2dc5995fad, type: 3}
-  m_Name: "-1_\u7761\u89C9"
+  m_Name: "-1_\u7EC3\u529F"
   m_EditorClassIdentifier: 
   _so: {fileID: 11400000}
-  _name: "\u7761\u89C9"
+  _name: "\u7EC3\u529F"
   id: -1
   Mode: 0
   Left:
@@ -28,8 +28,10 @@ MonoBehaviour:
     PlaceMode: 0
     Role: {fileID: 0}
     Lines: []
-  Description: "\u591C\u5E55\u4F4E\u5782\uFF0C\u661F\u6CB3\u6E10\u4EAE\uFF0C\r\n\u82F1\u96C4\u8EBA\u5367\uFF0C\u601D\u7EEA\u98DE\u626C\u3002\r\n\u4E00\u5251\u5BD2\u5149\u5341\u5E74\u78E8\uFF0C\r\n\u6C5F\u6E56\u68A6\u91CC\uFF0C\u4F55\u5904\u662F\u5BB6\u4E61\uFF1F"
+  Description: "\u7834\u6653\u4E4B\u65F6\uFF0C\u6668\u96FE\u5F25\u6F2B\uFF0C\u4E00\u8EAB\u6B66\u88C5\uFF0C\u8E0F\u4E0A\u7EC3\u6B66\u4E4B\u5730\u3002\r\n\u53CC\u62F3\u6325\u821E\uFF0C\u5982\u9F99\u817E\u6D77\u5578\uFF0C\u811A\u6B65\u6C89\u7A33\uFF0C\u5982\u5C71\u5C79\u7ACB\u4E0D\u5012\u3002\r\n\u62F3\u62F3\u5230\u8089\uFF0C\u529B\u900F\u7EB8\u80CC\uFF0C\u6C57\u6C34\u4E0E\u6668\u96FE\u4EA4\u7EC7\uFF0C\u51DD\u805A\u6210\u4E0D\u5C48\u7684\u610F\u5FD7\u548C\u65E0\u7A77\u7684\u529B\u91CF\u3002"
   _sceneContent: {fileID: 8655601276079373855, guid: 1bb47ad55e29aed4eac9812ad44f3433, type: 3}
   results:
+  - _gameTag: {fileID: 11400000, guid: 0c148d16bde3d084d9b4e7f1ad6a4a3f, type: 2}
+    _value: 1
   - _gameTag: {fileID: 11400000, guid: 949d2ca2bdcc55e418405d6f564eb050, type: 2}
-    _value: 5
+    _value: -1

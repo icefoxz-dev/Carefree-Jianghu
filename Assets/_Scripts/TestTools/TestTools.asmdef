@@ -1,0 +1,20 @@
+{
+    "name": "TestTools",
+    "rootNamespace": "",
+    "references": [
+        "GUID:7ff1afb75675a2e429e7ca13130dcd98",
+        "GUID:44c3154a82171ea43a2455811758efa3",
+        "GUID:09c36c9754b04e64dab10ed18f8feedb",
+        "GUID:765e89442828b7d4e80ef2439c644e36",
+        "GUID:ef9b99ffae03fcd428e5396672a82b14"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

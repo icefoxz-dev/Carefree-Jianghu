@@ -1,30 +1,19 @@
-using System.Diagnostics;
 using System.Linq;
+using System.Text;
 using _Data;
-using UnityEngine;
 using Debug = UnityEngine.Debug;
 
 namespace _Game._Models
 {
-    public interface IGameWorld
-    {
-        ICharacter[] Team { get; }
-        EpisodeBase CurrentEp { get; }
-        PlayerData Player { get; }
-        IOccasion[] Occasions { get; }
-        IOccasion CurrentOccasion { get; }
-    }
-    
-    public class GameWorld : ModelBase, IGameWorld
+    public class GameWorld : ModelBase
     {
         public EpisodeBase CurrentEp { get; private set; }
         public Character[] Team { get; private set; }
-        public IOccasion[] Occasions { get; private set; }
+        public OccasionModel[] Occasions { get; private set; }
 
         public PlayerData Player { get; private set; }//玩家数据
-        public IOccasion CurrentOccasion { get; private set; }//当前场景
-
-        ICharacter[] IGameWorld.Team => Team;
+        public OccasionModel CurrentOccasion { get; private set; }//当前场景
+        public WorldInfo Info { get; private set; } //世界信息
 
         public void Init()
         {
@@ -34,11 +23,12 @@ namespace _Game._Models
 
         private void TestInit()
         {
-            Occasions = new IOccasion[]
-            {
-                new TestOccasion("睡觉",
-                    new IRolePlacing[] { new RolePlacing(RolePlacing.Index.Solo, RolePlacing.Modes.Team, null) })
-            };
+            Occasions = Game.Config.ActivityCfg.GetOccasions().Select(o => new OccasionModel(o)).ToArray();
+            //;new[]
+            //{
+            //    new OccasionModel("睡觉",
+            //        new IRolePlacing[] { new RolePlacing(RolePlacing.Index.Solo, RolePlacing.Modes.Team, null) })
+            //};
             CurrentEp = new TestEpisode(Game.Config.GetEpisode(0));
             Player = new PlayerData(Game.Config.GetPresetPlayer(), Game.Config.CharacterAttributeMap);
             Team = Game.Config.GetCharacters().Select(r=>new Character(r)).ToArray();
@@ -47,24 +37,36 @@ namespace _Game._Models
             SendEvent(GameEvent.Episode_Start);
         }
 
-        private void DebugInfo(PlayerData player)
+        public void DebugInfo(PlayerData player)
         {
-            Debug.Log($"玩家：{player}\n武[{player.Power}]\n学[{player.Wisdom}]\n力[{player.Strength}]\n智[{player.Intelligent}]\n银[{player.Silver}]\n体[{player.Stamina}]");
-            TagLog(player.Capable,"属性");
-            TagLog(player.Skill,"技能");
+            var sb = new StringBuilder();
+            sb.Append($"玩家：{player}\n武[{player.Power}]\n学[{player.Wisdom}]\n力[{player.Strength}]\n智[{player.Intelligent}]\n银[{player.Silver}]\n体[{player.Stamina}]");
+            sb.Append(TagLog(player.Capable,"属性"));
+            sb.Append(TagLog(player.Skill,"技能"));
+            Debug.Log(sb);
             return;
 
-            void TagLog(ITagManager tm, string tagName)
+            string TagLog(ITagManager tm, string tagName)
             {
+                var s = new StringBuilder();
                 foreach (var tag in tm.Tags)
-                    Debug.Log($"{tagName}： {tag.Name}: {tag.Value}");
+                    s.Append($"\n{tagName}： {tag.Name}: {tag.Value}");
+                return s.ToString();
             }
         }
 
-        public void SetCurrentOccasion(IOccasion occasion)
+        public void SetCurrentOccasion(OccasionModel occasion)
         {
             CurrentOccasion = occasion;
             SendEvent(GameEvent.Occasion_Update);
+        }
+
+        public void NextRound()
+        {
+            foreach (var tag in CurrentOccasion.Results)
+                tag.SetPlayer(Player);
+            Info.NextRound();
+            SendEvent(GameEvent.Player_Update);
         }
     }
 }
