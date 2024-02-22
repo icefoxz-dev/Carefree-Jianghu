@@ -3,9 +3,9 @@ using System.Collections.Generic;
 namespace _Data
 {
     /// <summary>
-    /// 玩家属性
+    /// 角色属性
     /// </summary>
-    public interface IPlayerProperty
+    public interface IRoleProperty
     {
         ITagManager Trait { get; }
         ITagManager Capable { get; }
@@ -17,9 +17,10 @@ namespace _Data
     /// <summary>
     /// 玩家角色数据，包含玩家的角色信息和故事进程。
     /// </summary>
-    public interface IPlayerData
+    public interface IRoleData
     {
-        IPlayerProperty Prop { get; }
+        IRoleProperty Prop { get; }
+        ICharacter Character { get; }
     }
     public interface ITagManager
     {
@@ -27,5 +28,16 @@ namespace _Data
         void AddTag(IFuncTag tag);
         void RemoveTag(IFuncTag tag);
         void AddTagValue(IFuncTag tag);
+        double GetTagValue(IGameTag tag, bool throwErrorIfNoTag = false);
+    }
+
+    public interface ICharacterAttributeMap
+    {
+        double GetStrength(IRoleData player);
+        double GetIntelligent(IRoleData player);
+        double GetPower(IRoleData player);
+        double GetWisdom(IRoleData player);
+        double GetSilver(IRoleData player);
+        double GetStamina(IRoleData player);
     }
 }

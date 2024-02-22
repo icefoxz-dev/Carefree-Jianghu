@@ -13,7 +13,7 @@ namespace _Data
         IGameTag GameTag { get; }
         string Name => GameTag.Name;
         double Value { get; }
-        void SetPlayer(IPlayerData player);
+        void SetPlayer(IRoleData player);
     }
     
     /// <summary>
@@ -49,7 +49,7 @@ namespace _Data
         public string Name { get; } = Tag.Name;
         public double Value { get; } = Tag.Value;
         public bool IsInTerm(IPlotTag other, PlotTagClause clause) => PlotTagExtension.IsInTerm(this, other, clause);
-        public ITagManager GetTagManager(IPlayerProperty property) => Tag.GameTag.GetTagManager(property);
+        public ITagManager GetTagManager(IRoleProperty property) => Tag.GameTag.GetTagManager(property);
     }
 
     public static class PlotTagExtension

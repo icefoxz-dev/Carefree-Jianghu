@@ -14,13 +14,13 @@ namespace _Config.So
             private class TagCondition : IPlotTerm
             {
                 [SerializeField] private PlotTagClause _clause;
-                [SerializeField] private GameTag _tag;
+                [SerializeField] private GameTagSoBase _tag;
                 [SerializeField] private double _value;
 
                 public IGameTag GameTag => _tag;
                 public string Name => _tag.Name;
                 public double Value => _value;
-                public ITagManager GetTagManager(IPlayerProperty property) => _tag.GetTagManager(property);
+                public ITagManager GetTagManager(IRoleProperty property) => _tag.GetTagManager(property);
                 public PlotTagClause Clause => _clause;
                 public bool IsInTerm(IPlotTag other) => this.IsInTerm(other, Clause);
             }

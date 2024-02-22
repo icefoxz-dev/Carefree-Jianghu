@@ -40,10 +40,25 @@ namespace _Game._Models
                     new IRolePlacing[] { new RolePlacing(RolePlacing.Index.Solo, RolePlacing.Modes.Team, null) })
             };
             CurrentEp = new TestEpisode(Game.Config.GetEpisode(0));
+            Player = new PlayerData(Game.Config.GetPresetPlayer(), Game.Config.CharacterAttributeMap);
             Team = Game.Config.GetCharacters().Select(r=>new Character(r)).ToArray();
-            foreach (var (index, frame) in CurrentEp.FrameMap) 
-                Debug.Log($"{index} --- {frame.Name}");
+            
+            DebugInfo(Player);
             SendEvent(GameEvent.Episode_Start);
+        }
+
+        private void DebugInfo(PlayerData player)
+        {
+            Debug.Log($"玩家：{player}\n武[{player.Power}]\n学[{player.Wisdom}]\n力[{player.Strength}]\n智[{player.Intelligent}]\n银[{player.Silver}]\n体[{player.Stamina}]");
+            TagLog(player.Capable,"属性");
+            TagLog(player.Skill,"技能");
+            return;
+
+            void TagLog(ITagManager tm, string tagName)
+            {
+                foreach (var tag in tm.Tags)
+                    Debug.Log($"{tagName}： {tag.Name}: {tag.Value}");
+            }
         }
 
         public void SetCurrentOccasion(IOccasion occasion)

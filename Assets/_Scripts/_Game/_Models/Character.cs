@@ -18,5 +18,7 @@ namespace _Game._Models
             Prefab = r.Prefab;
             Description = r.Description;
         }
+
+        public override string ToString() => $"{Id}.{Name}";
     }
 }

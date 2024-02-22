@@ -6,6 +6,6 @@ namespace _Data
     public interface IGameTag
     {
         string Name { get; }
-        ITagManager GetTagManager(IPlayerProperty property);
+        ITagManager GetTagManager(IRoleProperty property);
     }
 }

@@ -15,7 +15,7 @@ MonoBehaviour:
   _so: {fileID: 11400000}
   _name: "\u6210\u804B"
   id: 2
-  _prefab: {fileID: 4608288553702235758, guid: 5094621a989db5649947ee0b2db5aebf, type: 3}
+  _prefab: {fileID: 1212601801446756811, guid: 5094621a989db5649947ee0b2db5aebf, type: 3}
   _description: 
   "\u6027\u683C": []
   "\u5C5E\u6027": []
