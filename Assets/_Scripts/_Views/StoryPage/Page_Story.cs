@@ -14,13 +14,30 @@ namespace _Views.StoryPage
     {
         private View_Story view_story { get; }
         private View_CardSelector view_cardSelector { get; }
+        private View_Player view_player { get; }
         private StoryController StoryController => Game.GetController<StoryController>();
         public Page_Story(IView v, bool display = true) : base(v, display)
         {
             view_story = new View_Story(v.Get<View>("view_story"), OnOccasionRoleClick);
             view_cardSelector = new View_CardSelector(v.Get<View>("view_cardSelector"), OnRoleDragEvent);
-            Game.RegEvent(GameEvent.Episode_Start, b => LoadLastEpisode());
+            view_player = new View_Player(v.Get<View>("view_player"), () =>
+            {
+                var story = Game.GetController<StoryController>();
+                story.ConfirmRound();
+                Game.World.DebugInfo(Game.World.Player);
+            });
+            Game.RegEvent(GameEvent.Episode_Start, b =>
+            {
+                LoadLastEpisode();
+                view_player.SetInfo();
+                view_player.SetSkills();
+            });
             Game.RegEvent(GameEvent.Occasion_Update, b => view_story.OnOccasionUpdate());
+            Game.RegEvent(GameEvent.Player_Update, b =>
+            {
+                view_player.SetInfo();
+                view_player.SetSkills();
+            });
         }
 
         private void OnRoleDragEvent((PointerEventData p, DragHelper.DragEvent e,int cardType ,int index) arg)

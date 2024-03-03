@@ -32,6 +32,7 @@ namespace _Game._Models
             CurrentEp = new TestEpisode(Game.Config.GetEpisode(0));
             Player = new PlayerData(Game.Config.GetPresetPlayer(), Game.Config.CharacterAttributeMap);
             Team = Game.Config.GetCharacters().Select(r=>new Character(r)).ToArray();
+            Info = new WorldInfo();
             
             DebugInfo(Player);
             SendEvent(GameEvent.Episode_Start);
