@@ -27,12 +27,16 @@ MonoBehaviour:
     _value: 3
   - _so: {fileID: 11400000, guid: 1823638c329732044a87b2c62d3e75ef, type: 2}
     _value: 4
-  - _so: {fileID: 11400000, guid: 949d2ca2bdcc55e418405d6f564eb050, type: 2}
-    _value: 5
   - _so: {fileID: 11400000, guid: a9db1508b2bc9374b9db8370f7203f5c, type: 2}
     _value: 6
   - _so: {fileID: 11400000, guid: a812a1cd5db922f408a27f31accadfab, type: 2}
     _value: 7
+  - _so: {fileID: 11400000, guid: 480db2b41a2e41847899c5619ba63fd5, type: 2}
+    _value: 30
   "\u6280\u80FD":
   - _so: {fileID: 11400000, guid: 0c148d16bde3d084d9b4e7f1ad6a4a3f, type: 2}
     _value: 5
+  "\u72B6\u6001":
+  - _so: {fileID: 11400000, guid: a5aa1fd6430a3914190177b241c06474, type: 2}
+    _value: 2
+  "\u7269\u54C1": []

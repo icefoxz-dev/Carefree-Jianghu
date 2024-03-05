@@ -7,33 +7,32 @@ namespace _Game._Models
 {
     public class OccasionModel : ModelBase, IOccasion
     {
+        private readonly IOccasion _ref;
         public Occasion.Modes Mode => Occasion.Modes.Solo;
         public string Name { get; }
         public string Description { get; }
 
         public RolePlacing[] PlacingList { get; }
 
-        public OccasionModel(string name, IRolePlacing[] placingList)
-        {
-            Name = name;
-            PlacingList = placingList.Select(p=>new RolePlacing(p)).ToArray();
-            Description = name;
-            Results = Array.Empty<IFuncTag>();
-        }
-
         public OccasionModel(IOccasion o)
         {
             Name = o.Name;
             PlacingList = o.GetPlacingInfos().Select(p => new RolePlacing(p)).ToArray();
             Description = o.Description;
-            Results = o.Results;
+            _ref = o;
         }
 
         public IRolePlacing[] GetPlacingInfos() => PlacingList.ToArray();
 
         public string GetLine(RolePlacing.Index role, int index) => $"测试, role = {role}, index = {index}";
 
-        public IFuncTag[] Results { get; }
+        public void UpdateRole(IRoleData role)
+        {
+            _ref.UpdateRole(role);
+            SendEvent(GameEvent.Role_Update, role.Character.Id);
+        }
+
+        public IPlotTerm[] GetExcludedTerms(IRoleData role) => _ref.GetExcludedTerms(role);
 
         public void SetRole(RolePlacing.Index placeIndex, ICharacter role)
         {
@@ -65,7 +64,8 @@ namespace _Game._Models
         public IRolePlacing[] GetPlacingInfos() => _ref.GetPlacingInfos();
 
         public string GetLine(RolePlacing.Index role, int index) => _ref.GetLine(role, index);
-        public IFuncTag[] Results => _ref.Results;
+        public void UpdateRole(IRoleData role) => _ref.UpdateRole(role);
+        public IPlotTerm[] GetExcludedTerms(IRoleData role) => _ref.GetExcludedTerms(role);
 
         public void SetRole(RolePlacing.Index placeIndex, ICharacter role)
         {

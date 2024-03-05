@@ -11,6 +11,6 @@ namespace _Config.So
 
     public class SkillTagSo: GameTagSoBase
     {
-        public override ITagManager GetTagManager(IRoleProperty property) => property.Skill;
+        public override ITagManager GetTagManager(IRoleAttributes attributes) => attributes.Skill;
     }
 }

@@ -33,7 +33,7 @@ namespace _Views.StoryPage
                 view_player.SetSkills();
             });
             Game.RegEvent(GameEvent.Occasion_Update, b => view_story.OnOccasionUpdate());
-            Game.RegEvent(GameEvent.Player_Update, b =>
+            Game.RegEvent(GameEvent.Role_Update, b =>
             {
                 view_player.SetInfo();
                 view_player.SetSkills();

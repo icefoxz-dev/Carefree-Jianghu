@@ -1,5 +1,7 @@
+using System.Linq;
 using _Data;
 using _Game._Models;
+using UnityEngine;
 
 namespace _Game._Controllers
 {
@@ -19,7 +21,10 @@ namespace _Game._Controllers
 
         public void ConfirmRound()
         {
-            World.NextRound();
+            var excluded = World.TryProceedRound();
+            if (!excluded.Any()) return;
+            var excludedText = excluded.Aggregate(string.Empty, (current, term) => current + (term + "\n"));
+            Debug.Log("<color=yellow>不能执行下个回合</color>，条件：" + excludedText);
         }
     }
 }

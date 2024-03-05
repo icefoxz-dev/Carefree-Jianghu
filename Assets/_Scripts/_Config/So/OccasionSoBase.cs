@@ -6,7 +6,7 @@ using UnityEngine.Serialization;
 
 namespace _Config.So
 {
-    public class OccasionSoBase : AutoUnderscoreNamingObject, IOccasion
+    public abstract class OccasionSoBase : AutoUnderscoreNamingObject, IOccasion
     {
         [FormerlySerializedAs("Modes")]public Occasion.Modes Mode;
         [HideIf(nameof(Mode), Occasion.Modes.Solo)] [SerializeField] private InteractionSet Left;
@@ -15,7 +15,9 @@ namespace _Config.So
         [TextArea] public string Description;
         Occasion.Modes IOccasion.Mode => Mode;
         string IOccasion.Description => Description;
-        public virtual IFuncTag[] Results => Array.Empty<IFuncTag>();
+        public abstract IPlotTerm[] GetExcludedTerms(IRoleData role);
+        public abstract void UpdateRole(IRoleData role);
+
         public string GetLine(RolePlacing.Index role,int index)
         {
             var line = role switch

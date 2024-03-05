@@ -5,13 +5,14 @@ namespace _Data
     /// <summary>
     /// 角色属性
     /// </summary>
-    public interface IRoleProperty
+    public interface IRoleAttributes
     {
         ITagManager Trait { get; }
         ITagManager Capable { get; }
+        ITagManager Status { get; }
         ITagManager Skill { get; }
-        ITagManager EpisodeTag { get; }
-        ITagManager ChapterTag { get; }
+        ITagManager Inventory { get; }
+        IEnumerable<IValueTag> GetAllTags();
     }
 
     /// <summary>
@@ -19,16 +20,14 @@ namespace _Data
     /// </summary>
     public interface IRoleData
     {
-        IRoleProperty Prop { get; }
+        IRoleAttributes Attributes { get; }
         ICharacter Character { get; }
     }
     public interface ITagManager
     {
-        IReadOnlyList<IFuncTag> Tags { get; }
-        void AddTag(IFuncTag tag);
-        void RemoveTag(IFuncTag tag);
-        void AddTagValue(IFuncTag tag);
+        IReadOnlyList<IValueTag> Tags { get; }
         double GetTagValue(IGameTag tag, bool throwErrorIfNoTag = false);
+        void AddTagValue(IValueTag tag);
     }
 
     public interface ICharacterAttributeMap

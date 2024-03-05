@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using _Data;
 using UnityEngine;
 
@@ -20,9 +21,10 @@ namespace _Config.So
                 public IGameTag GameTag => _tag;
                 public string Name => _tag.Name;
                 public double Value => _value;
-                public ITagManager GetTagManager(IRoleProperty property) => _tag.GetTagManager(property);
+                public ITagManager GetTagManager(IRoleAttributes attributes) => _tag.GetTagManager(attributes);
                 public PlotTagClause Clause => _clause;
-                public bool IsInTerm(IPlotTag other) => this.IsInTerm(other, Clause);
+                public bool IsInTerm(IValueTag other) => this.IsInTerm(other, Clause);
+                public bool IsInTerm(IRoleAttributes role) => role.GetAllTags().Any(IsInTerm);
             }
         }
     }

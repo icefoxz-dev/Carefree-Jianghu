@@ -15,6 +15,7 @@ namespace _Views
         private Page_Main page_main { get; set; }
         [SerializeField] private View cursor_uiView;
         private Cursor_Ui cursor_ui { get; set; }
+        [SerializeField] private View window_confirmView;
 
         public override void Init()
         {

@@ -33,5 +33,9 @@ MonoBehaviour:
   results:
   - _gameTag: {fileID: 11400000, guid: 0c148d16bde3d084d9b4e7f1ad6a4a3f, type: 2}
     _value: 1
-  - _gameTag: {fileID: 11400000, guid: 949d2ca2bdcc55e418405d6f564eb050, type: 2}
+  - _gameTag: {fileID: 11400000, guid: a5aa1fd6430a3914190177b241c06474, type: 2}
     _value: -1
+  terms:
+  - _gameTag: {fileID: 11400000, guid: a5aa1fd6430a3914190177b241c06474, type: 2}
+    _clause: 2
+    Value: 0

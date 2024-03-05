@@ -39,7 +39,8 @@ namespace _Data
         /// <returns></returns>
         IRolePlacing[] GetPlacingInfos();
         string GetLine(RolePlacing.Index role, int index);
-        IFuncTag[] Results { get; }
+        void UpdateRole(IRoleData role);
+        IPlotTerm[] GetExcludedTerms(IRoleData role);
     }
 
     public interface ISceneContent

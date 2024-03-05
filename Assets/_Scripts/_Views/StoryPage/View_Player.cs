@@ -22,7 +22,7 @@ public class View_Player : UiBase
         btn_nextRound.onClick.AddListener(onClickAction);
     }
     public void SetInfo() => view_info.SetInfo(player);
-    public void SetSkills() => view_tags.SetSkill(player.Skill, "ÊôÐÔ");
+    public void SetSkills() => view_tags.SetSkill(player.Skill, "æŠ€èƒ½");
     private class View_info : UiBase
     {
         private Text text_name { get; }

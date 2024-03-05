@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: ActivityConfigSo
   m_EditorClassIdentifier: 
   _occasions:
-  - {fileID: 11400000, guid: 65f907a94045f1f4998d9e62b9a38c1f, type: 2}
   - {fileID: 11400000, guid: 337e89d5f127ad04bbb932f7a4216a33, type: 2}
   - {fileID: 11400000, guid: 0cc2545006a6ac246af3c35c3639e85f, type: 2}
+  - {fileID: 11400000, guid: 65f907a94045f1f4998d9e62b9a38c1f, type: 2}
+  - {fileID: 11400000, guid: 43a8803574c57754199420fee92d6e5b, type: 2}

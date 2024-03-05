@@ -15,9 +15,13 @@ namespace _Config.So
         [SerializeField,FormerlySerializedAs("_traits")] private RoleTag<TraitSo>[] 性格;
         [SerializeField]private RoleTag<CapableSo>[] 属性;
         [SerializeField]private RoleTag<BasicSkillTagSo>[] 技能;
+        [SerializeField]private RoleTag<StatusTagSo>[] 状态;
+        [SerializeField]private RoleTag<CapableSo>[] 物品;
         private IEnumerable<RoleTag> Traits => 性格;
         private IEnumerable<RoleTag> Capable=> 属性;
         private IEnumerable<RoleTag> Skills=> 技能;
+        private IEnumerable<RoleTag> Inventory=> 物品;
+        private IEnumerable<RoleTag<StatusTagSo>> Status => 状态;
         private IEnumerable<RoleTag> Tags => Traits.Concat(Capable).Concat(Skills);
 
         public string Description => _description;
@@ -25,12 +29,13 @@ namespace _Config.So
 
         public IRoleData GetRoleData()
         {
-            return new RoleData(new PlayerProperty(
-                new TagManager(Traits.Select(t => t.ToFuncTag())),
-                new TagManager(Capable.Select(t => t.ToFuncTag())),
-                new TagManager(Skills.Select(t => t.ToFuncTag())),
-                new TagManager(Array.Empty<IFuncTag>()),
-                new TagManager(Array.Empty<IFuncTag>())), 
+            return new RoleData(new PlayerAttributes(
+                    Trait: new TagManager(Traits.Select(t => t.ToFuncTag())),
+                    Capable: new TagManager(Capable.Select(t => t.ToFuncTag())),
+                    Status: new StateTagManager(Status.Select(t => t._so.GetStatusTag())),
+                    Skill: new TagManager(Skills.Select(t => t.ToFuncTag())),
+                    Inventory:new TagManager(Inventory.Select(t=>t.ToFuncTag()))
+                    ),
                 this);
         }
 
@@ -43,36 +48,37 @@ namespace _Config.So
             public override IGameTag GameTag => _so;
 
             public override string Name => _so.Name;
-            public override ITagManager GetTagManager(IRoleProperty property) => _so.GetTagManager(property);
+            public override ITagManager GetTagManager(IRoleAttributes attributes) => _so.GetTagManager(attributes);
             public override double Value => _value;
         }
-        private abstract class RoleTag : IPlotTag
+        private abstract class RoleTag : IValueTag
         {
             public abstract IGameTag GameTag { get; }
             public abstract string Name { get; }
             public abstract double Value { get; }
-            public abstract ITagManager GetTagManager(IRoleProperty property);
-            public IFuncTag ToFuncTag() => new FuncTag(GameTag, Value);
+            public abstract ITagManager GetTagManager(IRoleAttributes attributes);
+            public IValueTag ToFuncTag() => new ValueTag(GameTag, Value);
         }
 
-        private record RoleData(IRoleProperty Prop, ICharacter Character) : IRoleData
+        private record RoleData(IRoleAttributes Attributes, ICharacter Character) : IRoleData
         {
-            public IRoleProperty Prop { get; } = Prop;
+            public IRoleAttributes Attributes { get; } = Attributes;
             public ICharacter Character { get; } = Character;
         }
 
-        private record PlayerProperty(
+        private record PlayerAttributes(
             ITagManager Trait,
             ITagManager Capable,
+            ITagManager Status,
             ITagManager Skill,
-            ITagManager EpisodeTag,
-            ITagManager ChapterTag) : IRoleProperty
+            ITagManager Inventory) : IRoleAttributes
         {
             public ITagManager Trait { get; } = Trait;
             public ITagManager Capable { get; } = Capable;
+            public ITagManager Status { get; } = Status;
             public ITagManager Skill { get; } = Skill;
-            public ITagManager EpisodeTag { get; } = EpisodeTag;
-            public ITagManager ChapterTag { get; } = ChapterTag;
+            public ITagManager Inventory { get; } = Inventory;
+            public IEnumerable<IValueTag> GetAllTags() => Trait.ConcatTags(Capable, Status, Skill);
         }
     }
 }

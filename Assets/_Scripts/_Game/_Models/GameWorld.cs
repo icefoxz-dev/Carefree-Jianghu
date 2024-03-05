@@ -23,19 +23,22 @@ namespace _Game._Models
 
         private void TestInit()
         {
-            Occasions = Game.Config.ActivityCfg.GetOccasions().Select(o => new OccasionModel(o)).ToArray();
-            //;new[]
-            //{
-            //    new OccasionModel("睡觉",
-            //        new IRolePlacing[] { new RolePlacing(RolePlacing.Index.Solo, RolePlacing.Modes.Team, null) })
-            //};
             CurrentEp = new TestEpisode(Game.Config.GetEpisode(0));
             Player = new PlayerData(Game.Config.GetPresetPlayer(), Game.Config.CharacterAttributeMap);
             Team = Game.Config.GetCharacters().Select(r=>new Character(r)).ToArray();
             Info = new WorldInfo();
             
+            UpdateRound();
             DebugInfo(Player);
             SendEvent(GameEvent.Episode_Start);
+        }
+
+        private void UpdateRound()
+        {
+            Occasions = Game.Config.ActivityCfg.GetOccasions()
+                .Where(o => !o.GetExcludedTerms(Player).Any())
+                .Select(o => new OccasionModel(o)).ToArray();
+            SendEvent(GameEvent.Occasion_Update);
         }
 
         public void DebugInfo(PlayerData player)
@@ -43,7 +46,9 @@ namespace _Game._Models
             var sb = new StringBuilder();
             sb.Append($"玩家：{player}\n武[{player.Power}]\n学[{player.Wisdom}]\n力[{player.Strength}]\n智[{player.Intelligent}]\n银[{player.Silver}]\n体[{player.Stamina}]");
             sb.Append(TagLog(player.Capable,"属性"));
+            sb.Append(TagLog(player.Status,"状态"));
             sb.Append(TagLog(player.Skill,"技能"));
+            sb.Append(TagLog(player.Inventory, "物品"));
             Debug.Log(sb);
             return;
 
@@ -59,15 +64,23 @@ namespace _Game._Models
         public void SetCurrentOccasion(OccasionModel occasion)
         {
             CurrentOccasion = occasion;
-            SendEvent(GameEvent.Occasion_Update);
+            UpdateRound();
         }
 
-        public void NextRound()
+        /// <summary>
+        /// 尝试进行下个回合，返回不过的条件
+        /// </summary>
+        /// <returns></returns>
+        public IPlotTerm[] TryProceedRound()
         {
-            foreach (var tag in CurrentOccasion.Results)
-                tag.SetPlayer(Player);
+            var notInTerms = CurrentOccasion.GetExcludedTerms(Player);
+            if (notInTerms.Any())
+                return notInTerms;
+            CurrentOccasion.UpdateRole(Player);
             Info.NextRound();
-            SendEvent(GameEvent.Player_Update);
+            UpdateRound();
+            SendEvent(GameEvent.Role_Update);
+            return notInTerms;
         }
     }
 }

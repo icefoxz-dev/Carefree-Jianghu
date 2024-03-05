@@ -4,11 +4,14 @@ using UnityEngine;
 namespace _Config.So
 {
     [CreateAssetMenu(fileName = "FuncTagSo", menuName = "配置/标签/功能")]
-    public class FuncTagSo : AutoNameSoBase, IFuncTag
+    public class ValueTagSo : AutoNameSoBase, IValueTag
     {
         [SerializeField] private GameTagSoBase _gameTag;
         [SerializeField] private double _value = 1;
+
         public IGameTag GameTag => _gameTag;
+
         public double Value => _value;
+        public ITagManager GetTagManager(IRoleAttributes attributes) => _gameTag.GetTagManager(attributes);
     }
 }

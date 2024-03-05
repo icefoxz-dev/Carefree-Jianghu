@@ -33,3 +33,7 @@ MonoBehaviour:
   results:
   - _gameTag: {fileID: 11400000, guid: d57626ed8891e5b499a320ea9e40cbca, type: 2}
     _value: 1
+  terms:
+  - _gameTag: {fileID: 11400000, guid: ee0771d552ca56d4189dd951e19f3cae, type: 2}
+    _clause: 2
+    Value: 0

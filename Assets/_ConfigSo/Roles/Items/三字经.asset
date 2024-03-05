@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a3d60dfc714482478ab85fc156942e8, type: 3}
-  m_Name: RoleConfigSo
+  m_Script: {fileID: 11500000, guid: 3a341e0bff84521439ed5798992174c6, type: 3}
+  m_Name: "\u4E09\u5B57\u7ECF"
   m_EditorClassIdentifier: 
-  _roles:
-  - {fileID: 11400000, guid: 06bedcd8f7028e64da49d26686cf6d1a, type: 2}
+  _so: {fileID: 11400000}
+  _name: "\u4E09\u5B57\u7ECF"
+  _tags: []

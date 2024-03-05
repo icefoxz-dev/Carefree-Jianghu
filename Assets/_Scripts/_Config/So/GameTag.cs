@@ -4,6 +4,6 @@ namespace _Config.So
 {
     public abstract class GameTagSoBase : AutoNameSoBase, IGameTag
     {
-        public abstract ITagManager GetTagManager(IRoleProperty property);
+        public abstract ITagManager GetTagManager(IRoleAttributes attributes);
     }
 }

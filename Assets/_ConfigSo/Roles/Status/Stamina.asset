@@ -9,8 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a3d60dfc714482478ab85fc156942e8, type: 3}
-  m_Name: RoleConfigSo
+  m_Script: {fileID: 11500000, guid: dfa2fb461a7021e40a2bdde6a3f5daae, type: 3}
+  m_Name: Stamina
   m_EditorClassIdentifier: 
-  _roles:
-  - {fileID: 11400000, guid: 06bedcd8f7028e64da49d26686cf6d1a, type: 2}
+  _so: {fileID: 11400000}
+  _name: Stamina
+  CName: "\u4F53\u529B"
+  _value: 5
+  _max: 10
+  _min: 0

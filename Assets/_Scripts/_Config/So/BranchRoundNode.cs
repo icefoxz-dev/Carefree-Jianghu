@@ -25,8 +25,8 @@ namespace _Config.So
         {
             [SerializeField] private PlotTermField[] _fields;
 
-            public bool IsTrigger(IRoleTerm role) =>
-                _fields.Length == 0 || _fields.All(f => role.Tags.Any(t => f.IsInTerm(t, f._clause)));
+            //public bool IsTrigger(IRoleTerm role) =>
+            //    _fields.Length == 0 || _fields.All(f => role.Tags.Any(t => f.IsInTerm(t, f._clause)));
         }
 
     [Serializable]

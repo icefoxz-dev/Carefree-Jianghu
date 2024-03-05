@@ -1,48 +1,90 @@
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 
 namespace _Data
 {
-    /// <summary>
-    /// 标签管理类
-    /// </summary>
-    public class TagManager : ITagManager
+    public class StateTagManager : ITagManager
     {
-        private List<FuncTag> _tags;
+        private readonly List<StatusTag> _tags;
+        public IReadOnlyList<IValueTag> Tags => _tags;
 
-        public TagManager(ITagManager tagManager)
+        public StateTagManager(IEnumerable<IStatusTag> tags)
         {
-            _tags = tagManager.Tags.Select(t => new FuncTag(t)).ToList();
-        }
-        public TagManager(IEnumerable<IFuncTag> tags)
-        {
-            _tags = tags.Select(t => new FuncTag(t)).ToList();
+            _tags = tags.Select(s => s.ToStatusTag(s.Max, s.Min)).ToList();
         }
 
-        public IReadOnlyList<IFuncTag> Tags => _tags;
 
-        public void AddTag(IFuncTag tag)
+        public void AddTag(IStatusTag tag)
         {
             var t = GetFirstOrDefault(tag);
             if (t != null) throw new DuplicateNameException($"tag.{tag.Name} already exist!");
-            _tags.Add(new FuncTag(tag));
+            _tags.Add(tag.ToStatusTag());
         }
 
-        public void RemoveTag(IFuncTag tag)
+        public void RemoveTag(IValueTag tag)
         {
             var t = GetFirstOrDefault(tag);
             _tags.Remove(t);
         }
 
-        private FuncTag GetFirstOrDefault(IFuncTag tag) => _tags.FirstOrDefault(t => t.Name == tag.Name);
+        private StatusTag GetFirstOrDefault(IGameTag tag) => _tags.FirstOrDefault(t => t.Name == tag.Name);
 
-        public void AddTagValue(IFuncTag tag)
+        public void AddTagValue(IValueTag tag)
+        {
+            var t = GetFirstOrDefault(tag);
+            if (t == default)
+                throw new NullReferenceException($"tag.{tag.Name} not exist!");
+            t.Add(tag.Value);
+        }
+
+        public double GetTagValue(IGameTag tag, bool throwErrorIfNoTag = false)
+        {
+            var t = _tags.FirstOrDefault(t => t.GameTag == tag);
+            if (t == null && throwErrorIfNoTag) throw new NoNullAllowedException($"tag.{tag.Name} not exist!");
+            return t?.Value ?? 0;
+        }
+    }
+    /// <summary>
+    /// 标签管理类
+    /// </summary>
+    public class TagManager : ITagManager
+    {
+        private List<ValueTag> _tags;
+
+        public TagManager(ITagManager tagManager) : this(tagManager.Tags)
+        {
+        }
+
+        public TagManager(IEnumerable<IValueTag> tags)
+        {
+            _tags = tags.Select(t => new ValueTag(t, copyValue: true)).ToList();
+        }
+
+        public IReadOnlyList<IValueTag> Tags => _tags;
+
+        public void AddTag(IGameTag tag)
+        {
+            var t = GetFirstOrDefault(tag);
+            if (t != null) throw new DuplicateNameException($"tag.{tag.Name} already exist!");
+            _tags.Add(new ValueTag(tag));
+        }
+
+        public void RemoveTag(IGameTag tag)
+        {
+            var t = GetFirstOrDefault(tag);
+            _tags.Remove(t);
+        }
+
+        private ValueTag GetFirstOrDefault(IGameTag tag) => _tags.FirstOrDefault(t => t.Name == tag.Name);
+
+        public void AddTagValue(IValueTag tag)
         {
             var t = GetFirstOrDefault(tag);
             if (t == default)
             {
-                AddTag(tag);
+                AddTag(new ValueTag(tag));
                 t = GetFirstOrDefault(tag);
             }
             t.AddValue(tag.Value);
@@ -54,31 +96,38 @@ namespace _Data
             if (t == null && throwErrorIfNoTag) throw new NoNullAllowedException($"tag.{tag.Name} not exist!");
             return t?.Value ?? 0;
         }
-
-
     }
 
     //标签状态类，Value会变化
-    public record FuncTag : IFuncTag
+    public record ValueTag : IValueTag
     {
-        public IGameTag GameTag { get; }
+        private readonly IGameTag gameTag;
+
+        public IGameTag GameTag => gameTag;
 
         public string Name => GameTag.Name;
         public double Value { get; private set; }
 
-        public FuncTag(IFuncTag tag)
+        public ValueTag(IValueTag tag, bool copyValue = false)
         {
-            GameTag = tag.GameTag;
-            Value = tag.Value;
+            gameTag = tag;
+            if (copyValue) Value = tag.Value;
         }
 
-        public FuncTag(IGameTag tag, double value = 0)
+        public ValueTag(IGameTag tag, double value = 0)
         {
-            GameTag = tag;
+            gameTag = tag;
             Value = value;
         }
 
-        public ITagManager GetTagManager(IRoleProperty property) => GameTag.GetTagManager(property);
+        public ITagManager GetTagManager(IRoleAttributes attributes) => GameTag.GetTagManager(attributes);
         public void AddValue(double v) => Value += v;
+    }
+
+    public static class StateTagManagerExtension
+    {
+        public static IEnumerable<IValueTag> ConcatTags(this ITagManager mgr, IEnumerable<IValueTag> tags)=> mgr.Tags.Concat(tags);
+        public static IEnumerable<IValueTag> ConcatTags(this ITagManager mgr, ITagManager other) => mgr.ConcatTags(other.Tags);
+        public static IEnumerable<IValueTag> ConcatTags(this ITagManager mgr, params ITagManager[] others) => mgr.Tags.Concat(others.SelectMany(o=>o.Tags));
     }
 }

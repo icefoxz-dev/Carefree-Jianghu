@@ -6,6 +6,6 @@ namespace _Config.So
     [CreateAssetMenu(fileName = "TraitSo", menuName = "配置/标签/角色/特征")]
     public class TraitSo : GameTagSoBase
     {
-        public override ITagManager GetTagManager(IRoleProperty property) => property.Trait;
+        public override ITagManager GetTagManager(IRoleAttributes attributes) => attributes.Trait;
     }
 }

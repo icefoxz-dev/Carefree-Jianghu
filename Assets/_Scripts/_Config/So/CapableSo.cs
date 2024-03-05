@@ -7,6 +7,6 @@ namespace _Config.So
     public class CapableSo : GameTagSoBase
     {
         public string CName;
-        public override ITagManager GetTagManager(IRoleProperty property) => property.Capable;
+        public override ITagManager GetTagManager(IRoleAttributes attributes) => attributes.Capable;
     }
 }

@@ -84,10 +84,4 @@ namespace _Data
         string Description { get; }
         GameObject Prefab { get; }
     }
-
-    public interface IRoleTerm
-    {
-        int Id { get; }
-        IReadOnlyList<IPlotTag> Tags { get; }
-    }
 }
