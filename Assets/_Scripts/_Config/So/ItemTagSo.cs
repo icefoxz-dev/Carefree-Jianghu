@@ -32,6 +32,7 @@ namespace _Config.So
 
     public abstract class FuncTagSoBase : GameTagSoBase, IFuncTag
     {
+        public IGameTag GameTag => this;
         public abstract void UpdateRole(IRoleData role);
     }
 }

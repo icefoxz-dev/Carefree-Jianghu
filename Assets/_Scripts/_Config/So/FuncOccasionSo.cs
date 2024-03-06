@@ -27,7 +27,7 @@ namespace _Config.So
             foreach (var tag in terms.Select(t=>t._gameTag))
                 if (!tag)
                     Debug.LogError("game tag not set!", this);
-            return terms.Where(t => !t.IsInTerm(role.Attributes)).ToArray();
+            return terms.GetExcludedTerms(role);
         }
 
         [Serializable]
@@ -37,6 +37,7 @@ namespace _Config.So
             [SerializeField] private double _value = 1;
 
             public double Value=> _value;
+            public IGameTag GameTag => _gameTag;
             public string Name => _gameTag.Name;
             public ITagManager GetTagManager(IRoleAttributes attributes) => _gameTag.GetTagManager(attributes);
         }

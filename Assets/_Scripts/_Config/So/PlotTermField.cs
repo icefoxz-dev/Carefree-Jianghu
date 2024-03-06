@@ -14,8 +14,8 @@ namespace _Config.So
         public string Name => _gameTag.Name;
         double IValueTag.Value => Value;
         [FormerlySerializedAs("GameTag")]public GameTagSoBase _gameTag;
-        [FormerlySerializedAs("Compare"), SerializeField] public PlotTagClause _clause;
-        PlotTagClause IPlotTerm.Clause => _clause;
+        [FormerlySerializedAs("Compare"), SerializeField] public TagClauses _clause;
+        public TagClauses Clause => _clause;
         public bool IsInTerm(IValueTag other) => this.IsInTerm(other, _clause);
         public bool IsInTerm(IRoleAttributes role) => role.GetAllTags().Any(IsInTerm);
 
@@ -24,14 +24,14 @@ namespace _Config.So
 
         public override string ToString() => $"{Name}: {GetClauseText(_clause)}{Value}";
 
-        private string GetClauseText(PlotTagClause clause)
+        private string GetClauseText(TagClauses clauses)
         {
-            return clause switch
+            return clauses switch
             {
-                PlotTagClause.Equal => "==",
-                PlotTagClause.Exceed => ">",
-                PlotTagClause.Less => "<",
-                _ => throw new ArgumentOutOfRangeException(nameof(clause), clause, null)
+                TagClauses.Equal => "==",
+                TagClauses.Exceed => ">",
+                TagClauses.Less => "<",
+                _ => throw new ArgumentOutOfRangeException(nameof(clauses), clauses, null)
             };
         }
     }

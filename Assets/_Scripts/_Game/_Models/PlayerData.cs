@@ -53,7 +53,7 @@ namespace _Game._Models
         public ITagManager Skill => _skill;
         public ITagManager Inventory => _inventory;
 
-        public IEnumerable<IValueTag> GetAllTags() => Trait.ConcatTags(Capable, Status, Skill);
+        public IEnumerable<IValueTag> GetAllTags() => Trait.ConcatTags(Capable, Status, Skill, Inventory);
 
         public ICharacter Character => _character;
         public IRoleAttributes Attributes => this;

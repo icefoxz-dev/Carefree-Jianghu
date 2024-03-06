@@ -18,14 +18,14 @@ namespace _Data
 
         public void AddTag(IStatusTag tag)
         {
-            var t = GetFirstOrDefault(tag);
+            var t = GetFirstOrDefault(tag.GameTag);
             if (t != null) throw new DuplicateNameException($"tag.{tag.Name} already exist!");
             _tags.Add(tag.ToStatusTag());
         }
 
         public void RemoveTag(IValueTag tag)
         {
-            var t = GetFirstOrDefault(tag);
+            var t = GetFirstOrDefault(tag.GameTag);
             _tags.Remove(t);
         }
 
@@ -33,7 +33,7 @@ namespace _Data
 
         public void AddTagValue(IValueTag tag)
         {
-            var t = GetFirstOrDefault(tag);
+            var t = GetFirstOrDefault(tag.GameTag);
             if (t == default)
                 throw new NullReferenceException($"tag.{tag.Name} not exist!");
             t.Add(tag.Value);
@@ -81,11 +81,11 @@ namespace _Data
 
         public void AddTagValue(IValueTag tag)
         {
-            var t = GetFirstOrDefault(tag);
+            var t = GetFirstOrDefault(tag.GameTag);
             if (t == default)
             {
-                AddTag(new ValueTag(tag));
-                t = GetFirstOrDefault(tag);
+                AddTag(tag.GameTag);
+                t = GetFirstOrDefault(tag.GameTag);
             }
             t.AddValue(tag.Value);
         }
@@ -110,7 +110,7 @@ namespace _Data
 
         public ValueTag(IValueTag tag, bool copyValue = false)
         {
-            gameTag = tag;
+            gameTag = tag.GameTag;
             if (copyValue) Value = tag.Value;
         }
 
@@ -122,6 +122,7 @@ namespace _Data
 
         public ITagManager GetTagManager(IRoleAttributes attributes) => GameTag.GetTagManager(attributes);
         public void AddValue(double v) => Value += v;
+        public override string ToString() => $"{Name}: {Value}";
     }
 
     public static class StateTagManagerExtension

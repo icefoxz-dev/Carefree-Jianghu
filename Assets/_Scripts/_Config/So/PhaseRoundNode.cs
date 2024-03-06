@@ -14,7 +14,7 @@ namespace _Config.So
             [Serializable]
             private class TagCondition : IPlotTerm
             {
-                [SerializeField] private PlotTagClause _clause;
+                [SerializeField] private TagClauses clauses;
                 [SerializeField] private GameTagSoBase _tag;
                 [SerializeField] private double _value;
 
@@ -22,7 +22,7 @@ namespace _Config.So
                 public string Name => _tag.Name;
                 public double Value => _value;
                 public ITagManager GetTagManager(IRoleAttributes attributes) => _tag.GetTagManager(attributes);
-                public PlotTagClause Clause => _clause;
+                public TagClauses Clause => clauses;
                 public bool IsInTerm(IValueTag other) => this.IsInTerm(other, Clause);
                 public bool IsInTerm(IRoleAttributes role) => role.GetAllTags().Any(IsInTerm);
             }

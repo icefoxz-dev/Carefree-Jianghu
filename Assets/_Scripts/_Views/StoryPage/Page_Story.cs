@@ -28,13 +28,13 @@ namespace _Views.StoryPage
             });
             Game.RegEvent(GameEvent.Episode_Start, b =>
             {
-                LoadLastEpisode();
+                LoadOccasion();
                 view_player.SetInfo();
                 view_player.SetSkills();
             });
-            Game.RegEvent(GameEvent.Occasion_Update, b => view_story.OnOccasionUpdate());
-            Game.RegEvent(GameEvent.Role_Update, b =>
+            Game.RegEvent(GameEvent.Occasion_Update, b =>
             {
+                LoadOccasion();
                 view_player.SetInfo();
                 view_player.SetSkills();
             });
@@ -79,7 +79,7 @@ namespace _Views.StoryPage
             }
         }
 
-        private void LoadLastEpisode()
+        private void LoadOccasion()
         {
             LogEvent();
             var team = Game.World.Team;

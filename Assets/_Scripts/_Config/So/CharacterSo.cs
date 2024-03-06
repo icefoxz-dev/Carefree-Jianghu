@@ -78,7 +78,7 @@ namespace _Config.So
             public ITagManager Status { get; } = Status;
             public ITagManager Skill { get; } = Skill;
             public ITagManager Inventory { get; } = Inventory;
-            public IEnumerable<IValueTag> GetAllTags() => Trait.ConcatTags(Capable, Status, Skill);
+            public IEnumerable<IValueTag> GetAllTags() => Trait.ConcatTags(Capable, Status, Skill, Inventory);
         }
     }
 }

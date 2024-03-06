@@ -29,7 +29,7 @@ namespace _Game._Models
         public void UpdateRole(IRoleData role)
         {
             _ref.UpdateRole(role);
-            SendEvent(GameEvent.Role_Update, role.Character.Id);
+            SendEvent(GameEvent.Occasion_Update, role.Character.Id);
         }
 
         public IPlotTerm[] GetExcludedTerms(IRoleData role) => _ref.GetExcludedTerms(role);

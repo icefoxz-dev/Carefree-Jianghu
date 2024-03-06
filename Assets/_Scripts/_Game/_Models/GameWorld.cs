@@ -35,8 +35,9 @@ namespace _Game._Models
 
         private void UpdateRound()
         {
-            Occasions = Game.Config.ActivityCfg.GetOccasions()
-                .Where(o => !o.GetExcludedTerms(Player).Any())
+            var l = Game.Config.ActivityCfg.GetOccasions()
+                .Where(o => o.GetExcludedTerms(Player).Length == 0).ToArray();
+            Occasions = l
                 .Select(o => new OccasionModel(o)).ToArray();
             SendEvent(GameEvent.Occasion_Update);
         }
@@ -79,7 +80,6 @@ namespace _Game._Models
             CurrentOccasion.UpdateRole(Player);
             Info.NextRound();
             UpdateRound();
-            SendEvent(GameEvent.Role_Update);
             return notInTerms;
         }
     }

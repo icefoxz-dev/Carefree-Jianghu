@@ -35,17 +35,18 @@ namespace _Data
         public void SetMax() => Value = Max;
         public void SetMin() => Value = Min;
 
-        public StatusTag(IValueTag tag, double max, double min = 0) : this(tag, tag.Value, max, min)
+        public StatusTag(IValueTag tag, double max, double min = 0) : this(tag.GameTag, tag.Value, max, min)
         {
         }
 
         public void Add(double value) => Value = Math.Clamp(Value + value, Min, Max);
+        public override string ToString()=> $"{Name}:[{Value}/{Max}]";
     }
 
     public static class StateTagExtension
     {
         public static StatusTag ToStatusTag(this IGameTag tag, double value, double max, double min = 0) => new(tag, value, max, min);
-        public static StatusTag ToStatusTag(this IStatusTag tag) => new(tag, tag.Value, tag.Max, tag.Min);
+        public static StatusTag ToStatusTag(this IStatusTag tag) => new(tag.GameTag, tag.Value, tag.Max, tag.Min);
         public static StatusTag ToStatusTag(this IValueTag tag, double max, double min = 0) => new(tag, max, min);
     }
 }

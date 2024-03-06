@@ -27,7 +27,7 @@ namespace _Config.So
         public double GetPower(IRoleData player) => player.Attributes.Capable.GetTagValue(Power);
         public double GetWisdom(IRoleData player) => player.Attributes.Capable.GetTagValue(Wisdom);
         public double GetSilver(IRoleData player) => player.Attributes.Capable.GetTagValue(Silver);
-        public double GetStamina(IRoleData player) => player.Attributes.Status.GetTagValue(Stamina);
+        public double GetStamina(IRoleData player) => player.Attributes.Status.GetTagValue(Stamina.GameTag);
         public double GetReputation(IRoleData player) => player.Attributes.Capable.GetTagValue(Reputation);
     }
 }
