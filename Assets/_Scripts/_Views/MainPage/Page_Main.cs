@@ -21,6 +21,7 @@ namespace _Views.MainPage
         {
             Main.StartGame();
             Hide();
+            UiManager.ShowConfirm("²âÊÔ°æ£¬ÓÎÏ·ÎÞ·¨´æµµ", () => { }, () => { });
         }
     }
 }
