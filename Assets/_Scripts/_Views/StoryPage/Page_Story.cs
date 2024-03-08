@@ -3,6 +3,7 @@ using System.Linq;
 using _Data;
 using _Game;
 using _Game._Controllers;
+using _Game._Models;
 using _Views.Cursor;
 using UniMvc.Views;
 using UnityEngine;
@@ -22,8 +23,10 @@ namespace _Views.StoryPage
             view_cardSelector = new View_CardSelector(v.Get<View>("view_cardSelector"), OnRoleDragEvent);
             view_player = new View_Player(v.Get<View>("view_player"), () =>
             {
-                var story = Game.GetController<StoryController>();
-                story.ConfirmRound();
+                var excluded = Game.World.TryProceedRound();
+                if (!excluded.Any()) return;
+                var excludedText = excluded.Aggregate(string.Empty, (current, term) => current + (term + "\n"));
+                UiManager.ShowConfirm($"不能执行下个回合，条件：{excludedText}", ()=>{}, ()=>{});
                 Game.World.DebugInfo(Game.World.Player);
             });
             Game.RegEvent(GameEvent.Episode_Start, b =>
