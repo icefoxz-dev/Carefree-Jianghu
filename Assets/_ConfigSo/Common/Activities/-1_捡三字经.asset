@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29391a5366d28b946a24ad2dc5995fad, type: 3}
+  m_Name: "-1_\u6361\u4E09\u5B57\u7ECF"
+  m_EditorClassIdentifier: 
+  _so: {fileID: 11400000}
+  _name: "\u6361\u4E09\u5B57\u7ECF"
+  id: -1
+  _title: "\u6361\u4E09\u5B57\u7ECF"
+  _mode: 0
+  Left:
+    PlaceMode: 0
+    Role: {fileID: 0}
+    Lines: []
+  Right:
+    PlaceMode: 0
+    Role: {fileID: 0}
+    Lines: []
+  Solo:
+    PlaceMode: 0
+    Role: {fileID: 0}
+    Lines: []
+  _description: "\u770B\u5230\u4E09\u5B57\u7ECF\uFF0C\u6361\u4E86\uFF01"
+  _sceneContent: {fileID: 8655601276079373855, guid: 1bb47ad55e29aed4eac9812ad44f3433, type: 3}
+  rewards:
+  - _gameTag: {fileID: 11400000, guid: ee0771d552ca56d4189dd951e19f3cae, type: 2}
+    _value: 1
+  terms: []

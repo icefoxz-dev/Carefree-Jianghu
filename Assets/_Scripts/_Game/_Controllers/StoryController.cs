@@ -7,16 +7,16 @@ namespace _Game._Controllers
 {
     public class StoryController : ControllerBase
     {
-        public void PlaceRoleToOccasion(int teamIndex,RolePlacing.Index placeIndex)
+        public void PlaceRoleToOccasion(int teamIndex)
         {
             var role = World.Team[teamIndex];
             //World.CurrentEp.SetOccasion(occasionIndex, placeIndex, role);
-            World.CurrentOccasion.SetRole(placeIndex, role);
+            World.CurrentOccasion.SetRole(role);
         }
 
-        public void SetOccasion(OccasionModel occasion)
+        public void SetOccasion(IPurpose purpose)
         {
-            World.SetCurrentOccasion(occasion);
+            World.SetCurrentPurpose(purpose);
         }
 
         public void ConfirmRound()

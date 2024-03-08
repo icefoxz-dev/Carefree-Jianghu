@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29391a5366d28b946a24ad2dc5995fad, type: 3}
+  m_Name: "0_\u5BE8\u4E2D_\u76F8\u9047\u5415\u72C4"
+  m_EditorClassIdentifier: 
+  _so: {fileID: 11400000}
+  _name: "\u5BE8\u4E2D_\u76F8\u9047\u5415\u72C4"
+  id: 0
+  _mode: 1
+  Left:
+    PlaceMode: 0
+    Role: {fileID: 0}
+    Lines: []
+  Right:
+    PlaceMode: 2
+    Role: {fileID: 11400000, guid: 440a74a371e6f944ead296faf737704e, type: 2}
+    Lines: []
+  Solo:
+    PlaceMode: 0
+    Role: {fileID: 0}
+    Lines: []
+  _description: "\u89C1\u5415\u72C4\u8FCE\u9762\u800C\u6765\u3002\n\u5415\u72C4\uFF1A\u54CE\uFF01\u4F60\u5728\u8FD9\u53EF\u597D\uFF1F\u6709\u7A7A\u6765\u820D\u4E0B\u5750\u5750\u3002"
+  _title: "\u76F8\u9047\u5415\u72C4"
+  _sceneContent: {fileID: 0}
+  rewards:
+  - _gameTag: {fileID: 11400000, guid: 25b61b8cf7cedbb49bb39ce8684b2740, type: 2}
+    _value: 1
+  terms:
+  - _gameTag: {fileID: 11400000, guid: 25b61b8cf7cedbb49bb39ce8684b2740, type: 2}
+    _clause: 0
+    Value: 0

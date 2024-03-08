@@ -12,7 +12,8 @@ namespace _Data
         ITagManager Status { get; }
         ITagManager Skill { get; }
         ITagManager Inventory { get; }
-        IEnumerable<IValueTag> GetAllTags();
+        ITagManager Story { get; }
+        IEnumerable<IValueTag> GetAllTags() => Trait.ConcatTags(Capable, Status, Skill, Inventory, Story);
     }
 
     /// <summary>

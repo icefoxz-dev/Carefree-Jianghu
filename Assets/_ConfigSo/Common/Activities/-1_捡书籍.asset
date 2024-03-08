@@ -9,13 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29391a5366d28b946a24ad2dc5995fad, type: 3}
-  m_Name: "-1_\u6253\u5DE5"
+  m_Script: {fileID: 11500000, guid: 8e91f9b6efc8dd0428b21657744d5ecd, type: 3}
+  m_Name: "-1_\u6361\u4E66\u7C4D"
   m_EditorClassIdentifier: 
   _so: {fileID: 11400000}
-  _name: "\u6253\u5DE5"
+  _name: "\u6361\u4E66\u7C4D"
   id: -1
-  Mode: 0
+  _title: "\u6361\u4E66"
+  _mode: 0
   Left:
     PlaceMode: 0
     Role: {fileID: 0}
@@ -28,9 +29,9 @@ MonoBehaviour:
     PlaceMode: 0
     Role: {fileID: 0}
     Lines: []
-  Description: "\u6253\u5DE5\uFF01\n\u52AA\u529B\u4E0D\u4E00\u5B9A\u4F1A\u6210\u529F\uFF0C\n\u4F46\u662F\u4E0D\u52AA\u529B\u4E00\u5B9A\u5F88\u8F7B\u677E\uFF01"
-  _sceneContent: {fileID: 8655601276079373855, guid: 1bb47ad55e29aed4eac9812ad44f3433, type: 3}
-  results:
-  - _gameTag: {fileID: 11400000, guid: 4c6f436680817a749bce57912e794ca2, type: 2}
-    _value: 1
-  terms: []
+  _description: 
+  _so: {fileID: 11400000, guid: 31bd952f4a625af43a4ae957e7ca0166, type: 2}
+  terms:
+  - _gameTag: {fileID: 11400000, guid: ee0771d552ca56d4189dd951e19f3cae, type: 2}
+    _clause: 0
+    Value: 0

@@ -32,7 +32,7 @@ namespace _Views.StoryPage
                 view_player.SetInfo();
                 view_player.SetSkills();
             });
-            Game.RegEvent(GameEvent.Occasion_Update, b =>
+            Game.RegEvent(GameEvent.Purpose_Update, b =>
             {
                 LoadOccasion();
                 view_player.SetInfo();
@@ -50,7 +50,7 @@ namespace _Views.StoryPage
             {
                 case DragHelper.DragEvent.Begin:
                 {
-                    var title = cardType == 0 ? Game.World.Team[index].Name : Game.World.Occasions[index]?.Name;
+                    var title = cardType == 0 ? Game.World.Team[index].Name : Game.World.Purposes[index]?.Name;
                     Cursor_Ui.Set(title);
                     break;
                 }
@@ -67,11 +67,11 @@ namespace _Views.StoryPage
                     if (!isInFrame) return;
                     if (cardType == 1)
                     {
-                        var oc = Game.World.Occasions[index];
+                        var oc = Game.World.Purposes[index];
                         StoryController.SetOccasion(oc);
                         return;
                     }
-                    StoryController.PlaceRoleToOccasion(index, placeIndex);
+                    StoryController.PlaceRoleToOccasion(index);
                     break;
                 }
                 default:
@@ -83,7 +83,7 @@ namespace _Views.StoryPage
         {
             LogEvent();
             var team = Game.World.Team;
-            var occasions = Game.World.Occasions;
+            var occasions = Game.World.Purposes;
             view_story.OnOccasionUpdate();
             var options = team.Select(t => (t.Name, t.Description, 0))
                 .Concat(occasions.Select(o => (o.Name, o.Description, 1)))

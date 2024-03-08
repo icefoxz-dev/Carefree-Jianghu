@@ -2,24 +2,25 @@ using System;
 using System.Linq;
 using _Data;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _Config.So
 {
     [CreateAssetMenu(fileName = "OccasionSo", menuName = "配置/场合/一般")]
-    public class FuncOccasionSo : OccasionSoBase
+    public class FuncOccasionSo : PurposeOccasionBase
     {
         [SerializeField] private SceneContent _sceneContent;
-        [SerializeField] private ValueTag[] results;
+        [SerializeField,FormerlySerializedAs("results")] private ValueTag[] rewards;
         [SerializeField] private PlotTermField[] terms;
 
         public SceneContent SceneContent => _sceneContent;
 
-        public override void UpdateRole(IRoleData role)
+        public override void UpdateRewards(IRoleData role)
         {
-            foreach (var tag in results.Select(t => t._gameTag))
+            foreach (var tag in rewards.Select(t => t._gameTag))
                 if (!tag)
                     Debug.LogError("game tag not set!", this);
-            foreach (var tag in results) tag.UpdateRole(role);
+            foreach (var tag in rewards) tag.UpdateRole(role);
         }
 
         public override IPlotTerm[] GetExcludedTerms(IRoleData role)

@@ -34,6 +34,7 @@ namespace _Game._Models
         private readonly TagManager _skill;
         private readonly StateTagManager _status;
         private readonly TagManager _inventory;
+        private readonly TagManager _episode;
         private readonly ICharacterAttributeMap _attributeMap;
 
         public PlayerData(IRoleData playerData, ICharacterAttributeMap attributeMap)
@@ -44,6 +45,7 @@ namespace _Game._Models
             _skill = new TagManager(playerData.Attributes.Skill);
             _status = new StateTagManager(playerData.Attributes.Status.Tags.Cast<IStatusTag>());
             _inventory = new TagManager(playerData.Attributes.Inventory);
+            _episode = new TagManager(playerData.Attributes.Story);
             _attributeMap = attributeMap;
         }
 
@@ -52,8 +54,7 @@ namespace _Game._Models
         public ITagManager Status => _status;
         public ITagManager Skill => _skill;
         public ITagManager Inventory => _inventory;
-
-        public IEnumerable<IValueTag> GetAllTags() => Trait.ConcatTags(Capable, Status, Skill, Inventory);
+        public ITagManager Story => _episode;
 
         public ICharacter Character => _character;
         public IRoleAttributes Attributes => this;

@@ -34,8 +34,9 @@ namespace _Config.So
                     Capable: new TagManager(Capable.Select(t => t.ToFuncTag())),
                     Status: new StateTagManager(Status.Select(t => t._so.GetStatusTag())),
                     Skill: new TagManager(Skills.Select(t => t.ToFuncTag())),
-                    Inventory:new TagManager(Inventory.Select(t=>t.ToFuncTag()))
-                    ),
+                    Inventory: new TagManager(Inventory.Select(t => t.ToFuncTag())),
+                    Story: new TagManager(Array.Empty<IValueTag>())
+                ),
                 this);
         }
 
@@ -71,14 +72,15 @@ namespace _Config.So
             ITagManager Capable,
             ITagManager Status,
             ITagManager Skill,
-            ITagManager Inventory) : IRoleAttributes
+            ITagManager Inventory,
+            ITagManager Story) : IRoleAttributes
         {
             public ITagManager Trait { get; } = Trait;
             public ITagManager Capable { get; } = Capable;
             public ITagManager Status { get; } = Status;
             public ITagManager Skill { get; } = Skill;
             public ITagManager Inventory { get; } = Inventory;
-            public IEnumerable<IValueTag> GetAllTags() => Trait.ConcatTags(Capable, Status, Skill, Inventory);
+            public ITagManager Story { get; } = Story;
         }
     }
 }

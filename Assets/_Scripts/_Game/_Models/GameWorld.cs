@@ -7,12 +7,11 @@ namespace _Game._Models
 {
     public class GameWorld : ModelBase
     {
-        public EpisodeBase CurrentEp { get; private set; }
         public Character[] Team { get; private set; }
-        public OccasionModel[] Occasions { get; private set; }
-
+        public IPurpose[] Purposes { get; private set; }
+        public IPurpose SelectedPurpose { get; private set; }
         public PlayerData Player { get; private set; }//玩家数据
-        public OccasionModel CurrentOccasion { get; private set; }//当前场景
+        public OccasionClusterModel CurrentOccasion { get; private set; }//当前场景
         public WorldInfo Info { get; private set; } //世界信息
 
         public void Init()
@@ -23,7 +22,6 @@ namespace _Game._Models
 
         private void TestInit()
         {
-            CurrentEp = new TestEpisode(Game.Config.GetEpisode(0));
             Player = new PlayerData(Game.Config.GetPresetPlayer(), Game.Config.CharacterAttributeMap);
             Team = Game.Config.GetCharacters().Select(r=>new Character(r)).ToArray();
             Info = new WorldInfo();
@@ -35,11 +33,10 @@ namespace _Game._Models
 
         private void UpdateRound()
         {
-            var l = Game.Config.ActivityCfg.GetOccasions()
-                .Where(o => o.GetExcludedTerms(Player).Length == 0).ToArray();
-            Occasions = l
-                .Select(o => new OccasionModel(o)).ToArray();
-            SendEvent(GameEvent.Occasion_Update);
+            var clusters = Game.Config.ActivityCfg.GetClusters();
+                Purposes = clusters.SelectMany(c => c.GetPurposes(Player)).ToArray();
+            CurrentOccasion = new OccasionClusterModel(Purposes);
+            SendEvent(GameEvent.Purpose_Update);
         }
 
         public void DebugInfo(PlayerData player)
@@ -62,9 +59,9 @@ namespace _Game._Models
             }
         }
 
-        public void SetCurrentOccasion(OccasionModel occasion)
+        public void SetCurrentPurpose(IPurpose purpose)
         {
-            CurrentOccasion = occasion;
+            SelectedPurpose = purpose;
             UpdateRound();
         }
 
@@ -74,11 +71,13 @@ namespace _Game._Models
         /// <returns></returns>
         public IPlotTerm[] TryProceedRound()
         {
-            var notInTerms = CurrentOccasion.GetExcludedTerms(Player);
+            var notInTerms = SelectedPurpose.GetOccasion(Player).GetExcludedTerms(Player);
             if (notInTerms.Any())
                 return notInTerms;
-            CurrentOccasion.UpdateRole(Player);
+            var occasion = SelectedPurpose.GetOccasion(Player);
+            occasion.UpdateRewards(Player);
             Info.NextRound();
+            SelectedPurpose = null;
             UpdateRound();
             return notInTerms;
         }

@@ -6,19 +6,30 @@ using UnityEngine.Serialization;
 
 namespace _Config.So
 {
-    public abstract class OccasionSoBase : AutoUnderscoreNamingObject, IOccasion
+    public abstract class OccasionBase : AutoUnderscoreNamingObject, IOccasion
     {
-        [FormerlySerializedAs("Modes")]public Occasion.Modes Mode;
-        [HideIf(nameof(Mode), Occasion.Modes.Solo)] [SerializeField] private InteractionSet Left;
-        [HideIf(nameof(Mode), Occasion.Modes.Solo)] [SerializeField] private InteractionSet Right;
-        [ShowIf(nameof(Mode), Occasion.Modes.Solo)] [SerializeField] private InteractionSet Solo;
-        [TextArea] public string Description;
-        Occasion.Modes IOccasion.Mode => Mode;
-        string IOccasion.Description => Description;
+        public abstract Occasion.Modes Mode { get; }
+        public abstract string Description { get; }
+        public abstract IRolePlacing[] GetPlacingInfos();
+        public abstract string GetLine(RolePlacing.Index role, int index);
+        public abstract void UpdateRewards(IRoleData role);
         public abstract IPlotTerm[] GetExcludedTerms(IRoleData role);
-        public abstract void UpdateRole(IRoleData role);
+    }
 
-        public string GetLine(RolePlacing.Index role,int index)
+    public abstract class PurposeOccasionBase : OccasionBase,IPurpose
+    {
+        [SerializeField] private string _title;
+        [FormerlySerializedAs("Mode")]public Occasion.Modes _mode;
+        [HideIf(nameof(_mode), Occasion.Modes.Solo)] [SerializeField] private InteractionSet Left;
+        [HideIf(nameof(_mode), Occasion.Modes.Solo)] [SerializeField] private InteractionSet Right;
+        [ShowIf(nameof(_mode), Occasion.Modes.Solo)] [SerializeField] private InteractionSet Solo;
+        [TextArea,FormerlySerializedAs("Description")] public string _description;
+        public override string Name => _title;
+        public override Occasion.Modes Mode => _mode;
+        public override string Description => _description;
+        public IOccasion GetOccasion(IRoleData role) => this;
+
+        public override string GetLine(RolePlacing.Index role,int index)
         {
             var line = role switch
             {
@@ -30,9 +41,9 @@ namespace _Config.So
             return line;
         }
 
-        public IRolePlacing[] GetPlacingInfos()
+        public override IRolePlacing[] GetPlacingInfos()
         {
-            return Mode switch
+            return _mode switch
             {
                 Occasion.Modes.Solo => new IRolePlacing[]
                 {

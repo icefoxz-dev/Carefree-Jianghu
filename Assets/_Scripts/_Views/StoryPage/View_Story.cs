@@ -34,7 +34,10 @@ namespace _Views.StoryPage
         //    throw new NullReferenceException($"No occasion set!");
         //}
 
-        public void OnOccasionUpdate() => view_occasion.Set(Game.World.CurrentOccasion);
+        public void OnOccasionUpdate()
+        {
+            view_occasion.Set(Game.World?.SelectedPurpose);
+        }
 
         /// <summary>
         /// 当拖动角色时检查是否在框内,返回PlaceIndex
@@ -54,7 +57,7 @@ namespace _Views.StoryPage
             private enum Modes
             {
                 None,
-                Versus,
+                //Versus,
                 Solo,
             }
             private Element_Role element_role_left { get; }
@@ -98,61 +101,62 @@ namespace _Views.StoryPage
                 return _mode switch
                 {
                     Modes.None => Array.Empty<Element_Role>(),
-                    Modes.Versus => new[] { element_role_left, element_role_right },
+                    //Modes.Versus => new[] { element_role_left, element_role_right },
                     Modes.Solo => new[] { element_role_solo },
                     _ => throw new ArgumentOutOfRangeException()
                 };
             }
 
-            public void Set(IOccasion? oc)
+            public void Set(IPurpose? oc)
             {
-                var mode = oc?.Mode switch
-                {
-                    Occasion.Modes.Versus => Modes.Versus,
-                    Occasion.Modes.Solo => Modes.Solo,
-                    _ => Modes.None
-                };
+                var mode = Modes.Solo;
+                //    oc?.Mode switch
+                //{
+                //    Occasion.Modes.Versus => Modes.Versus,
+                //    Occasion.Modes.Solo => Modes.Solo,
+                //    _ => Modes.None
+                //};
                 text_brief.text = oc?.Description ?? string.Empty;
                 SetMode(mode);
-                SetRoles(oc);
+                //SetRoles(oc);
                 Show();
                 return;
 
-                void SetRoles(IOccasion o)
-                {
-                    if (o == null) return;
-                    switch (_mode)
-                    {
-                        case Modes.None:
-                            break;
-                        case Modes.Versus:
-                        case Modes.Solo:
-                        {
-                            var infos = o.GetPlacingInfos();
-                            foreach (var info in infos)
-                            {
-                                var element = info.Place switch
-                                {
-                                    RolePlacing.Index.Solo => element_role_solo,
-                                    RolePlacing.Index.Left => element_role_left,
-                                    RolePlacing.Index.Right => element_role_right,
-                                    _ => throw new ArgumentOutOfRangeException()
-                                };
-                                element.Set(info.Character);
-                            }
-                            break;
-                        }
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
-                }
+                //void SetRoles(IOccasion o)
+                //{
+                //    if (o == null) return;
+                //    switch (_mode)
+                //    {
+                //        case Modes.None:
+                //            break;
+                //        //case Modes.Versus:
+                //        case Modes.Solo:
+                //        {
+                //            var infos = o.GetPlacingInfos();
+                //            foreach (var info in infos)
+                //            {
+                //                var element = info.Place switch
+                //                {
+                //                    RolePlacing.Index.Solo => element_role_solo,
+                //                    RolePlacing.Index.Left => element_role_left,
+                //                    RolePlacing.Index.Right => element_role_right,
+                //                    _ => throw new ArgumentOutOfRangeException()
+                //                };
+                //                element.Set(info.Character);
+                //            }
+                //            break;
+                //        }
+                //        default:
+                //            throw new ArgumentOutOfRangeException();
+                //    }
+                //}
             }
 
             private void SetMode(Modes mode)
             {
                 _mode = mode;
-                element_role_left.Display(mode == Modes.Versus);
-                element_role_right.Display(mode == Modes.Versus);
+                //element_role_left.Display(mode == Modes.Versus);
+                //element_role_right.Display(mode == Modes.Versus);
                 element_role_solo.Display(mode == Modes.Solo);
             }
 
