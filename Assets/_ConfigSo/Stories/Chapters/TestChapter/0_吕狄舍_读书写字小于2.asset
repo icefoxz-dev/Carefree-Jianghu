@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29391a5366d28b946a24ad2dc5995fad, type: 3}
   m_Name: "0_\u5415\u72C4\u820D_\u8BFB\u4E66\u5199\u5B57\u5C0F\u4E8E2"
   m_EditorClassIdentifier: 
-  _so: {fileID: 11400000}
+  referenceSo: {fileID: 11400000}
   _name: "\u5415\u72C4\u820D_\u8BFB\u4E66\u5199\u5B57\u5C0F\u4E8E2"
   id: 0
   _title: "\u62DC\u8BBF\u5415\u72C4"
@@ -31,8 +31,10 @@ MonoBehaviour:
     Lines: []
   _description: "\u5415\u72C4\uFF1A\u8FD9\u4E48\u5F97\u7A7A\u6765\u770B\u6211\uFF1F"
   _sceneContent: {fileID: 0}
-  rewards: []
   terms:
   - _gameTag: {fileID: 11400000, guid: 25b61b8cf7cedbb49bb39ce8684b2740, type: 2}
-    _clause: 0
-    Value: 1
+    _clause: 2
+    Value: 3
+  rewards:
+  - _gameTag: {fileID: 11400000, guid: 25b61b8cf7cedbb49bb39ce8684b2740, type: 2}
+    _value: 1

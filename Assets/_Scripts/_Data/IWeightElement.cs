@@ -23,7 +23,10 @@ namespace _Data
 
         public static IEnumerable<T> SelectWeightedRandom<T>(this IEnumerable<T> elements, int numberOfItems) where T : IWeightElement
         {
-            var filteredElements = elements.Where(e => e.Weight > 0).ToList(); // 过滤掉权重<=0的元素
+            var filteredElements = elements
+                .Where(e => e.Weight > 0)
+                .OrderBy(_ => GetRandom()) // 随机打乱元素顺序
+                .ToList();
 
             if (!filteredElements.Any() || numberOfItems <= 0)
             {
@@ -31,7 +34,7 @@ namespace _Data
             }
 
             var weightedList = filteredElements
-                .Select(e => (item: e, accumulatedWeight: filteredElements.Where(x => x.Equals(e) || x.Weight <= e.Weight).Sum(x => x.Weight)))
+                .Select((e, index) => (item: e, accumulatedWeight: filteredElements.Take(index + 1).Sum(x => x.Weight)))
                 .ToList();
 
             var totalWeight = weightedList.Last().accumulatedWeight;
@@ -50,7 +53,6 @@ namespace _Data
 
             return selectedItems;
         }
-
     }
 
 }

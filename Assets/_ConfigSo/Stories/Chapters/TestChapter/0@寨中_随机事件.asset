@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04b29c89a54cdf94b872631fcbc39234, type: 3}
   m_Name: "0@\u5BE8\u4E2D_\u968F\u673A\u4E8B\u4EF6"
   m_EditorClassIdentifier: 
-  _so: {fileID: 11400000}
+  referenceSo: {fileID: 11400000}
   _name: "\u5BE8\u4E2D_\u968F\u673A\u4E8B\u4EF6"
   id: 0
+  _timeTerms: []
   _occasions:
   - _so: {fileID: 11400000, guid: bdb88dab86de0fc4294f8a07e34e490d, type: 2}
     _weight: 1

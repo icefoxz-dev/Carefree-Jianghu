@@ -8,7 +8,7 @@ namespace _Data
     public class StateTagManager : ITagManager
     {
         private readonly List<StatusTag> _tags;
-        public IReadOnlyList<IValueTag> Tags => _tags;
+        public IEnumerable<IValueTag> Tags => _tags;
 
         public StateTagManager(IEnumerable<IStatusTag> tags)
         {
@@ -62,7 +62,7 @@ namespace _Data
             _tags = tags.Select(t => new ValueTag(t, copyValue: true)).ToList();
         }
 
-        public IReadOnlyList<IValueTag> Tags => _tags;
+        public IEnumerable<IValueTag> Tags => _tags;
 
         public void AddTag(IGameTag tag)
         {

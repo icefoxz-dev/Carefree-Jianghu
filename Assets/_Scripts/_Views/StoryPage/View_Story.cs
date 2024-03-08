@@ -36,7 +36,7 @@ namespace _Views.StoryPage
 
         public void OnOccasionUpdate()
         {
-            view_occasion.Set(Game.World?.SelectedPurpose);
+            view_occasion.Set(Game.World?.Round?.SelectedPurpose);
         }
 
         /// <summary>

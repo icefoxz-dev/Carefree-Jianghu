@@ -1,7 +1,4 @@
-using System;
-using _Views;
 using UniMvc.Views;
-using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
@@ -22,11 +19,13 @@ public class Window_Confirm : WinUiBase
     {
         Display(true);
         text_message.text = message;
+        btn_confirm.onClick.RemoveAllListeners();
         btn_confirm.onClick.AddListener(()=>
         {
             onConfirm?.Invoke();
             Hide();
         });
+        btn_cancel.onClick.RemoveAllListeners();
         btn_cancel.onClick.AddListener(()=>
         {
             onCancel?.Invoke();

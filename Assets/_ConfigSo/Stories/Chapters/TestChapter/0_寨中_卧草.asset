@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29391a5366d28b946a24ad2dc5995fad, type: 3}
   m_Name: "0_\u5BE8\u4E2D_\u5367\u8349"
   m_EditorClassIdentifier: 
-  _so: {fileID: 11400000}
+  referenceSo: {fileID: 11400000}
   _name: "\u5BE8\u4E2D_\u5367\u8349"
   id: 0
+  _title: "\u7761\u5348\u89C9"
   _mode: 0
   Left:
     PlaceMode: 0
@@ -29,12 +30,11 @@ MonoBehaviour:
     Role: {fileID: 0}
     Lines: []
   _description: "\u8D70\u5230\u5C0F\u6CB3\uFF0C\u5367\u8349\u4E00\u4F1A\u513F...\u771F\u8212\u670D\uFF01"
-  _title: "\u7761\u5348\u89C9"
   _sceneContent: {fileID: 0}
-  rewards:
-  - _gameTag: {fileID: 11400000, guid: a5aa1fd6430a3914190177b241c06474, type: 2}
-    _value: 3
   terms:
   - _gameTag: {fileID: 11400000, guid: a5aa1fd6430a3914190177b241c06474, type: 2}
     _clause: 2
-    Value: 2
+    Value: 3
+  rewards:
+  - _gameTag: {fileID: 11400000, guid: a5aa1fd6430a3914190177b241c06474, type: 2}
+    _value: 3

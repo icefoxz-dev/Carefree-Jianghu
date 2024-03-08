@@ -8,11 +8,9 @@ namespace _Game._Models
     public class GameWorld : ModelBase
     {
         public Character[] Team { get; private set; }
-        public IPurpose[] Purposes { get; private set; }
-        public IPurpose SelectedPurpose { get; private set; }
         public PlayerData Player { get; private set; }//玩家数据
-        public OccasionClusterModel CurrentOccasion { get; private set; }//当前场景
-        public WorldInfo Info { get; private set; } //世界信息
+        public GameRound Round { get; private set; } //世界信息
+        public RewardBoard RewardBoard { get; } = new RewardBoard();
 
         public void Init()
         {
@@ -24,19 +22,10 @@ namespace _Game._Models
         {
             Player = new PlayerData(Game.Config.GetPresetPlayer(), Game.Config.CharacterAttributeMap);
             Team = Game.Config.GetCharacters().Select(r=>new Character(r)).ToArray();
-            Info = new WorldInfo();
-            
-            UpdateRound();
+            Round = new GameRound();
+            Round.UpdatePurposes(Player);
             DebugInfo(Player);
             SendEvent(GameEvent.Episode_Start);
-        }
-
-        private void UpdateRound()
-        {
-            var clusters = Game.Config.ActivityCfg.GetClusters();
-                Purposes = clusters.SelectMany(c => c.GetPurposes(Player)).ToArray();
-            CurrentOccasion = new OccasionClusterModel(Purposes);
-            SendEvent(GameEvent.Purpose_Update);
         }
 
         public void DebugInfo(PlayerData player)
@@ -47,6 +36,7 @@ namespace _Game._Models
             sb.Append(TagLog(player.Status,"状态"));
             sb.Append(TagLog(player.Skill,"技能"));
             sb.Append(TagLog(player.Inventory, "物品"));
+            sb.Append(TagLog(player.Story, "故事"));
             Debug.Log(sb);
             return;
 
@@ -59,11 +49,7 @@ namespace _Game._Models
             }
         }
 
-        public void SetCurrentPurpose(IPurpose purpose)
-        {
-            SelectedPurpose = purpose;
-            UpdateRound();
-        }
+        public void SetCurrentPurpose(IPurpose purpose) => Round.SetPurpose(purpose);
 
         /// <summary>
         /// 尝试进行下个回合，返回不过的条件
@@ -71,14 +57,10 @@ namespace _Game._Models
         /// <returns></returns>
         public IPlotTerm[] TryProceedRound()
         {
-            var notInTerms = SelectedPurpose.GetOccasion(Player).GetExcludedTerms(Player);
-            if (notInTerms.Any())
-                return notInTerms;
-            var occasion = SelectedPurpose.GetOccasion(Player);
-            occasion.UpdateRewards(Player);
-            Info.NextRound();
-            SelectedPurpose = null;
-            UpdateRound();
+            var notInTerms = Round.SelectedPurpose.GetOccasion(Player).GetExcludedTerms(Player);
+            if (notInTerms.Any()) return notInTerms;
+            RewardBoard.SetReward(Round.SelectedPurpose, Player);
+            Round.NextRound(Player);
             return notInTerms;
         }
     }

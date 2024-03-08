@@ -44,12 +44,12 @@ namespace _Config
 
     public abstract class AutoNameSoBase : ScriptableObject
     {
-        [ReadOnly][SerializeField] private ScriptableObject _so;
+        [ReadOnly][SerializeField] private ScriptableObject referenceSo;
 #if UNITY_EDITOR
         [OnInspectorGUI(nameof(GetReference))]
         protected void GetReference()
         {
-            if (_so == null) _so = this;
+            if (referenceSo == null) referenceSo = this;
             ChangeName();
             return;
 

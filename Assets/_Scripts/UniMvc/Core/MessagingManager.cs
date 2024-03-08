@@ -49,7 +49,6 @@ namespace UniMvc.Core
         /// 注册<see cref="DataBag"/>事件
         /// </summary>
         /// <param name="eventName"></param>
-        /// <param name="action">todo : 注意! ILRuntime lamda 不可以缩进方法, 必须把bag声明出来,例: bag=> method(bag);</param>
         /// <returns></returns>
         public string RegEvent(string eventName, Action<DataBag> action)
         {

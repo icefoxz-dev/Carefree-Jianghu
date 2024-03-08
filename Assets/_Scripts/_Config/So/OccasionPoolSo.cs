@@ -20,7 +20,7 @@ namespace _Config.So
             .Select(o => o.So)
             .FirstOrDefault();
 
-        public override IEnumerable<IPurpose> GetPurposes(IRoleData role) => new IPurpose[] { this };
+        protected override IEnumerable<IPurpose> GetOccasionPurpose(IRoleData role, IGameRound gameRound)=> new IPurpose[] { this };
 
         [Serializable]private class OptionField : IWeightElement
         {

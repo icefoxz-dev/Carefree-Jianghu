@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29391a5366d28b946a24ad2dc5995fad, type: 3}
   m_Name: "-1_\u6253\u5DE5"
   m_EditorClassIdentifier: 
-  _so: {fileID: 11400000}
+  referenceSo: {fileID: 11400000}
   _name: "\u6253\u5DE5"
   id: -1
   _title: "\u6253\u5DE5"
@@ -31,12 +31,12 @@ MonoBehaviour:
     Lines: []
   _description: "\u6253\u5DE5\uFF01\n\u52AA\u529B\u4E0D\u4E00\u5B9A\u4F1A\u6210\u529F\uFF0C\n\u4F46\u662F\u4E0D\u52AA\u529B\u4E00\u5B9A\u5F88\u8F7B\u677E\uFF01"
   _sceneContent: {fileID: 8655601276079373855, guid: 1bb47ad55e29aed4eac9812ad44f3433, type: 3}
-  rewards:
-  - _gameTag: {fileID: 11400000, guid: 4c6f436680817a749bce57912e794ca2, type: 2}
-    _value: 1
-  - _gameTag: {fileID: 11400000, guid: a5aa1fd6430a3914190177b241c06474, type: 2}
-    _value: -2
   terms:
   - _gameTag: {fileID: 11400000, guid: a5aa1fd6430a3914190177b241c06474, type: 2}
     _clause: 1
     Value: 1
+  rewards:
+  - _gameTag: {fileID: 11400000, guid: a9db1508b2bc9374b9db8370f7203f5c, type: 2}
+    _value: 6
+  - _gameTag: {fileID: 11400000, guid: a5aa1fd6430a3914190177b241c06474, type: 2}
+    _value: -2

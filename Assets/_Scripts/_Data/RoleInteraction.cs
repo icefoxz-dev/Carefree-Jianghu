@@ -26,7 +26,7 @@ namespace _Data
     }
     public interface ITagManager
     {
-        IReadOnlyList<IValueTag> Tags { get; }
+        IEnumerable<IValueTag> Tags { get; }
         double GetTagValue(IGameTag tag, bool throwErrorIfNoTag = false);
         void AddTagValue(IValueTag tag);
     }

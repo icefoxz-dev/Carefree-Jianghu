@@ -26,8 +26,9 @@ namespace _Data
         /// 获取可用场合(可操作项目)
         /// </summary>
         /// <param name="role"></param>
+        /// <param name="gameRound"></param>
         /// <returns></returns>
-        IEnumerable<IPurpose> GetPurposes(IRoleData role);
+        IEnumerable<IPurpose> GetPurposes(IRoleData role, IGameRound gameRound);
     }
 
     /// <summary>
@@ -42,8 +43,9 @@ namespace _Data
         /// <returns></returns>
         //IRolePlacing[] GetPlacingInfos();
         //string GetLine(RolePlacing.Index role, int index);
-        void UpdateRewards(IRoleData role);
+        string Description { get; }
         IPlotTerm[] GetExcludedTerms(IRoleData role);
+        IValueTag[] Rewards { get; }
     }
 
     /// <summary>

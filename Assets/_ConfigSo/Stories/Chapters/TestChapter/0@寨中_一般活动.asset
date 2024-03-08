@@ -12,9 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d883182e2de1804fbe0573e7cb32d26, type: 3}
   m_Name: "0@\u5BE8\u4E2D_\u4E00\u822C\u6D3B\u52A8"
   m_EditorClassIdentifier: 
-  _so: {fileID: 11400000}
+  referenceSo: {fileID: 11400000}
   _name: "\u5BE8\u4E2D_\u4E00\u822C\u6D3B\u52A8"
   id: 0
+  _timeTerms:
+  - _term: 1
+    _year: 1
+    _month: 1
+    _round: 0
+  - _term: 2
+    _year: 1
+    _month: 1
+    _round: 4
   _terms: []
   _occasions:
   - {fileID: 11400000, guid: 43a8803574c57754199420fee92d6e5b, type: 2}

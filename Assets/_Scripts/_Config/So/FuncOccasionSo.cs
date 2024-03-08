@@ -10,18 +10,10 @@ namespace _Config.So
     public class FuncOccasionSo : PurposeOccasionBase
     {
         [SerializeField] private SceneContent _sceneContent;
-        [SerializeField,FormerlySerializedAs("results")] private ValueTag[] rewards;
         [SerializeField] private PlotTermField[] terms;
-
+        [SerializeField,FormerlySerializedAs("results")] private ValueTag[] rewards;
+        public override IValueTag[] Rewards => rewards;
         public SceneContent SceneContent => _sceneContent;
-
-        public override void UpdateRewards(IRoleData role)
-        {
-            foreach (var tag in rewards.Select(t => t._gameTag))
-                if (!tag)
-                    Debug.LogError("game tag not set!", this);
-            foreach (var tag in rewards) tag.UpdateRole(role);
-        }
 
         public override IPlotTerm[] GetExcludedTerms(IRoleData role)
         {
@@ -30,6 +22,7 @@ namespace _Config.So
                     Debug.LogError("game tag not set!", this);
             return terms.GetExcludedTerms(role);
         }
+
 
         [Serializable]
         private class ValueTag : IValueTag

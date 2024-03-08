@@ -10,10 +10,11 @@ namespace _Config.So
     {
         public abstract Occasion.Modes Mode { get; }
         public abstract string Description { get; }
+        public abstract IValueTag[] Rewards { get; }
         public abstract IRolePlacing[] GetPlacingInfos();
         public abstract string GetLine(RolePlacing.Index role, int index);
-        public abstract void UpdateRewards(IRoleData role);
         public abstract IPlotTerm[] GetExcludedTerms(IRoleData role);
+
     }
 
     public abstract class PurposeOccasionBase : OccasionBase,IPurpose

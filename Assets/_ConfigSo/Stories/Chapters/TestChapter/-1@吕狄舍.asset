@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d883182e2de1804fbe0573e7cb32d26, type: 3}
   m_Name: "-1@\u5415\u72C4\u820D"
   m_EditorClassIdentifier: 
-  _so: {fileID: 11400000}
+  referenceSo: {fileID: 11400000}
   _name: "\u5415\u72C4\u820D"
   id: -1
+  _timeTerms: []
   _terms:
   - _gameTag: {fileID: 11400000, guid: 25b61b8cf7cedbb49bb39ce8684b2740, type: 2}
     _clause: 1

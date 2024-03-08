@@ -21,26 +21,9 @@ namespace _Views.StoryPage
         {
             view_story = new View_Story(v.Get<View>("view_story"), OnOccasionRoleClick);
             view_cardSelector = new View_CardSelector(v.Get<View>("view_cardSelector"), OnRoleDragEvent);
-            view_player = new View_Player(v.Get<View>("view_player"), () =>
-            {
-                var excluded = Game.World.TryProceedRound();
-                if (!excluded.Any()) return;
-                var excludedText = excluded.Aggregate(string.Empty, (current, term) => current + (term + "\n"));
-                UiManager.ShowConfirm($"不能执行下个回合，条件：{excludedText}", ()=>{}, ()=>{});
-                Game.World.DebugInfo(Game.World.Player);
-            });
-            Game.RegEvent(GameEvent.Episode_Start, b =>
-            {
-                LoadOccasion();
-                view_player.SetInfo();
-                view_player.SetSkills();
-            });
-            Game.RegEvent(GameEvent.Purpose_Update, b =>
-            {
-                LoadOccasion();
-                view_player.SetInfo();
-                view_player.SetSkills();
-            });
+            view_player = new View_Player(v.Get<View>("view_player"),
+                () => UiManager.ShowConfirm("确认回合？", StoryController.ConfirmRound));
+            Game.RegEvent(GameEvent.Round_Update, b => UpdateOccasion());
         }
 
         private void OnRoleDragEvent((PointerEventData p, DragHelper.DragEvent e,int cardType ,int index) arg)
@@ -53,7 +36,7 @@ namespace _Views.StoryPage
             {
                 case DragHelper.DragEvent.Begin:
                 {
-                    var title = cardType == 0 ? Game.World.Team[index].Name : Game.World.Purposes[index]?.Name;
+                    var title = cardType == 0 ? Game.World.Team[index].Name : Game.World.Round.Purposes[index]?.Name;
                     Cursor_Ui.Set(title);
                     break;
                 }
@@ -70,7 +53,7 @@ namespace _Views.StoryPage
                     if (!isInFrame) return;
                     if (cardType == 1)
                     {
-                        var oc = Game.World.Purposes[index];
+                        var oc = Game.World.Round.Purposes[index];
                         StoryController.SetOccasion(oc);
                         return;
                     }
@@ -82,16 +65,18 @@ namespace _Views.StoryPage
             }
         }
 
-        private void LoadOccasion()
+        private void UpdateOccasion()
         {
             LogEvent();
             var team = Game.World.Team;
-            var occasions = Game.World.Purposes;
+            var occasions = Game.World.Round.Purposes;
             view_story.OnOccasionUpdate();
             var options = team.Select(t => (t.Name, t.Description, 0))
                 .Concat(occasions.Select(o => (o.Name, o.Description, 1)))
                 .ToArray();
             view_cardSelector.SetCards(options);
+            view_player.SetInfo();
+            view_player.SetSkills();
         }
 
         private void OnOccasionRoleClick(RolePlacing.Index rolePlace)

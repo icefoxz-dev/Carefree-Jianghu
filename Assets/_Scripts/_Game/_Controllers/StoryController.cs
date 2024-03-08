@@ -11,7 +11,7 @@ namespace _Game._Controllers
         {
             var role = World.Team[teamIndex];
             //World.CurrentEp.SetOccasion(occasionIndex, placeIndex, role);
-            World.CurrentOccasion.SetRole(role);
+            //World.CurrentOccasion.SetRole(role);
         }
 
         public void SetOccasion(IPurpose purpose)
@@ -25,6 +25,7 @@ namespace _Game._Controllers
             if (!excluded.Any()) return;
             var excludedText = excluded.Aggregate(string.Empty, (current, term) => current + (term + "\n"));
             Debug.Log("<color=yellow>不能执行下个回合</color>，条件：" + excludedText);
+            Game.World.DebugInfo(Game.World.Player);
         }
     }
 }
