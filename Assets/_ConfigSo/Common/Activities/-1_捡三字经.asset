@@ -34,4 +34,9 @@ MonoBehaviour:
   rewards:
   - _gameTag: {fileID: 11400000, guid: ee0771d552ca56d4189dd951e19f3cae, type: 2}
     _value: 1
-  terms: []
+  - _gameTag: {fileID: 11400000, guid: a5aa1fd6430a3914190177b241c06474, type: 2}
+    _value: -2
+  terms:
+  - _gameTag: {fileID: 11400000, guid: a5aa1fd6430a3914190177b241c06474, type: 2}
+    _clause: 1
+    Value: 1
