@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29391a5366d28b946a24ad2dc5995fad, type: 3}
   m_Name: "0_\u5BE8\u4E2D_\u76F8\u9047\u5415\u5B89"
   m_EditorClassIdentifier: 
-  _so: {fileID: 11400000}
+  referenceSo: {fileID: 11400000}
   _name: "\u5BE8\u4E2D_\u76F8\u9047\u5415\u5B89"
   id: 0
   _title: "\u76F8\u9047\u5415\u5B89"
@@ -31,10 +31,10 @@ MonoBehaviour:
     Lines: []
   _description: "\u5415\u5B89\u8FCE\u9762\u800C\u6765\u3002\n\u5415\u5B89\uFF1A...\u4F60\u597D...\u5927\u54E5\u8BA9\u6211\u591A\u7167\u987E\u4F60\u3002\u4F60\u6709\u4E8B\u53EF\u4EE5\u6765\u627E\u6211\u3002"
   _sceneContent: {fileID: 0}
-  rewards:
-  - _gameTag: {fileID: 11400000, guid: 82fa162003042cc4592a25494e7dd2a0, type: 2}
-    _value: 1
   terms:
-  - _gameTag: {fileID: 11400000, guid: 82fa162003042cc4592a25494e7dd2a0, type: 2}
+  - RoleTag: {fileID: 11400000, guid: 82fa162003042cc4592a25494e7dd2a0, type: 2}
     _clause: 0
     Value: 0
+  rewards:
+  - RoleTag: {fileID: 11400000, guid: 82fa162003042cc4592a25494e7dd2a0, type: 2}
+    _value: 1

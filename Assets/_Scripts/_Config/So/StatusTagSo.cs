@@ -4,7 +4,7 @@ using UnityEngine;
 namespace _Config.So
 {
     [CreateAssetMenu(fileName = "StateTagSo", menuName = "配置/标签/角色/状态")]
-    public class StatusTagSo : GameTagSoBase
+    public class StatusTagSo : RoleTagSoBase
     {
         public string CName;
         [SerializeField] private double _value;

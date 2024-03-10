@@ -18,6 +18,17 @@ namespace _Data
     }
 
     /// <summary>
+    /// 场合交互的结果，透过结果执行后续操作
+    /// </summary>
+    public interface IOccasionResult
+    {
+        /// <summary>
+        /// 0 = failed
+        /// </summary>
+        int Result { get; }
+    }
+
+    /// <summary>
     /// 场景集，作为多个场景的集合，用于解锁和管理场景
     /// </summary>
     public interface IOccasionCluster 
@@ -45,7 +56,8 @@ namespace _Data
         //string GetLine(RolePlacing.Index role, int index);
         string Description { get; }
         IPlotTerm[] GetExcludedTerms(IRoleData role);
-        IValueTag[] Rewards { get; }
+        IValueTag[] GetRewards(IOccasionResult result);
+        IChallengeArgs ChallengeArgs { get; }
     }
 
     /// <summary>
@@ -55,7 +67,7 @@ namespace _Data
     {
         string Name { get; }
         string Description { get; }
-
+        bool IsMandatory { get; }
         IOccasion GetOccasion(IRoleData role);
     }
 

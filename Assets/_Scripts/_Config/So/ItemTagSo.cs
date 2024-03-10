@@ -18,7 +18,7 @@ namespace _Config.So
         [Serializable]
         private class TagField
         {
-            [SerializeField] private GameTagSoBase _tag;
+            [SerializeField] private RoleTagSoBase _tag;
             [SerializeField] private double _value;
 
             public void Proceed(IRoleData role)
@@ -30,9 +30,9 @@ namespace _Config.So
     }
 
 
-    public abstract class FuncTagSoBase : GameTagSoBase, IFuncTag
+    public abstract class FuncTagSoBase : RoleTagSoBase, IFuncTag
     {
-        public IGameTag GameTag => this;
+        public IRoleTag RoleTag => this;
         public abstract void UpdateRole(IRoleData role);
     }
 }

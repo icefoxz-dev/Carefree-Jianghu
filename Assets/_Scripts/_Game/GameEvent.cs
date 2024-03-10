@@ -10,5 +10,11 @@ namespace _Game
 
         //reward
         public const string Reward_Update = "Reward_Update";
+
+        //challenge
+        public const string Challenge_Start = "Challenge_Start";
+
+        //battle
+        public const string Battle_End = "Battle_End";
     }
 }

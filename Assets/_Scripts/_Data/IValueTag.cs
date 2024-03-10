@@ -8,9 +8,16 @@ namespace _Data
         /// <summary>
         /// 判断使用的标签(so)
         /// </summary>
-        IGameTag GameTag { get; }
-        string Name => GameTag.Name;
+        IRoleTag RoleTag { get; }
+        string Name => RoleTag.Name;
         void UpdateRole(IRoleData role);
+    }
+
+    /// <summary>
+    /// 能力标签，不能直接赋值，它是透过公式计算得到的
+    /// </summary>
+    public interface ICapableTag : IValueTag
+    {
     }
 
     /// <summary>
@@ -21,8 +28,8 @@ namespace _Data
         /// <summary>
         /// 判断使用的标签(so)
         /// </summary>
-        IGameTag GameTag { get; }//为了获取so标签作为判断
-        string Name => GameTag.Name;
+        IRoleTag Tag { get; }//为了获取so标签作为判断
+        string Name => Tag.Name;
         double Value { get; }
     }
 
@@ -35,7 +42,7 @@ namespace _Data
         /// <param name="role"></param>
         public static void UpdateRole(this IValueTag tag, IRoleData role)
         {
-            var manager = tag.GameTag.GetTagManager(role.Attributes);
+            var manager = tag.Tag.GetTagManager(role.Attributes);
             manager.AddTagValue(tag);
         }
     }

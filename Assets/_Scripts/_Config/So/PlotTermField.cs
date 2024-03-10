@@ -10,16 +10,16 @@ namespace _Config.So
     [Serializable]
     public class PlotTermField : IPlotTerm
     {
-        public IGameTag GameTag => _gameTag;
-        public string Name => _gameTag.Name;
+        public IRoleTag Tag => RoleTag;
+        public string Name => RoleTag.Name;
         double IValueTag.Value => Value;
-        [FormerlySerializedAs("GameTag")]public GameTagSoBase _gameTag;
+        [FormerlySerializedAs("GameTag")]public RoleTagSoBase RoleTag;
         [FormerlySerializedAs("Compare"), SerializeField] public TagClauses _clause;
         public TagClauses Clause => _clause;
         public bool IsInTerm(IValueTag other) => this.IsInTerm(other, _clause);
         public bool IsInTerm(IRoleAttributes role) => role.GetAllTags().Any(IsInTerm);
 
-        public ITagManager GetTagManager(IRoleAttributes attributes) => _gameTag.GetTagManager(attributes);
+        public ITagManager GetTagManager(IRoleAttributes attributes) => RoleTag.GetTagManager(attributes);
         public double Value;
 
         public override string ToString() => $"{Name}: {GetClauseText(_clause)}{Value}";

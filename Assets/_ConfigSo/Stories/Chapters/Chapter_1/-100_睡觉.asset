@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29391a5366d28b946a24ad2dc5995fad, type: 3}
   m_Name: "-100_\u7761\u89C9"
   m_EditorClassIdentifier: 
-  _so: {fileID: 11400000}
+  referenceSo: {fileID: 11400000}
   _name: "\u7761\u89C9"
   id: -100
-  _sceneContent: {fileID: 0}
-  Mode: 0
+  _title: 
+  _mode: 0
   Left:
     PlaceMode: 0
     Role: {fileID: 0}
@@ -29,4 +29,7 @@ MonoBehaviour:
     PlaceMode: 0
     Role: {fileID: 0}
     Lines: []
-  Description: 
+  _description: 
+  _sceneContent: {fileID: 0}
+  terms: []
+  rewards: []

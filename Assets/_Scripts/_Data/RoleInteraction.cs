@@ -7,13 +7,14 @@ namespace _Data
     /// </summary>
     public interface IRoleAttributes
     {
-        ITagManager Trait { get; }
         ITagManager Capable { get; }
+        ITagManager Trait { get; }
+        ITagManager Ability { get; }
         ITagManager Status { get; }
         ITagManager Skill { get; }
         ITagManager Inventory { get; }
         ITagManager Story { get; }
-        IEnumerable<IValueTag> GetAllTags() => Trait.ConcatTags(Capable, Status, Skill, Inventory, Story);
+        IEnumerable<IValueTag> GetAllTags() => Capable.ConcatTags(Trait, Ability, Status, Skill, Inventory, Story);
     }
 
     /// <summary>
@@ -31,7 +32,7 @@ namespace _Data
         void AddTagValue(IValueTag tag);
     }
 
-    public interface ICharacterAttributeMap
+    public interface ICharacterTagsMap
     {
         double GetStrength(IRoleData player);
         double GetIntelligent(IRoleData player);
@@ -39,5 +40,7 @@ namespace _Data
         double GetWisdom(IRoleData player);
         double GetSilver(IRoleData player);
         double GetStamina(IRoleData player);
+        bool IsGameOver(IRoleData player);
+        IEnumerable<ICapableTag> GetCapableTags { get; }
     }
 }

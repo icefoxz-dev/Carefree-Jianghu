@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e91f9b6efc8dd0428b21657744d5ecd, type: 3}
   m_Name: "-1_\u6361\u4E66\u7C4D"
   m_EditorClassIdentifier: 
-  _so: {fileID: 11400000}
+  referenceSo: {fileID: 11400000}
   _name: "\u6361\u4E66\u7C4D"
   id: -1
   _title: "\u6361\u4E66"
@@ -32,6 +32,6 @@ MonoBehaviour:
   _description: 
   _so: {fileID: 11400000, guid: 31bd952f4a625af43a4ae957e7ca0166, type: 2}
   terms:
-  - _gameTag: {fileID: 11400000, guid: ee0771d552ca56d4189dd951e19f3cae, type: 2}
+  - RoleTag: {fileID: 11400000, guid: ee0771d552ca56d4189dd951e19f3cae, type: 2}
     _clause: 0
     Value: 0

@@ -9,7 +9,7 @@ namespace _Config.So
         
     }
 
-    public class SkillTagSo: GameTagSoBase
+    public class SkillTagSo: RoleTagSoBase
     {
         public override ITagManager GetTagManager(IRoleAttributes attributes) => attributes.Skill;
     }

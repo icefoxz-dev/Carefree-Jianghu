@@ -10,7 +10,8 @@ namespace _Config.So
     {
         public abstract Occasion.Modes Mode { get; }
         public abstract string Description { get; }
-        public abstract IValueTag[] Rewards { get; }
+        public abstract IValueTag[] GetRewards(IOccasionResult result);
+        public abstract IChallengeArgs ChallengeArgs { get; }
         public abstract IRolePlacing[] GetPlacingInfos();
         public abstract string GetLine(RolePlacing.Index role, int index);
         public abstract IPlotTerm[] GetExcludedTerms(IRoleData role);
@@ -28,6 +29,7 @@ namespace _Config.So
         public override string Name => _title;
         public override Occasion.Modes Mode => _mode;
         public override string Description => _description;
+        public abstract bool IsMandatory { get; }
         public IOccasion GetOccasion(IRoleData role) => this;
 
         public override string GetLine(RolePlacing.Index role,int index)
@@ -73,12 +75,22 @@ namespace _Config.So
             }
         }
 
-        [Serializable]
-        protected class InteractionSet //交互设定
+        [Serializable] protected class InteractionSet //交互设定
         {
             [FormerlySerializedAs("Type")]public RolePlacing.Modes PlaceMode; //交互类型
             [ShowIf(nameof(PlaceMode), RolePlacing.Modes.Fixed)] public CharacterSo Role; //交互角色
             [TextArea] public string[] Lines;
+        }
+
+        [Serializable] protected class RewardTag : IValueTag
+        {
+            [SerializeField,FormerlySerializedAs("_gameTag")] public RoleTagSoBase RoleTag;
+            [SerializeField] private double _value = 1;
+
+            public double Value => _value;
+            public IRoleTag Tag => RoleTag;
+            public string Name => RoleTag.Name;
+            public ITagManager GetTagManager(IRoleAttributes attributes) => RoleTag.GetTagManager(attributes);
         }
     }
 }

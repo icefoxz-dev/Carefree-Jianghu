@@ -13,15 +13,15 @@ namespace _Game._Models
 
         public IOccasion Occasion { get; private set; }
 
-        public void SetReward(IPurpose purpose,IRoleData role)
+        public void SetReward(IValueTag[] rewards,IRoleData role,IOccasion occasion)
         {
-            Occasion = purpose.GetOccasion(role);
-            Rewards = Occasion.Rewards;
+            Rewards = rewards;
+            Occasion = occasion;
             foreach (var tag in Rewards)
             {
                 if (tag == null)
                     throw new NullReferenceException(
-                        $"Purpose={purpose.Name} Occasion Rewards = {string.Join(',', Occasion.Rewards.Select(r => r?.Name))} ,game tag not set!");
+                        $"Occasion Rewards = {string.Join(',', Occasion.GetRewards(null).Select(r => r?.Name))} ,game tag not set!");
                 tag.UpdateRole(role);
             }
             SendEvent(GameEvent.Reward_Update);

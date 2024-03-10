@@ -17,7 +17,7 @@ MonoBehaviour:
   id: -1
   _timeTerms: []
   _terms:
-  - _gameTag: {fileID: 11400000, guid: 25b61b8cf7cedbb49bb39ce8684b2740, type: 2}
+  - RoleTag: {fileID: 11400000, guid: 25b61b8cf7cedbb49bb39ce8684b2740, type: 2}
     _clause: 1
     Value: 0
   _occasions:

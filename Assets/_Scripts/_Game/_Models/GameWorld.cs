@@ -20,7 +20,7 @@ namespace _Game._Models
 
         private void TestInit()
         {
-            Player = new PlayerData(Game.Config.GetPresetPlayer(), Game.Config.CharacterAttributeMap);
+            Player = new PlayerData(Game.Config.GetPresetPlayer());
             Team = Game.Config.GetCharacters().Select(r=>new Character(r)).ToArray();
             Round = new GameRound();
             Round.UpdatePurposes(Player);
@@ -31,8 +31,8 @@ namespace _Game._Models
         public void DebugInfo(PlayerData player)
         {
             var sb = new StringBuilder();
-            sb.Append($"玩家：{player}\n武[{player.Power}]\n学[{player.Wisdom}]\n力[{player.Strength}]\n智[{player.Intelligent}]\n银[{player.Silver}]\n体[{player.Stamina}]");
-            sb.Append(TagLog(player.Capable,"属性"));
+            sb.Append($"<color=yellow>玩家：{player}\n武[{player.Power}]\n学[{player.Wisdom}]\n力[{player.Strength}]\n智[{player.Intelligent}]\n银[{player.Silver}]\n体[{player.Stamina}]");
+            sb.Append(TagLog(player.Ability,"属性"));
             sb.Append(TagLog(player.Status,"状态"));
             sb.Append(TagLog(player.Skill,"技能"));
             sb.Append(TagLog(player.Inventory, "物品"));
@@ -49,7 +49,7 @@ namespace _Game._Models
             }
         }
 
-        public void SetCurrentPurpose(IPurpose purpose) => Round.SetPurpose(purpose);
+        public void SetCurrentPurpose(IPurpose purpose) => Round.SelectPurpose(purpose);
 
         /// <summary>
         /// 尝试进行下个回合，返回不过的条件
@@ -59,8 +59,15 @@ namespace _Game._Models
         {
             var notInTerms = Round.SelectedPurpose.GetOccasion(Player).GetExcludedTerms(Player);
             if (notInTerms.Any()) return notInTerms;
-            RewardBoard.SetReward(Round.SelectedPurpose, Player);
-            Round.NextRound(Player);
+            var purpose = Round.SelectedPurpose;
+            var occasion = purpose.GetOccasion(Player);
+            Round.InvokeChallenge(Player, result =>
+            {
+                var rewards = occasion.GetRewards(result);
+                RewardBoard.SetReward(rewards, Player, occasion);
+                Round.NextRound(Player);
+                DebugInfo(Player);
+            });
             return notInTerms;
         }
     }

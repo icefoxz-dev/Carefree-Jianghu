@@ -32,17 +32,17 @@ MonoBehaviour:
   _description: "\u5415\u72C4\uFF1A\u6765\u6765\uFF0C\u6B63\u597D\u4E3A\u6211\u89E3\u60D1\u8FD9\u4E66\u3002"
   _sceneContent: {fileID: 0}
   terms:
-  - _gameTag: {fileID: 11400000, guid: d57626ed8891e5b499a320ea9e40cbca, type: 2}
+  - RoleTag: {fileID: 11400000, guid: 25b61b8cf7cedbb49bb39ce8684b2740, type: 2}
     _clause: 1
     Value: 1
-  - _gameTag: {fileID: 11400000, guid: a5aa1fd6430a3914190177b241c06474, type: 2}
+  - RoleTag: {fileID: 11400000, guid: d57626ed8891e5b499a320ea9e40cbca, type: 2}
     _clause: 1
     Value: 2
-  - _gameTag: {fileID: 11400000, guid: 25b61b8cf7cedbb49bb39ce8684b2740, type: 2}
+  - RoleTag: {fileID: 11400000, guid: a5aa1fd6430a3914190177b241c06474, type: 2}
     _clause: 1
     Value: 1
   rewards:
-  - _gameTag: {fileID: 11400000, guid: 79f044d5f52a40b428780aaa27ac3595, type: 2}
+  - RoleTag: {fileID: 11400000, guid: 79f044d5f52a40b428780aaa27ac3595, type: 2}
     _value: 1
-  - _gameTag: {fileID: 11400000, guid: a5aa1fd6430a3914190177b241c06474, type: 2}
+  - RoleTag: {fileID: 11400000, guid: a5aa1fd6430a3914190177b241c06474, type: 2}
     _value: -2

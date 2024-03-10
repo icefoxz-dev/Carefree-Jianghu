@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 365e5a8c4fb2275459edffd915ed724d, type: 3}
   m_Name: ActivityConfigSo
   m_EditorClassIdentifier: 
+  _mandatory: []
   _clusters:
   - {fileID: 11400000, guid: 0accf05b6c424c84c9cda1a42c0ee323, type: 2}
   - {fileID: 11400000, guid: 2aac60642ee92594fb69d8e5d77ffc63, type: 2}
   - {fileID: 11400000, guid: 24a07d74c53660043a6814ad090829c9, type: 2}
+  - {fileID: 11400000, guid: 272bb0ce9ef1b844e8c1bc58ec94e31a, type: 2}

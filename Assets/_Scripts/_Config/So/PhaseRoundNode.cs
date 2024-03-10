@@ -15,10 +15,10 @@ namespace _Config.So
             private class TagCondition : IPlotTerm
             {
                 [SerializeField] private TagClauses clauses;
-                [SerializeField] private GameTagSoBase _tag;
+                [SerializeField] private RoleTagSoBase _tag;
                 [SerializeField] private double _value;
 
-                public IGameTag GameTag => _tag;
+                public IRoleTag Tag => _tag;
                 public string Name => _tag.Name;
                 public double Value => _value;
                 public ITagManager GetTagManager(IRoleAttributes attributes) => _tag.GetTagManager(attributes);

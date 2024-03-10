@@ -15,15 +15,7 @@ MonoBehaviour:
   referenceSo: {fileID: 11400000}
   _name: "\u5BE8\u4E2D_\u4E00\u822C\u6D3B\u52A8"
   id: 0
-  _timeTerms:
-  - _term: 1
-    _year: 1
-    _month: 1
-    _round: 0
-  - _term: 2
-    _year: 1
-    _month: 1
-    _round: 4
+  _timeTerms: []
   _terms: []
   _occasions:
   - {fileID: 11400000, guid: 43a8803574c57754199420fee92d6e5b, type: 2}

@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a325ba968675ae240bbdf42edf5eb461, type: 3}
+  m_Name: "0_Boss_\u5BE8\u4E2D_\u76D7\u8D3C\u706D\u6751"
+  m_EditorClassIdentifier: 
+  referenceSo: {fileID: 11400000}
+  _name: "Boss_\u5BE8\u4E2D_\u76D7\u8D3C\u706D\u6751"
+  id: 0
+  _title: "\u76D7\u8D3C\u5934\u76EE"
+  _mode: 0
+  Left:
+    PlaceMode: 0
+    Role: {fileID: 0}
+    Lines: []
+  Right:
+    PlaceMode: 0
+    Role: {fileID: 0}
+    Lines: []
+  Solo:
+    PlaceMode: 0
+    Role: {fileID: 0}
+    Lines: []
+  _description: "\u76D7\u8D3C\uFF1A\u54C8\u54C8\uFF0C\u6CA1\u60F3\u5230\u8352\u90CA\u91CE\u5CAD\u7ADF\u7136\u6709\u8FD9\u4E2A\u597D\u5730\u65B9\uFF01\n\u6B64\u5730\u6211\u8981\u4E86\uFF01"
+  challengeArgs: {fileID: 11400000, guid: 3771adb285845d240a14ec883baf9c90, type: 2}
+  _terms: []
+  _reward:
+    _win: []
+    _lose:
+    - RoleTag: {fileID: 11400000, guid: d174f3556efbc594385632ade685aded, type: 2}
+      _value: 1

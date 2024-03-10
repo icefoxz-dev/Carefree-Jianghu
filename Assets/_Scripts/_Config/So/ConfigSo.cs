@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using _Data;
 using UnityEngine;
 
@@ -13,9 +14,9 @@ namespace _Config.So
         public ICharacter[] GetCharacters() => _roleCfg.GetCharacters();
         [SerializeField] private RoleConfigSo _roleCfg;
         [SerializeField] private CharacterSo _player;
-        public IRoleData GetPresetPlayer() => _player.GetRoleData();
-        [SerializeField] private CharacterAttributeMapSo _characterAttributeMap;
-        public ICharacterAttributeMap CharacterAttributeMap => _characterAttributeMap;
+        public IRoleData GetPresetPlayer() => _player.GetRoleData(CharacterTagsMap.GetCapableTags);
+        [SerializeField] private CharacterTagsMapSo characterTagsMap;
+        public ICharacterTagsMap CharacterTagsMap => characterTagsMap;
         [SerializeField]public ActivityConfigSo ActivityCfg;
     }
 }

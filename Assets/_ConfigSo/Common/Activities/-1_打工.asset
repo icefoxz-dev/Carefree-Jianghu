@@ -32,11 +32,11 @@ MonoBehaviour:
   _description: "\u6253\u5DE5\uFF01\n\u52AA\u529B\u4E0D\u4E00\u5B9A\u4F1A\u6210\u529F\uFF0C\n\u4F46\u662F\u4E0D\u52AA\u529B\u4E00\u5B9A\u5F88\u8F7B\u677E\uFF01"
   _sceneContent: {fileID: 8655601276079373855, guid: 1bb47ad55e29aed4eac9812ad44f3433, type: 3}
   terms:
-  - _gameTag: {fileID: 11400000, guid: a5aa1fd6430a3914190177b241c06474, type: 2}
+  - RoleTag: {fileID: 11400000, guid: a5aa1fd6430a3914190177b241c06474, type: 2}
     _clause: 1
     Value: 1
   rewards:
-  - _gameTag: {fileID: 11400000, guid: a9db1508b2bc9374b9db8370f7203f5c, type: 2}
+  - RoleTag: {fileID: 11400000, guid: a9db1508b2bc9374b9db8370f7203f5c, type: 2}
     _value: 6
-  - _gameTag: {fileID: 11400000, guid: a5aa1fd6430a3914190177b241c06474, type: 2}
+  - RoleTag: {fileID: 11400000, guid: a5aa1fd6430a3914190177b241c06474, type: 2}
     _value: -2

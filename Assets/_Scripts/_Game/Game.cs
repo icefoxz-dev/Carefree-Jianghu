@@ -1,5 +1,6 @@
 using System;
 using _Config.So;
+using _Data;
 using _Game._Controllers;
 using _Game._Models;
 using UniMvc.Core;
@@ -41,6 +42,7 @@ namespace _Game
         public static ConfigSo Config { get; private set; }
 
         public static GameWorld World => _world;
+        public static ICharacterTagsMap CharacterTags => Config.CharacterTagsMap;
 
         public static MonoService MonoService
         {

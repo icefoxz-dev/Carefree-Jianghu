@@ -13,7 +13,7 @@ namespace _Config.So
         [SerializeField] private PlotTermField[] _terms;
         [SerializeField] private PurposeOccasionBase[] _occasions;
 
-        protected override IEnumerable<IPurpose> GetOccasionPurpose(IRoleData role, IGameRound gameRound) =>
+        protected override IEnumerable<IPurpose> GetOccasionPurpose(IRoleData role, IGameRound round) =>
             _terms.All(t => t.IsInTerm(role.Attributes))
                 ? _occasions.Where(f => f.IsInTerm(role)).ToArray()
                 : Array.Empty<IPurpose>();
@@ -33,7 +33,7 @@ namespace _Config.So
         public IEnumerable<IPurpose> GetPurposes(IRoleData role, IGameRound gameRound) =>
             _timeTerms.All(t => t.IsInTerm(gameRound)) ? GetOccasionPurpose(role, gameRound) : Array.Empty<IPurpose>();
 
-        protected abstract IEnumerable<IPurpose> GetOccasionPurpose(IRoleData role, IGameRound gameRound);
+        protected abstract IEnumerable<IPurpose> GetOccasionPurpose(IRoleData role, IGameRound round);
 
         [Serializable] private class TimeTermField
         {
