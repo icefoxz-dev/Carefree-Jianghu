@@ -16,6 +16,7 @@ namespace _Views.StoryPage
         private View_Story view_story { get; }
         private View_CardSelector view_cardSelector { get; }
         private View_Player view_player { get; }
+        private View_Pages view_pages { get; }
         private StoryController StoryController => Game.GetController<StoryController>();
         public Page_Story(IView v, bool display = true) : base(v, display)
         {
@@ -23,6 +24,9 @@ namespace _Views.StoryPage
             view_cardSelector = new View_CardSelector(v.Get<View>("view_cardSelector"), OnRoleDragEvent);
             view_player = new View_Player(v.Get<View>("view_player"),
                 () => UiManager.ShowConfirm("确认回合？", StoryController.ConfirmRound));
+            view_pages = new View_Pages(v.Get<View>("view_pages"),
+                () => view_player.Show(),
+                () => UiManager.ShowInfo("工作正在进行中！"));
             Game.RegEvent(GameEvent.Round_Update, b => UpdateOccasion());
         }
 
