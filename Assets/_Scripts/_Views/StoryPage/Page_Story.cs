@@ -76,6 +76,7 @@ namespace _Views.StoryPage
                 .ToArray();
             view_cardSelector.SetCards(options);
             view_player.SetInfo();
+            view_player.SetTags();
             view_player.SetSkills();
         }
 
