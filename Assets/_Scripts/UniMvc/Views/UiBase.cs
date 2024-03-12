@@ -145,7 +145,7 @@ namespace UniMvc.Views
         public ListView_Scroll(IView v, string prefabName, string scrollRectName, bool display = true,
             bool hideChildrenViews = true) : this(
             v.Get<View>(prefabName),
-            v.Get<ScrollRect>(scrollRectName), v, hideChildrenViews, display)
+            v.Get<ScrollRect>(scrollRectName), v, display, hideChildrenViews)
         {
         }
 

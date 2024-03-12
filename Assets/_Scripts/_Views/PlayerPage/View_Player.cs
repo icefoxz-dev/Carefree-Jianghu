@@ -20,6 +20,8 @@ public class View_Player : UiBase
     public void SetInfo() => view_info.SetInfo(player);
     public void SetSkills() => view_info.SetSkills(player);
     public void SetTags() => view_info.SetTags(player);
+    public void ShowInfo() => view_info.Show();
+    public void HideInfo() => view_info.Hide();
     private class View_info : UiBase
     {
         private View_main view_main { get; set; }
