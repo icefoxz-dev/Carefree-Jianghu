@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class View_Player : UiBase
 {
-    private PlayerData player => Game.World.Player;
+    private RoleData Role => Game.World.Role;
     private View_info view_info { get; }
     private View_tags view_tags { get; }
 
@@ -21,8 +21,8 @@ public class View_Player : UiBase
         btn_nextRound = v.Get<Button>("btn_nextRound");
         btn_nextRound.onClick.AddListener(onClickAction);
     }
-    public void SetInfo() => view_info.SetInfo(player);
-    public void SetSkills() => view_tags.SetSkill(player.Skill, "技能");
+    public void SetInfo() => view_info.SetInfo(Role);
+    public void SetSkills() => view_tags.SetSkill(Role.Skill, "技能");
     private class View_info : UiBase
     {
         private Text text_name { get; }
@@ -49,15 +49,15 @@ public class View_Player : UiBase
         private void SetIntelligent(double intelligent) => text_intelligent.text = intelligent.ToString();
         private void SetSilver(double silver) => text_silver.text = silver.ToString();
         private void SetStamina(double stamina) => text_stamina.text = stamina.ToString();
-        public void SetInfo(PlayerData player)
+        public void SetInfo(RoleData role)
         {
-            SetName($"{player}");
-            SetPower(player.Power);
-            SetWisdom(player.Wisdom);
-            SetStrength(player.Strength);
-            SetIntelligent(player.Intelligent);
-            SetSilver(player.Silver);
-            SetStamina(player.Stamina);
+            SetName($"{role}");
+            SetPower(role.Power);
+            SetWisdom(role.Wisdom);
+            SetStrength(role.Strength);
+            SetIntelligent(role.Intelligent);
+            SetSilver(role.Silver);
+            SetStamina(role.Stamina);
         }
     }
 
@@ -69,10 +69,10 @@ public class View_Player : UiBase
             SkillsListView = new ListView_Trans<Prefab_Skill>(v, "prefab_skill", "layout_tags");
         }
 
-        public void SetSkill(ITagManager pTags, string tagName)
+        public void SetSkill(ITagSet<IGameTag> pTags, string tagName)
         {
             SkillsListView.ClearList(u => u.Destroy());
-            foreach (var tag in pTags.Tags)
+            foreach (var tag in pTags.Set)
             {
                 var ui = SkillsListView.Instance(v => new Prefab_Skill(v));
                 ui.SetTag(tagName);

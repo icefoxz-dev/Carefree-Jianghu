@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84807870bb7882c4d9b0b43d1bebe453, type: 3}
+  m_Name: "\u9752\u57CE\u5185\u529F"
+  m_EditorClassIdentifier: 
+  referenceSo: {fileID: 11400000}
+  _name: "\u9752\u57CE\u5185\u529F"
+  _map:
+    _useCurve: 0
+    _curve:
+      _curve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      _min: 1
+      _max: 13
+      _levels: 10
+    _custom:
+      _fields:
+      - Level: 1
+        Power: 1.3360000103712082
+      - Level: 2
+        Power: 2.2479999363422394
+      - Level: 3
+        Power: 3.5920002460479736
+      - Level: 4
+        Power: 5.224000334739685
+      - Level: 5
+        Power: 7
+      - Level: 6
+        Power: 8.776000738143921
+      - Level: 7
+        Power: 10.407999753952026
+      - Level: 8
+        Power: 11.752000331878662
+      - Level: 9
+        Power: 12.664000034332275
+      - Level: 10
+        Power: 13

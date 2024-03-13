@@ -12,16 +12,18 @@ namespace _Config.So
         {
 
             [Serializable]
-            private class TagCondition : IPlotTerm
+            private class TagCondition : ITagTerm
             {
                 [SerializeField] private TagClauses clauses;
                 [SerializeField] private RoleTagSoBase _tag;
                 [SerializeField] private double _value;
 
-                public IRoleTag Tag => _tag;
+                public IGameTag Tag => _tag;
                 public string Name => _tag.Name;
+
                 public double Value => _value;
-                public ITagManager GetTagManager(IRoleAttributes attributes) => _tag.GetTagManager(attributes);
+
+                public TagType TagType => Tag.TagType;
                 public TagClauses Clause => clauses;
                 public bool IsInTerm(IValueTag other) => this.IsInTerm(other, Clause);
                 public bool IsInTerm(IRoleAttributes role) => role.GetAllTags().Any(IsInTerm);

@@ -10,7 +10,7 @@ namespace _Config.So
         [SerializeField] private double _value;
         [SerializeField] private double _max;
         [SerializeField] private double _min;
-        public override ITagManager GetTagManager(IRoleAttributes attributes) => attributes.Status;
-        public IStatusTag GetStatusTag() => this.ToStatusTag(_value, _max, _min);
+        public override TagType TagType => TagType.Status;
+        public ITagStatus GetStatusTag() => this.ToStatusTag(_value, _max, _min);
     }
 }

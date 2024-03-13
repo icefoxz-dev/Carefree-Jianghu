@@ -9,7 +9,7 @@ namespace _Config.So
     {
         [SerializeField] private RoundTriggers roundTrigger;
         [ConditionalField(nameof(roundTrigger), false, RoundTriggers.RoundCount), SerializeField] private RoundCountSet _roundSet;
-        [ConditionalField(nameof(roundTrigger), false, RoundTriggers.GameTag), SerializeField] private TagSet _tagSet;
+        [ConditionalField(nameof(roundTrigger), false, RoundTriggers.GameTag), SerializeField] private TermSet _tagSet;
         [Output] public EpRoundNode[] Next;
         [ReadOnly] public EpRoundNode[] NextList;
         public override string NodeName => "Root";

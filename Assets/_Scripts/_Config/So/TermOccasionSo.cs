@@ -8,9 +8,9 @@ namespace _Config.So
     public class TermOccasionSo : PurposeOccasionBase,IChallengeArgs
     {
         [SerializeField] private OccasionBase _so;
-        [SerializeField] private PlotTermField[] terms;
+        [SerializeField] private TagTermField[] terms;
 
-        public override IPlotTerm[] GetExcludedTerms(IRoleData role) =>
+        public override ITagTerm[] GetExcludedTerms(IRoleData role) =>
             terms.GetExcludedTerms(role).Concat(_so.GetExcludedTerms(role)).ToArray();
 
         public override IValueTag[] GetRewards(IOccasionResult result) => _so.GetRewards(result);

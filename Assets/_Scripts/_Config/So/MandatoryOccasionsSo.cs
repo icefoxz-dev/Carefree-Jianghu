@@ -9,7 +9,7 @@ namespace _Config.So
     [CreateAssetMenu(fileName = "MandatoryOccasionsSo", menuName = "配置/场合/时间强制")]
     public class MandatoryOccasionsSo : OccasionClusterSoBase
     {
-        [SerializeField] private PlotTermField[] _terms;
+        [SerializeField] private TagTermField[] _terms;
         [SerializeField] private MandatoryOccasionSo _occasion;
 
         protected override IEnumerable<IPurpose> GetOccasionPurpose(IRoleData role, IGameRound round) =>

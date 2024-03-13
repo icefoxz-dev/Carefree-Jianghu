@@ -9,11 +9,11 @@ namespace _Config.So
     public class MandatoryOccasionSo : PurposeOccasionBase
     {
         [SerializeField] private ChallengeArgsBase challengeArgs;
-        [SerializeField] private PlotTermField[] _terms;
+        [SerializeField] private TagTermField[] _terms;
         [SerializeField] private RewardJudge _reward;
         public override bool IsMandatory => true;
 
-        public override IPlotTerm[] GetExcludedTerms(IRoleData role) =>
+        public override ITagTerm[] GetExcludedTerms(IRoleData role) =>
             _terms.GetExcludedTerms(role).ToArray();
 
         public override IValueTag[] GetRewards(IOccasionResult result) => _reward.GetRewards(result);

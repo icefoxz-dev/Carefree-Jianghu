@@ -1,153 +1,160 @@
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 
 namespace _Data
 {
-    public class CapableTagManager : ITagManager
+    public class SkillTagManager : ISkillTagManager
     {
-        private readonly List<ICapableTag> _tags;
-        public IEnumerable<IValueTag> Tags => _tags;
+        public IEnumerable<ISkillTag> Skills => _skills.Keys;
+        private Dictionary<ISkillTag, double> _skills;
+        public IEnumerable<IValueTag> Set => _skills.Select(s => new ValueTag(s.Key, s.Value));
 
-        public CapableTagManager(IEnumerable<IValueTag> tags)
+        public IEnumerable<ISkillSet<ICombatSkill>> CombatSkills => _skills
+            .Where(s => s.Key.SkillType == SkillType.Combat)
+            .Select(s => new SkillSet<ICombatSkill>((ICombatSkill)s.Key, (int)s.Value));
+        public IEnumerable<ISkillSet<IBasicSkill>> BasicSkills => _skills
+            .Where(s => s.Key.SkillType == SkillType.Basic)
+            .Select(s => new SkillSet<IBasicSkill>((IBasicSkill)s.Key, (int)s.Value));
+        public IEnumerable<ISkillSet<ISkillTag>> ForceSkills => _skills
+            .Where(s => s.Key.SkillType == SkillType.Force)
+            .Select(s => new SkillSet<ISkillTag>(s.Key, (int)s.Value));
+        public IEnumerable<ISkillSet<ISkillTag>> DodgeSkills => _skills
+            .Where(s => s.Key.SkillType == SkillType.Dodge)
+            .Select(s => new SkillSet<ISkillTag>(s.Key, (int)s.Value));
+
+        public SkillTagManager(IEnumerable<(ISkillTag skill, double value)> skills)
         {
-            _tags = tags.Cast<ICapableTag>().ToList();
+            _skills = skills.ToDictionary(s => s.skill, s => s.value);
         }
 
-        public double GetTagValue(IGameTag tag, bool throwErrorIfNoTag = false)
+        public void UpdateTag(ISkillTag tag, double value)
+        {
+            var skill = _skills.Keys.FirstOrDefault(t => t == tag);
+            if (skill == null)
+            {
+                _skills.Add(tag, 0);
+                skill = tag;
+            }
+            _skills[skill] += value;
+        }
+
+        public double GetTagValue(IGameTag tag)
+        {
+            var skill = _skills.Keys.FirstOrDefault(s => s == tag);
+            if (skill == null) return 0;
+            return _skills[skill];
+        }
+
+        double ITagSet<ISkillTag>.GetTagValue(ISkillTag tag) => GetTagValue(tag);
+    }
+
+    public class FormulaTagManager : IFormulaTagManager
+    {
+        private readonly List<IFormulaTag> _tags;
+        private readonly IRoleData _role;
+
+        public IEnumerable<IValueTag> Set => _tags.Select(t => new ValueTag(t, t.GetValue(_role)));
+
+        public IEnumerable<IFormulaTag> FormulaTags => _tags;
+
+        public FormulaTagManager(IEnumerable<IFormulaTag> capable, IRoleData role)
+        {
+            _role = role;
+            _tags = capable.ToList();
+        }
+
+        public double GetTagValue(IGameTag tag)
+        {
+            var f = _tags.FirstOrDefault(t => t == tag);
+            return f?.GetValue(_role) ?? 0;
+        }
+
+        double ITagSet<IFormulaTag>.GetTagValue(IFormulaTag tag) => GetTagValue(tag);
+    }
+    public class StateTagManager : ITagManager<IGameTag>
+    {
+        private readonly List<TagStatus> _tags;
+
+        public IEnumerable<IValueTag> Set => _tags.Select(t => new ValueTag(t, t.Value));
+
+        public StateTagManager(IEnumerable<ITagStatus> tags)
+        {
+            _tags = tags.Select(t => t.ToStatusTag(t.Max, t.Min)).ToList();
+        }
+
+        public double GetTagValue(IGameTag tag)
+        {
+            var status = _tags.FirstOrDefault(t => t.Tag == tag);
+            return status?.Value ?? 0;
+        }
+
+        public void UpdateTag(IGameTag tag, double value)
         {
             var t = _tags.FirstOrDefault(t => t.Tag == tag);
-            return t?.Value ?? 0;
+            if (t==null)
+                throw new InvalidOperationException($"No such tag! {tag}, 状态必须预设！");
+            t.Add(value);
         }
 
-        public void AddTagValue(IValueTag tag) =>
-            throw new NotImplementedException($"{nameof(CapableTagManager)}： {tag.Name} 不可以赋值! 它应该是公式计算出来的。");
     }
-    public class StateTagManager : ITagManager
-    {
-        private readonly List<StatusTag> _tags;
-        public IEnumerable<IValueTag> Tags => _tags;
 
-        public StateTagManager(IEnumerable<IStatusTag> tags)
-        {
-            _tags = tags.Select(s => s.ToStatusTag(s.Max, s.Min)).ToList();
-        }
-
-
-        public void AddTag(IStatusTag tag)
-        {
-            var t = GetFirstOrDefault(tag.Tag);
-            if (t != null) throw new DuplicateNameException($"tag.{tag.Name} already exist!");
-            _tags.Add(tag.ToStatusTag());
-        }
-
-        public void RemoveTag(IValueTag tag)
-        {
-            var t = GetFirstOrDefault(tag.Tag);
-            _tags.Remove(t);
-        }
-
-        private StatusTag GetFirstOrDefault(IGameTag tag) => _tags.FirstOrDefault(t => t.Name == tag.Name);
-
-        public void AddTagValue(IValueTag tag)
-        {
-            var t = GetFirstOrDefault(tag.Tag);
-            if (t == default)
-                throw new NullReferenceException($"tag.{tag.Name} not exist!");
-            t.Add(tag.Value);
-        }
-
-        public double GetTagValue(IGameTag tag, bool throwErrorIfNoTag = false)
-        {
-            var t = _tags.FirstOrDefault(t => t.Tag == tag);
-            if (t == null && throwErrorIfNoTag) throw new NoNullAllowedException($"tag.{tag.Name} not exist!");
-            return t?.Value ?? 0;
-        }
-    }
     /// <summary>
     /// 标签管理类
     /// </summary>
-    public class TagManager : ITagManager
+    public class TagManager : ITagManager<IGameTag>
     {
-        private List<ValueTag> _tags;
+        private readonly Dictionary<IGameTag, double> _tags;
 
-        public TagManager(ITagManager tagManager) : this(tagManager.Tags)
+        public IEnumerable<IValueTag> Set => _tags.Select(t => new ValueTag(t.Key, t.Value));
+
+        public TagManager(ITagSet set)
         {
+            _tags = set.Set.ToDictionary(t => (IGameTag)t, t => t.Value);
+        }
+        public TagManager(IEnumerable<IGameTag> tags)
+        {
+            _tags = tags.ToDictionary(t => t, _ => default(double));
         }
 
-        public TagManager(IEnumerable<IValueTag> tags)
+        public double GetTagValue(IGameTag tag) => _tags.GetValueOrDefault(tag, 0);
+
+        public void UpdateTag(IGameTag tag, double value)
         {
-            _tags = tags.Select(t => new ValueTag(t, copyValue: true)).ToList();
-        }
-
-        public IEnumerable<IValueTag> Tags => _tags;
-
-        public void AddTag(IRoleTag tag)
-        {
-            var t = GetFirstOrDefault(tag);
-            if (t != null) throw new DuplicateNameException($"tag.{tag.Name} already exist!");
-            _tags.Add(new ValueTag(tag));
-        }
-
-        public void RemoveTag(IRoleTag tag)
-        {
-            var t = GetFirstOrDefault(tag);
-            _tags.Remove(t);
-        }
-
-        private ValueTag GetFirstOrDefault(IGameTag tag) => _tags.FirstOrDefault(t => t.Name == tag.Name);
-
-        public void AddTagValue(IValueTag tag)
-        {
-            var t = GetFirstOrDefault(tag.Tag);
-            if (t == default)
-            {
-                AddTag(tag.Tag);
-                t = GetFirstOrDefault(tag.Tag);
-            }
-            t.AddValue(tag.Value);
-        }
-
-        public double GetTagValue(IGameTag tag, bool throwErrorIfNoTag = false)
-        {
-            var t = _tags.FirstOrDefault(t => t.Tag == tag);
-            if (t == null && throwErrorIfNoTag) throw new NoNullAllowedException($"tag.{tag.Name} not exist!");
-            return t?.Value ?? 0;
+            if (_tags.ContainsKey(tag))
+                _tags.Add(tag, 0);
+            _tags[tag] += value;
         }
     }
 
     //标签状态类，Value会变化
     public record ValueTag : IValueTag
     {
-        private readonly IRoleTag roleTag;
-
-        public IRoleTag Tag => roleTag;
-
+        private readonly IGameTag _tag;
+        private double _value;
+        public IGameTag Tag => _tag;
         public string Name => Tag.Name;
-        public double Value { get; private set; }
+        public TagType TagType => _tag.TagType;
+        public double Value => _value;
 
-        public ValueTag(IValueTag tag, bool copyValue = false)
+        public ValueTag(IGameTag tag, double value = 0)
         {
-            roleTag = tag.Tag;
-            if (copyValue) Value = tag.Value;
+            _tag = tag;
+            _value = value;
         }
-
-        public ValueTag(IRoleTag tag, double value = 0)
-        {
-            roleTag = tag;
-            Value = value;
-        }
-
-        //public ITagManager GetTagManager(IRoleAttributes attributes) => GameTag.GetTagManager(attributes);
-        public void AddValue(double v) => Value += v;
+        public void AddValue(double v) => _value += v;
         public override string ToString() => $"{Name}: {Value}";
     }
 
-    public static class StateTagManagerExtension
+    public record SkillSet<T>(T Tag, int Level = 1) : ISkillSet<T>
+        where T : ISkillTag
     {
-        public static IEnumerable<IValueTag> ConcatTags(this ITagManager mgr, IEnumerable<IValueTag> tags)=> mgr.Tags.Concat(tags);
-        public static IEnumerable<IValueTag> ConcatTags(this ITagManager mgr, ITagManager other) => mgr.ConcatTags(other.Tags);
-        public static IEnumerable<IValueTag> ConcatTags(this ITagManager mgr, params ITagManager[] others) => mgr.Tags.Concat(others.SelectMany(o=>o.Tags));
+        public T Tag { get; } = Tag;
+        public int Level { get; private set; } = Level;
+
+        public void AddLevel(int level) => Level += level;
+        public void SetLevel(int level) => Level = level;
+        public double GetPower(IRoleData role) => Tag.GetPower(Level, role);
+        public override string ToString() => $"{Tag.Name}:{Level}";
     }
 }

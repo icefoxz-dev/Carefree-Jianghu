@@ -10,7 +10,7 @@ namespace _Config.So
     public class FuncOccasionSo : PurposeOccasionBase,IChallengeArgs
     {
         [SerializeField] private SceneContent _sceneContent;
-        [SerializeField] private PlotTermField[] terms;
+        [SerializeField] private TagTermField[] terms;
         [SerializeField,FormerlySerializedAs("results")] private RewardTag[] rewards;
         public override IValueTag[] GetRewards(IOccasionResult result) => rewards;
 
@@ -20,7 +20,7 @@ namespace _Config.So
         public SceneContent SceneContent => _sceneContent;
         public override bool IsMandatory => false;
 
-        public override IPlotTerm[] GetExcludedTerms(IRoleData role)
+        public override ITagTerm[] GetExcludedTerms(IRoleData role)
         {
             foreach (var tag in terms.Select(t=>t.RoleTag))
                 if (!tag)

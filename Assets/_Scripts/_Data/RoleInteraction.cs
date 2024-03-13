@@ -3,33 +3,40 @@ using System.Collections.Generic;
 namespace _Data
 {
     /// <summary>
-    /// 角色属性
+    /// 标签集合，用于获取值标签
     /// </summary>
-    public interface IRoleAttributes
+    public interface ITagSet
     {
-        ITagManager Capable { get; }
-        ITagManager Trait { get; }
-        ITagManager Ability { get; }
-        ITagManager Status { get; }
-        ITagManager Skill { get; }
-        ITagManager Inventory { get; }
-        ITagManager Story { get; }
-        IEnumerable<IValueTag> GetAllTags() => Capable.ConcatTags(Trait, Ability, Status, Skill, Inventory, Story);
+        IEnumerable<IValueTag> Set { get; }
+    }
+    /// <summary>
+    /// 标签集
+    /// </summary>
+    public interface ITagSet<in T> : ITagSet where T : IGameTag
+    {
+        double GetTagValue(T tag);
     }
 
     /// <summary>
-    /// 玩家角色数据，包含玩家的角色信息和故事进程。
+    /// 标签管理器
     /// </summary>
-    public interface IRoleData
+    public interface ITagManager<in T> : ITagSet<T> where T : IGameTag
     {
-        IRoleAttributes Attributes { get; }
-        ICharacter Character { get; }
+        void UpdateTag(T tag, double value);
     }
-    public interface ITagManager
+
+    public interface IFormulaTagManager : ITagSet<IFormulaTag>,ITagSet<IGameTag>
     {
-        IEnumerable<IValueTag> Tags { get; }
-        double GetTagValue(IGameTag tag, bool throwErrorIfNoTag = false);
-        void AddTagValue(IValueTag tag);
+        IEnumerable<IFormulaTag> FormulaTags { get; }
+    }
+
+    public interface ISkillTagManager : ITagSet<IGameTag>, ITagManager<ISkillTag>
+    {
+        IEnumerable<ISkillTag> Skills { get; }
+        IEnumerable<ISkillSet<ICombatSkill>> CombatSkills { get; }
+        IEnumerable<ISkillSet<IBasicSkill>> BasicSkills { get; }
+        IEnumerable<ISkillSet<ISkillTag>> ForceSkills { get; }
+        IEnumerable<ISkillSet<ISkillTag>> DodgeSkills { get; }
     }
 
     public interface ICharacterTagsMap
@@ -41,6 +48,6 @@ namespace _Data
         double GetSilver(IRoleData player);
         double GetStamina(IRoleData player);
         bool IsGameOver(IRoleData player);
-        IEnumerable<ICapableTag> GetCapableTags { get; }
+        IEnumerable<IFormulaTag> GetCapableTags { get; }
     }
 }

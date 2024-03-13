@@ -1,8 +1,7 @@
 using System;
-using System.Linq;
-using _Data;
 using MyBox;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace _Config.So
 {
@@ -14,16 +13,16 @@ namespace _Config.So
     {
         [SerializeField] private RoundTriggers roundTrigger;
         [ConditionalField(nameof(roundTrigger), false, RoundTriggers.RoundCount), SerializeField] private RoundCountSet _roundSet;
-        [ConditionalField(nameof(roundTrigger), false, RoundTriggers.GameTag), SerializeField] private TagSet _tagSet;
+        [ConditionalField(nameof(roundTrigger), false, RoundTriggers.GameTag), SerializeField,FormerlySerializedAs("_tagSet")] private TermSet _termSet;
     } 
     public enum RoundTriggers
         {
             [InspectorName("回合数")]RoundCount,
             [InspectorName("标签")]GameTag
         }
-    [Serializable]public class TagSet
+    [Serializable]public class TermSet
         {
-            [SerializeField] private PlotTermField[] _fields;
+            [SerializeField] private TagTermField[] _fields;
 
             //public bool IsTrigger(IRoleTerm role) =>
             //    _fields.Length == 0 || _fields.All(f => role.Tags.Any(t => f.IsInTerm(t, f._clause)));

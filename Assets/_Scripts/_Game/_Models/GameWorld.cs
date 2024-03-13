@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using _Data;
@@ -8,7 +9,7 @@ namespace _Game._Models
     public class GameWorld : ModelBase
     {
         public Character[] Team { get; private set; }
-        public PlayerData Player { get; private set; }//玩家数据
+        public RoleData Role { get; private set; }//玩家数据
         public GameRound Round { get; private set; } //世界信息
         public RewardBoard RewardBoard { get; } = new RewardBoard();
 
@@ -20,30 +21,31 @@ namespace _Game._Models
 
         private void TestInit()
         {
-            Player = new PlayerData(Game.Config.GetPresetPlayer());
+            Role = new RoleData(Game.Config.GetPresetPlayer());
             Team = Game.Config.GetCharacters().Select(r=>new Character(r)).ToArray();
             Round = new GameRound();
-            Round.UpdatePurposes(Player);
-            DebugInfo(Player);
+            Round.UpdatePurposes(Role);
+            DebugInfo(Role);
             SendEvent(GameEvent.Episode_Start);
         }
 
-        public void DebugInfo(PlayerData player)
+        public void DebugInfo(RoleData role)
         {
             var sb = new StringBuilder();
-            sb.Append($"<color=yellow>玩家：{player}\n武[{player.Power}]\n学[{player.Wisdom}]\n力[{player.Strength}]\n智[{player.Intelligent}]\n银[{player.Silver}]\n体[{player.Stamina}]");
-            sb.Append(TagLog(player.Ability,"属性"));
-            sb.Append(TagLog(player.Status,"状态"));
-            sb.Append(TagLog(player.Skill,"技能"));
-            sb.Append(TagLog(player.Inventory, "物品"));
-            sb.Append(TagLog(player.Story, "故事"));
+            sb.Append($"<color=yellow>玩家：{role}\n武[{role.Power}]\n学[{role.Wisdom}]\n力[{role.Strength}]\n智[{role.Intelligent}]\n银[{role.Silver}]\n体[{role.Stamina}]");
+            sb.Append(TagLog(role.Ability.Set,"属性"));
+            sb.Append(TagLog(role.Status.Set,"状态"));
+            sb.Append(TagLog(role.Skill.Set,"技能"));
+            sb.Append(TagLog(role.Inventory.Set, "物品"));
+            sb.Append(TagLog(role.Story.Set, "故事"));
             Debug.Log(sb);
             return;
 
-            string TagLog(ITagManager tm, string tagName)
+            string TagLog(IEnumerable<IValueTag> tags, string tagName)
             {
+                tags = tags.ToArray();
                 var s = new StringBuilder();
-                foreach (var tag in tm.Tags)
+                foreach (var tag in tags)
                     s.Append($"\n{tagName}： {tag.Name}: {tag.Value}");
                 return s.ToString();
             }
@@ -55,18 +57,18 @@ namespace _Game._Models
         /// 尝试进行下个回合，返回不过的条件
         /// </summary>
         /// <returns></returns>
-        public IPlotTerm[] TryProceedRound()
+        public ITagTerm[] TryProceedRound()
         {
-            var notInTerms = Round.SelectedPurpose.GetOccasion(Player).GetExcludedTerms(Player);
+            var notInTerms = Round.SelectedPurpose.GetOccasion(Role).GetExcludedTerms(Role);
             if (notInTerms.Any()) return notInTerms;
             var purpose = Round.SelectedPurpose;
-            var occasion = purpose.GetOccasion(Player);
-            Round.InvokeChallenge(Player, result =>
+            var occasion = purpose.GetOccasion(Role);
+            Round.InvokeChallenge(Role, result =>
             {
                 var rewards = occasion.GetRewards(result);
-                RewardBoard.SetReward(rewards, Player, occasion);
-                Round.NextRound(Player);
-                DebugInfo(Player);
+                RewardBoard.SetReward(rewards, Role, occasion);
+                Round.NextRound(Role);
+                DebugInfo(Role);
             });
             return notInTerms;
         }

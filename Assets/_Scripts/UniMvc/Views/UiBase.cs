@@ -135,17 +135,17 @@ namespace UniMvc.Views
             }
         }
 
-        public ListView_Scroll(View prefab, ScrollRect scrollRect, IView v, bool display = true,
-            bool hideChildrenViews = true) : base(v, prefab, scrollRect.content, display)
+        public ListView_Scroll(View prefab, ScrollRect scrollRect, IView v, bool displayParent,
+            bool hideChildrenViews = true) : base(v, prefab, scrollRect.content, displayParent)
         {
             _scrollRect = scrollRect;
             if (hideChildrenViews) HideChildren();
         }
 
-        public ListView_Scroll(IView v, string prefabName, string scrollRectName, bool display = true,
+        public ListView_Scroll(IView v, string prefabName, string scrollRectName, bool displayParent,
             bool hideChildrenViews = true) : this(
             v.Get<View>(prefabName),
-            v.Get<ScrollRect>(scrollRectName), v, hideChildrenViews, display)
+            v.Get<ScrollRect>(scrollRectName), v, displayParent: displayParent, hideChildrenViews: hideChildrenViews)
         {
         }
 

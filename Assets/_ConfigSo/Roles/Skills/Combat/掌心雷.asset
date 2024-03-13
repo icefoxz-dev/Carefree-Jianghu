@@ -12,5 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a931633394697ba49bf3c214113080cb, type: 3}
   m_Name: "\u638C\u5FC3\u96F7"
   m_EditorClassIdentifier: 
-  _so: {fileID: 11400000}
+  referenceSo: {fileID: 11400000}
   _name: "\u638C\u5FC3\u96F7"
+  _basic: {fileID: 11400000, guid: 0c148d16bde3d084d9b4e7f1ad6a4a3f, type: 2}
+  _map:
+    _useCurve: 0
+    _curve:
+      _curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      _min: 0
+      _max: 0
+      _levels: 0
+    _custom:
+      _fields: []

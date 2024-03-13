@@ -22,7 +22,7 @@ namespace _Game._Models
                 if (tag == null)
                     throw new NullReferenceException(
                         $"Occasion Rewards = {string.Join(',', Occasion.GetRewards(null).Select(r => r?.Name))} ,game tag not set!");
-                tag.UpdateRole(role);
+                role.Proceed(tag);
             }
             SendEvent(GameEvent.Reward_Update);
         }

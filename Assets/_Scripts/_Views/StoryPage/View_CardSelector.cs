@@ -19,7 +19,7 @@ namespace _Views.StoryPage
             base(v, display)
         {
             OnDrag = onDragEvent;
-            RoleListView = new ListView_Scroll<Prefab_Card>(v, "prefab_card", "scroll_cards");
+            RoleListView = new ListView_Scroll<Prefab_Card>(v, "prefab_card", "scroll_cards", display);
         }
 
         /// <summary>

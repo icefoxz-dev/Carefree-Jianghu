@@ -8,7 +8,7 @@ namespace _Data
     /// <summary>
     /// 剧情交互标签的组合
     /// </summary>
-    public interface IPlotTerm : IValueTag
+    public interface ITagTerm : IValueTag
     {
         TagClauses Clause { get; }
         bool IsInTerm(IValueTag other);
@@ -38,7 +38,7 @@ namespace _Data
             };
         }
 
-        public static IPlotTerm[] GetExcludedTerms(this IEnumerable<IPlotTerm> terms, IEnumerable<IValueTag> tags)
+        public static ITagTerm[] GetExcludedTerms(this IEnumerable<ITagTerm> terms, IEnumerable<IValueTag> tags)
         {
             var termList = terms.ToArray();
             var tagList = tags.ToArray();
@@ -48,11 +48,11 @@ namespace _Data
             return existTags.Concat(notInTerms).ToArray();
         }
 
-        private static bool IsInTerm(this IEnumerable<IPlotTerm> terms, IEnumerable<IValueTag> tags) => terms.GetExcludedTerms(tags).Length == 0;
+        private static bool IsInTerm(this IEnumerable<ITagTerm> terms, IEnumerable<IValueTag> tags) => terms.GetExcludedTerms(tags).Length == 0;
 
-        public static bool IsInTerm(this IEnumerable<IPlotTerm> terms, IRoleAttributes role) => terms.IsInTerm(role.GetAllTags());
-        public static bool IsInTerm(this IEnumerable<IPlotTerm> terms, IRoleData role) => terms.IsInTerm(role.Attributes.GetAllTags());
-        public static IPlotTerm[] GetExcludedTerms(this IEnumerable<IPlotTerm> terms, IRoleData role) => terms.GetExcludedTerms(role.Attributes);
-        private static IPlotTerm[] GetExcludedTerms(this IEnumerable<IPlotTerm> terms, IRoleAttributes attributes) => terms.GetExcludedTerms(attributes.GetAllTags());
+        public static bool IsInTerm(this IEnumerable<ITagTerm> terms, IRoleAttributes role) => terms.IsInTerm(role.GetAllTags());
+        public static bool IsInTerm(this IEnumerable<ITagTerm> terms, IRoleData role) => terms.IsInTerm(role.Attributes.GetAllTags());
+        public static ITagTerm[] GetExcludedTerms(this IEnumerable<ITagTerm> terms, IRoleData role) => terms.GetExcludedTerms(role.Attributes);
+        private static ITagTerm[] GetExcludedTerms(this IEnumerable<ITagTerm> terms, IRoleAttributes attributes) => terms.GetExcludedTerms(attributes.GetAllTags());
     }
 }

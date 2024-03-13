@@ -1,0 +1,104 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84807870bb7882c4d9b0b43d1bebe453, type: 3}
+  m_Name: "\u6B8B\u9633\u8BC0"
+  m_EditorClassIdentifier: 
+  referenceSo: {fileID: 11400000}
+  _name: "\u6B8B\u9633\u8BC0"
+  _map:
+    _useCurve: 1
+    _curve:
+      _curve:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 0.8551047
+          outSlope: 0.8551047
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.09926354
+          value: 0.08488072
+          inSlope: 0.5901186
+          outSlope: 0.5901186
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.28454474
+          value: 0.14512165
+          inSlope: 0.9722976
+          outSlope: 0.9722976
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.4256817
+          value: 0.3736877
+          inSlope: 1.1808786
+          outSlope: 1.1808786
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.8358822
+          value: 0.6781773
+          inSlope: 1.3516097
+          outSlope: 1.3516097
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 1.9609249
+          outSlope: 1.9609249
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      _min: 1
+      _max: 15
+      _levels: 10
+    _custom:
+      _fields:
+      - Level: 1
+        Power: 2.1943663507699966
+      - Level: 2
+        Power: 2.498246803879738
+      - Level: 3
+        Power: 3.2803256809711456
+      - Level: 4
+        Power: 5.720249056816101
+      - Level: 5
+        Power: 7.215859055519104
+      - Level: 6
+        Power: 8.03372073173523
+      - Level: 7
+        Power: 8.748823046684265
+      - Level: 8
+        Power: 9.884293794631958
+      - Level: 9
+        Power: 12.051638126373291
+      - Level: 10
+        Power: 15

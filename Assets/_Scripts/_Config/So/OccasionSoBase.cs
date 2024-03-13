@@ -14,7 +14,7 @@ namespace _Config.So
         public abstract IChallengeArgs ChallengeArgs { get; }
         public abstract IRolePlacing[] GetPlacingInfos();
         public abstract string GetLine(RolePlacing.Index role, int index);
-        public abstract IPlotTerm[] GetExcludedTerms(IRoleData role);
+        public abstract ITagTerm[] GetExcludedTerms(IRoleData role);
 
     }
 
@@ -88,9 +88,10 @@ namespace _Config.So
             [SerializeField] private double _value = 1;
 
             public double Value => _value;
-            public IRoleTag Tag => RoleTag;
+
+            public IGameTag Tag => RoleTag;
             public string Name => RoleTag.Name;
-            public ITagManager GetTagManager(IRoleAttributes attributes) => RoleTag.GetTagManager(attributes);
+            public TagType TagType => Tag.TagType;
         }
     }
 }

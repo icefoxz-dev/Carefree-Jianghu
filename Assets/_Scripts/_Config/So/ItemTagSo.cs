@@ -7,28 +7,28 @@ namespace _Config.So
     [CreateAssetMenu(fileName = "ItemTagSo", menuName = "配置/标签/物品")]
     public class ItemTagSo : FuncTagSoBase
     {
+        public override TagType TagType => TagType.Inventory;
         [SerializeField] private TagField[] _tags;
 
         public override void UpdateRole(IRoleData role)
         {
-            foreach (var tag in _tags) tag.Proceed(role);
+            foreach (var tag in _tags) role.Proceed(tag);
         }
-        public override ITagManager GetTagManager(IRoleAttributes attributes) => attributes.Inventory;//物品引用
+        
      
         [Serializable]
-        private class TagField
+        private class TagField : IValueTag
         {
             [SerializeField] private RoleTagSoBase _tag;
             [SerializeField] private double _value;
+            public IGameTag Tag => _tag;
 
-            public void Proceed(IRoleData role)
-            {
-                var tm = _tag.GetTagManager(role.Attributes);//属性引用
-                tm.AddTagValue(new ValueTag(_tag, _value)); //给属性赋值
-            }
+            public double Value => _value;
+            public string Name => _tag.Name;
+            public TagType TagType => _tag.TagType;
         }
-    }
 
+    }
 
     public abstract class FuncTagSoBase : RoleTagSoBase, IFuncTag
     {

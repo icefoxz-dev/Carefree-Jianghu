@@ -22,7 +22,7 @@ namespace _Data
     /// </summary>
     public interface IChallengeBattleArgs : IChallengeArgs
     {
-        IRoleData GetOpponent(IEnumerable<IValueTag> capable);
+        IRoleData GetOpponent(IEnumerable<IFormulaTag> capable);
     }
 
     public enum ChallengeTypes

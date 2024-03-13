@@ -5,7 +5,7 @@ namespace _Data
     /// <summary>
     /// 状态标签，代表游戏中的一个状态标签。每个状态标签都有一个名称，表示玩家在游戏中的状态。
     /// </summary>
-    public interface IStatusTag : IValueTag
+    public interface ITagStatus : IValueTag
     {
         double Max { get; }
         double Min { get; }
@@ -20,22 +20,23 @@ namespace _Data
     /// <param name="Value"></param>
     /// <param name="Max"></param>
     /// <param name="Min"></param>
-    public record StatusTag(IRoleTag Tag, double Value, double Max, double Min = 0)
-        : IStatusTag
+    public record TagStatus(IGameTag Tag, double Value, double Max, double Min = 0)
+        : ITagStatus
     {
         public string Name => Tag.Name;
-        //public ITagManager GetTagManager(IRoleAttributes attributes) => GameTag.GetTagManager(attributes);
 
-        public double Value { get; private set; } = Value;
+        public TagType TagType => Tag.TagType;
+        public double Value { private set; get; } = Value;
+
         public double Max { get; } = Max;
         public double Min { get; } = Min;
 
         /// <summary></summary>
-        public IRoleTag Tag { get; } = Tag;
+        public IGameTag Tag { get; } = Tag;
         public void SetMax() => Value = Max;
         public void SetMin() => Value = Min;
 
-        public StatusTag(IValueTag tag, double max, double min = 0) : this(tag.Tag, tag.Value, max, min)
+        public TagStatus(IValueTag tag, double max, double min = 0) : this(tag, tag.Value, max, min)
         {
         }
 
@@ -45,8 +46,8 @@ namespace _Data
 
     public static class StateTagExtension
     {
-        public static StatusTag ToStatusTag(this IRoleTag tag, double value, double max, double min = 0) => new(tag, value, max, min);
-        public static StatusTag ToStatusTag(this IStatusTag tag) => new(tag.Tag, tag.Value, tag.Max, tag.Min);
-        public static StatusTag ToStatusTag(this IValueTag tag, double max, double min = 0) => new(tag, max, min);
+        public static TagStatus ToStatusTag(this IGameTag tag, double value, double max, double min = 0) => new(tag, value, max, min);
+        public static TagStatus ToStatusTag(this ITagStatus tag) => tag.ToStatusTag(tag.Value, tag.Max, tag.Min);
+        public static TagStatus ToStatusTag(this IValueTag tag, double max, double min = 0) => tag.ToStatusTag(tag.Value, max, min);
     }
 }

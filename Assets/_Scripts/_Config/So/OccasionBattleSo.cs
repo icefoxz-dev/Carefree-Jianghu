@@ -10,6 +10,6 @@ namespace _Config.So
         [SerializeField] private CharacterSo _opponent;
         public override ChallengeTypes ChallengeType => ChallengeTypes.Battle;
 
-        public IRoleData GetOpponent(IEnumerable<IValueTag> capable) => _opponent.GetRoleData(capable);
+        public IRoleData GetOpponent(IEnumerable<IFormulaTag> capable) => _opponent.GetRoleData(capable);
     }
 }
