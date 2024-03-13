@@ -18,6 +18,8 @@ namespace _Views
         private Page_Story page_story { get; set; }
         [SerializeField] private View page_mainView;
         private Page_Main page_main { get; set; }
+        [SerializeField] private View page_playerView;
+        private Page_Player page_player { get; set; }
         [SerializeField] private View cursor_uiView;
         private Cursor_Ui cursor_ui { get; set; }
         [SerializeField] private View window_confirmView;
@@ -31,6 +33,7 @@ namespace _Views
         {
             page_story = new Page_Story(page_storyView);
             page_main = new Page_Main(page_mainView, true);
+            page_player = new Page_Player(page_playerView, true);
             cursor_ui = new Cursor_Ui(cursor_uiView, false);
             window_confirm = new Window_Confirm(window_confirmView, false);
             window_info = new Window_Info(window_infoView, false);
