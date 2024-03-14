@@ -25,7 +25,7 @@ namespace _Config.So
 
                 public TagType TagType => Tag.TagType;
                 public TagClauses Clause => clauses;
-                public bool IsInTerm(IValueTag other) => this.IsInTerm(other, Clause);
+                public bool IsInTerm(ITagValue other) => this.IsInTerm(other, Clause);
                 public bool IsInTerm(IRoleAttributes role) => role.GetAllTags().Any(IsInTerm);
             }
         }

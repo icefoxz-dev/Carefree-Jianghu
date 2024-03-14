@@ -56,7 +56,7 @@ namespace _Data
         //string GetLine(RolePlacing.Index role, int index);
         string Description { get; }
         ITagTerm[] GetExcludedTerms(IRoleData role);
-        IValueTag[] GetRewards(IOccasionResult result);
+        ITagValue[] GetRewards(IOccasionResult result);
         IChallengeArgs ChallengeArgs { get; }
     }
 

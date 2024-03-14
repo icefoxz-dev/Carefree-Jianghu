@@ -41,12 +41,12 @@ namespace _Game._Models
             Debug.Log(sb);
             return;
 
-            string TagLog(IEnumerable<IValueTag> tags, string tagName)
+            string TagLog(IEnumerable<ITagValue> tags, string tagName)
             {
                 tags = tags.ToArray();
                 var s = new StringBuilder();
-                foreach (var tag in tags)
-                    s.Append($"\n{tagName}： {tag.Name}: {tag.Value}");
+                foreach (var val in tags)
+                    s.Append($"\n{tagName}： {val.Tag.Name}: {val.Value}");
                 return s.ToString();
             }
         }

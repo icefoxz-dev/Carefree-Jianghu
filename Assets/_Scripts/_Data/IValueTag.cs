@@ -14,14 +14,6 @@ namespace _Data
         void UpdateRole(IRoleData role);
     }
 
-    /// <summary>
-    /// 值标签, 根据标签类型提供值用于判断<see cref="ITagTerm"/>和加法更新<see cITagSet{T}et{T}.AddTagValue"/>
-    /// </summary>
-    public interface IValueTag : IGameTag
-    {
-        double Value { get; }
-    }
-
 
     /// <summary>
     /// 能力标签，不能直接赋值，它是透过公式计算得到的

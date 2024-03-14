@@ -5,7 +5,7 @@ using UnityEngine.Serialization;
 namespace _Config.So
 {
     [CreateAssetMenu(fileName = "FuncTagSo", menuName = "配置/标签/功能")]
-    public class ValueTagSo : AutoNameSoBase, IValueTag
+    public class ValueTagSo : AutoNameSoBase, ITagValue
     {
         [SerializeField,FormerlySerializedAs("_roleTag")] private GameTagSoBase _gameTag;
         [SerializeField] private double _value = 1;

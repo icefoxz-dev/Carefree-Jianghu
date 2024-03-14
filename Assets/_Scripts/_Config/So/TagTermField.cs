@@ -14,12 +14,12 @@ namespace _Config.So
         public string Name => RoleTag.Name;
 
         public TagType TagType => RoleTag.TagType;
-        double IValueTag.Value => Value;
+        double ITagValue.Value => Value;
 
         [FormerlySerializedAs("GameTag")]public RoleTagSoBase RoleTag;
         [FormerlySerializedAs("Compare"), SerializeField] public TagClauses _clause;
         public TagClauses Clause => _clause;
-        public bool IsInTerm(IValueTag other) => this.IsInTerm(other, _clause);
+        public bool IsInTerm(ITagValue other) => this.IsInTerm(other, _clause);
         public bool IsInTerm(IRoleAttributes role) => role.GetAllTags().Any(IsInTerm);
         public double Value;
 

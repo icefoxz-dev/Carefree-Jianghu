@@ -41,4 +41,11 @@ namespace _Data
         string Name { get; }
         TagType TagType { get; }
     }
+
+    public static class GameTagExtension
+    {
+        public static bool IsType(this IGameTag tag, TagType type) => tag.TagType == type;
+        public static bool Is(this IGameTag tag, IGameTag other) =>
+            other != null && tag.Name == other.Name && tag.TagType == other.TagType;
+    }
 }

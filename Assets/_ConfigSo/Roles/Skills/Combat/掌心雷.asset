@@ -20,12 +20,59 @@ MonoBehaviour:
     _curve:
       _curve:
         serializedVersion: 2
-        m_Curve: []
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 0
+          inSlope: 3.263094
+          outSlope: 3.263094
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0.33333334
+        - serializedVersion: 3
+          time: 0.08001867
+          value: 0.26110843
+          inSlope: 1.048386
+          outSlope: 1.048386
+          tangentMode: 0
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0.14400437
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0.8031593
+          outSlope: 0.8031593
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0.33333334
+          outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-      _min: 0
-      _max: 0
-      _levels: 0
+      _min: 1
+      _max: 10
+      _levels: 10
     _custom:
-      _fields: []
+      _fields:
+      - Level: 1
+        Power: 3.536614418029785
+      - Level: 2
+        Power: 4.417490750551224
+      - Level: 3
+        Power: 5.221179008483887
+      - Level: 4
+        Power: 5.96332585811615
+      - Level: 5
+        Power: 6.659575819969177
+      - Level: 6
+        Power: 7.325576901435852
+      - Level: 7
+        Power: 7.976972818374634
+      - Level: 8
+        Power: 8.629411578178406
+      - Level: 9
+        Power: 9.29853904247284
+      - Level: 10
+        Power: 10

@@ -10,7 +10,7 @@ namespace _Config.So
     {
         public abstract Occasion.Modes Mode { get; }
         public abstract string Description { get; }
-        public abstract IValueTag[] GetRewards(IOccasionResult result);
+        public abstract ITagValue[] GetRewards(IOccasionResult result);
         public abstract IChallengeArgs ChallengeArgs { get; }
         public abstract IRolePlacing[] GetPlacingInfos();
         public abstract string GetLine(RolePlacing.Index role, int index);
@@ -82,7 +82,7 @@ namespace _Config.So
             [TextArea] public string[] Lines;
         }
 
-        [Serializable] protected class RewardTag : IValueTag
+        [Serializable] protected class RewardTag : ITagValue
         {
             [SerializeField,FormerlySerializedAs("_gameTag")] public RoleTagSoBase RoleTag;
             [SerializeField] private double _value = 1;

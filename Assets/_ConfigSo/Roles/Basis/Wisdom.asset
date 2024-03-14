@@ -9,9 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d95b603a278b0de499eb5a505388ea9a, type: 3}
+  m_Script: {fileID: 11500000, guid: 2affa7e6c1945e848ba8ad1442017fde, type: 3}
   m_Name: Wisdom
   m_EditorClassIdentifier: 
-  _so: {fileID: 11400000}
+  referenceSo: {fileID: 11400000}
   _name: Wisdom
-  CName: "\u624D\u667A"
+  _fields:
+  - _tagSo: {fileID: 11400000, guid: 1ce3ddb612c6392418895c4b15fd7d3b, type: 2}
+    _factor: 1
+  - _tagSo: {fileID: 11400000, guid: d57626ed8891e5b499a320ea9e40cbca, type: 2}
+    _factor: 0.5

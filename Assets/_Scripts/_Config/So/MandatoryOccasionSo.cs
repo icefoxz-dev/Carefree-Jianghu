@@ -16,7 +16,7 @@ namespace _Config.So
         public override ITagTerm[] GetExcludedTerms(IRoleData role) =>
             _terms.GetExcludedTerms(role).ToArray();
 
-        public override IValueTag[] GetRewards(IOccasionResult result) => _reward.GetRewards(result);
+        public override ITagValue[] GetRewards(IOccasionResult result) => _reward.GetRewards(result);
         public override IChallengeArgs ChallengeArgs => challengeArgs;
 
         [Serializable] private class RewardJudge
@@ -24,7 +24,7 @@ namespace _Config.So
             [SerializeField] private RewardTag[] _win;
             [SerializeField] private RewardTag[] _lose;
 
-            public IValueTag[] GetRewards(IOccasionResult result) =>
+            public ITagValue[] GetRewards(IOccasionResult result) =>
                 result.Result switch
                 {
                     0 => _lose,

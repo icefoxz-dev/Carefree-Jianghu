@@ -15,7 +15,7 @@ MonoBehaviour:
   referenceSo: {fileID: 11400000}
   _name: "\u6B8B\u9633\u8BC0"
   _map:
-    _useCurve: 1
+    _useCurve: 0
     _curve:
       _curve:
         serializedVersion: 2

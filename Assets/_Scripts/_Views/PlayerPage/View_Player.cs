@@ -97,11 +97,11 @@ public class View_Player : UiBase
             public void SetSkill(ISkillTagManager skill, string tagName)
             {
                 SkillsListView.ClearList(u => u.Destroy());
-                foreach (var tag in skill.Set)
+                foreach (var s in skill.Set)
                 {
                     var ui = SkillsListView.Instance(v => new Prefab_Skill(v));
                     ui.SetTag(tagName);
-                    ui.SetSkill($"{tag.Name}: {tag.Value}");
+                    ui.SetSkill($"{s.Tag.Name}: {s.Value}");
                 }
             }
 

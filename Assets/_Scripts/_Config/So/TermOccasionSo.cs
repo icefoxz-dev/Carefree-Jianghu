@@ -13,7 +13,7 @@ namespace _Config.So
         public override ITagTerm[] GetExcludedTerms(IRoleData role) =>
             terms.GetExcludedTerms(role).Concat(_so.GetExcludedTerms(role)).ToArray();
 
-        public override IValueTag[] GetRewards(IOccasionResult result) => _so.GetRewards(result);
+        public override ITagValue[] GetRewards(IOccasionResult result) => _so.GetRewards(result);
 
         public override IChallengeArgs ChallengeArgs => this;
         public ChallengeTypes ChallengeType => ChallengeTypes.None;

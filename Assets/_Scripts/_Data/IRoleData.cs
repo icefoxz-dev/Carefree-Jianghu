@@ -28,14 +28,14 @@ namespace _Data
         ITagManager<IGameTag> Inventory { get; }
         ITagManager<IGameTag> Story { get; }
 
-        IEnumerable<IValueTag> GetAllTags() => Capable.Set
+        IEnumerable<ITagValue> GetAllTags() => Capable.Set
             .Concat(Trait.Set).Concat(Ability.Set).Concat(Status.Set)
             .Concat(Skill.Set).Concat(Inventory.Set).Concat(Story.Set);
     }
 
     public static class RoleDataExtension
     {
-        public static void Proceed(this IRoleData role, IValueTag tag) => role.Proceed(tag, tag.Value);
+        public static void Proceed(this IRoleData role, ITagValue val) => role.Proceed(val.Tag, val.Value);
 
         public static double GetValue(this IRoleAttributes role, IGameTag tag) => tag.TagType switch
         {

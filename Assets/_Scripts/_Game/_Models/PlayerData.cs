@@ -34,7 +34,7 @@ namespace _Game._Models
         private readonly TagManager _trait;
         private readonly TagManager _ability;
         private readonly SkillTagManager _skill;
-        private readonly StateTagManager _status;
+        private readonly StatusTagManager _status;
         private readonly TagManager _inventory;
         private readonly TagManager _story;
         private readonly EquipSet _equipSet;
@@ -46,9 +46,10 @@ namespace _Game._Models
             _trait = new TagManager(playerData.Attributes.Trait);
             _ability = new TagManager(playerData.Attributes.Ability);
             _skill = new SkillTagManager(playerData.Attributes.Skill.Skills.Select(s => (s, playerData.Attributes.Skill.GetTagValue(s))));
-            _status = new StateTagManager(playerData.Attributes.Status.Set.Cast<ITagStatus>());
+            _status = new StatusTagManager(playerData.Attributes.Status.Set.Cast<ITagStatus>());
             _inventory = new TagManager(playerData.Attributes.Inventory);
             _story = new TagManager(playerData.Attributes.Story);
+            _equipSet = new EquipSet(playerData.EquipSet.Combat, playerData.EquipSet.Force, playerData.EquipSet.Dodge);
         }
 
         public ITagManager<IGameTag> Trait => _trait;

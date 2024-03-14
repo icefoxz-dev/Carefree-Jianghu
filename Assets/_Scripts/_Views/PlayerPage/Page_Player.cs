@@ -27,7 +27,7 @@ public class Page_Player : PageUiBase
     public Page_Player(IView v, bool display = false) : base(v, display)
     {
         view_player = new View_Player(v.Get<View>("view_player"),
-            () => UiManager.ShowConfirm("ȷ�ϻغϣ�", StoryController.ConfirmRound));
+            () => UiManager.ShowConfirm("确认?", StoryController.ConfirmRound));
         view_backpack = new View_backpack(v.Get<View>("view_backpack"), index => UiManager.ShowInfo("�����ڽ����У�"));
         view_pages = new View_Pages(v.Get<View>("view_pages"),
             PlayerStat_Show,
@@ -73,7 +73,7 @@ public class Page_Player : PageUiBase
         public void ShowInventory(ITagManager<IGameTag> tm)
         {
             Show();
-            var list = tm.Set.Select(t => (default(Sprite), t.Name)).ToArray();
+            var list = tm.Set.Select(t => (default(Sprite), t.Tag.Name)).ToArray();
             SetList(list);
         }
 

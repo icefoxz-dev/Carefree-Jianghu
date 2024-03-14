@@ -7,7 +7,7 @@ namespace _Data
     /// </summary>
     public interface ITagSet
     {
-        IEnumerable<IValueTag> Set { get; }
+        IEnumerable<ITagValue> Set { get; }
     }
     /// <summary>
     /// 标签集

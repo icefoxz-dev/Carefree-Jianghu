@@ -17,6 +17,7 @@ namespace _Config.So
     {
         public override TagType TagType => TagType.Skill;
         public abstract SkillType SkillType { get; }
+        public virtual int MaxLevel => 10;
         public abstract double GetPower(int level, IRoleData role);
     }
 
@@ -39,9 +40,9 @@ namespace _Config.So
         private class CurveMap
         {
             [SerializeField] private AnimationCurve _curve;
-            public double _min;
-            public double _max;
-            public int _levels;
+            public double _min = 1;
+            public double _max = 10;
+            public int _levels = 10;
 
             public double Evaluate(int level) => _curve.Evaluate(Mathf.Lerp(0, 1, level / (float)_levels)) * (_max - _min) + _min;
         }

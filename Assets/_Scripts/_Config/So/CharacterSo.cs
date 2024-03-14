@@ -27,9 +27,9 @@ namespace _Config.So
         private ITagSet Inventory => new TagSet(物品);
         private IEnumerable<(ISkillTag skill,double value)> Skills => 技能.Select(s=> ((ISkillTag)s._so,s.Value));
         private IEnumerable<ITagStatus> Status => 状态.Select(s=>s._so.GetStatusTag());
-        public ISkillSet<ICombatSkill> Combat => new SkillSet<ICombatSkill>(_combat.Tag, _combat.Level);
-        public ISkillSet<ISkillTag> Force => new SkillSet<ISkillTag>(_force.Tag, _force.Level);
-        public ISkillSet<ISkillTag> Dodge => new SkillSet<ISkillTag>(_dodge.Tag, _dodge.Level);
+        public ISkillSet<ICombatSkill> Combat => _combat.GetSkillSet();
+        public ISkillSet<ISkillTag> Force => _force.GetSkillSet();
+        public ISkillSet<ISkillTag> Dodge => _dodge.GetSkillSet();
         public string Description => _description;
         public GameObject Prefab => _prefab.gameObject;
 
@@ -54,6 +54,7 @@ namespace _Config.So
             [SerializeField] private int _level;
             public ICombatSkill Tag => _tag;
             public int Level => _level;
+            public ISkillSet<ICombatSkill> GetSkillSet() => _tag == null ? null : new SkillSet<ICombatSkill>(Tag, Level);
         }
 
         [Serializable]
@@ -63,18 +64,19 @@ namespace _Config.So
             [SerializeField] private int _level;
             public ISkillTag Tag => _tag;
             public int Level => _level;
+            public ISkillSet<ISkillTag> GetSkillSet() => _tag == null ? null : new SkillSet<ISkillTag>(Tag, Level);
         }
 
-        private abstract class ValueTag : IValueTag
+        private abstract class ValueTag : ITagValue
         {
             public abstract IGameTag Tag { get; }
             public abstract string Name { get; }
             public TagType TagType => Tag.TagType;
             public abstract double Value { get; }
         }
-        private record TagSet(IEnumerable<IValueTag> Set) : ITagSet
+        private record TagSet(IEnumerable<ITagValue> Set) : ITagSet
         {
-            public IEnumerable<IValueTag> Set { get; } = Set;
+            public IEnumerable<ITagValue> Set { get; } = Set;
         }
 
         private record RoleData : IRoleData
@@ -87,7 +89,7 @@ namespace _Config.So
                     capable: new FormulaTagManager(capable, this),
                     Trait: new TagManager(traits),
                     Ability: new TagManager(abilities),
-                    Status: new StateTagManager(status),
+                    Status: new StatusTagManager(status),
                     Skill: new SkillTagManager(skills),
                     Inventory: new TagManager(inventory),
                     Story: new TagManager(Array.Empty<IGameTag>()));

@@ -12,7 +12,7 @@ namespace _Config.So
         [SerializeField] private SceneContent _sceneContent;
         [SerializeField] private TagTermField[] terms;
         [SerializeField,FormerlySerializedAs("results")] private RewardTag[] rewards;
-        public override IValueTag[] GetRewards(IOccasionResult result) => rewards;
+        public override ITagValue[] GetRewards(IOccasionResult result) => rewards;
 
         public override IChallengeArgs ChallengeArgs => this;
         public ChallengeTypes ChallengeType => ChallengeTypes.None;

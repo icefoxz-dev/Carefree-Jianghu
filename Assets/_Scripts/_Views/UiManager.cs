@@ -42,7 +42,7 @@ namespace _Views
                 {
                     var board = Game.World.RewardBoard;
                     ShowInfo(board.Occasion.Description + "\n"
-                        +string.Join('\n', board.Rewards.Select(r => $"{r.Name}: {r.Value}")));
+                        +string.Join('\n', board.Rewards.Select(r => $"{r.Tag.Name}: {r.Value}")));
                 });
         }
 

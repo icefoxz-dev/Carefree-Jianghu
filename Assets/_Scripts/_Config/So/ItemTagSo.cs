@@ -17,7 +17,7 @@ namespace _Config.So
         
      
         [Serializable]
-        private class TagField : IValueTag
+        private class TagField : ITagValue
         {
             [SerializeField] private RoleTagSoBase _tag;
             [SerializeField] private double _value;

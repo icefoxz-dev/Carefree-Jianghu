@@ -5,7 +5,7 @@ namespace _Data
     /// <summary>
     /// 状态标签，代表游戏中的一个状态标签。每个状态标签都有一个名称，表示玩家在游戏中的状态。
     /// </summary>
-    public interface ITagStatus : IValueTag
+    public interface ITagStatus : ITagValue
     {
         double Max { get; }
         double Min { get; }
@@ -36,7 +36,7 @@ namespace _Data
         public void SetMax() => Value = Max;
         public void SetMin() => Value = Min;
 
-        public TagStatus(IValueTag tag, double max, double min = 0) : this(tag, tag.Value, max, min)
+        public TagStatus(ITagValue tag, double max, double min = 0) : this(tag.Tag, tag.Value, max, min)
         {
         }
 
@@ -47,7 +47,7 @@ namespace _Data
     public static class StateTagExtension
     {
         public static TagStatus ToStatusTag(this IGameTag tag, double value, double max, double min = 0) => new(tag, value, max, min);
-        public static TagStatus ToStatusTag(this ITagStatus tag) => tag.ToStatusTag(tag.Value, tag.Max, tag.Min);
-        public static TagStatus ToStatusTag(this IValueTag tag, double max, double min = 0) => tag.ToStatusTag(tag.Value, max, min);
+        public static TagStatus ToStatusTag(this ITagStatus ts) => ts.ToStatusTag(ts.Max, ts.Min);
+        public static TagStatus ToStatusTag(this ITagValue val, double max, double min = 0) => val.Tag.ToStatusTag(val.Value, max, min);
     }
 }

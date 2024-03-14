@@ -25,6 +25,7 @@ namespace _Data
     public interface ISkillTag : IGameTag
     {
         SkillType SkillType { get; }
+        int MaxLevel { get; }
         double GetPower(int level, IRoleData role);
     }
 

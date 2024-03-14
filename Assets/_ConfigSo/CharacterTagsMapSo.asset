@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94dd839d754355d49918a2abf92e16ca, type: 3}
   m_Name: CharacterTagsMapSo
   m_EditorClassIdentifier: 
-  "\u6B66\u529B": {fileID: 11400000, guid: f379862fc79c78840bd6e2acc30b446e, type: 2}
-  "\u624D\u667A": {fileID: 11400000, guid: 83ed7d03b9d441f46864ccd11b855cd8, type: 2}
+  "\u6218\u529B": {fileID: 11400000, guid: 43f4561d5664ddc47ade46947e21e2f0, type: 2}
+  "\u624D\u667A": {fileID: 0}
   "\u529B\u91CF": {fileID: 11400000, guid: 1823638c329732044a87b2c62d3e75ef, type: 2}
   "\u667A\u529B": {fileID: 11400000, guid: 1ce3ddb612c6392418895c4b15fd7d3b, type: 2}
   "\u4F53\u529B": {fileID: 11400000, guid: a5aa1fd6430a3914190177b241c06474, type: 2}
