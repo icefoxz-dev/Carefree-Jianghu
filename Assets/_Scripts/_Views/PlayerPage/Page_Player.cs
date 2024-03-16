@@ -19,21 +19,35 @@ public class Page_Player : PageUiBase
         Stat,
         Backpack
     }
-    private RoleData player => Game.World.Role;
+    private RoleData player => Game.World.MainRole;
     private View_Player view_player { get; }
     private View_backpack view_backpack { get; }
     private View_Pages view_pages { get; }
-    private StoryController StoryController => Game.GetController<StoryController>();
+    private ChallengeController ChallengeController => Game.GetController<ChallengeController>();
     public Page_Player(IView v, bool display = false) : base(v, display)
     {
-        view_player = new View_Player(v.Get<View>("view_player"),
-            () => UiManager.ShowConfirm("确认?", StoryController.ConfirmRound));
-        view_backpack = new View_backpack(v.Get<View>("view_backpack"), index => UiManager.ShowInfo("�����ڽ����У�"));
+        view_player = new View_Player(v.Get<View>("view_player"), OnRoundConfirm);
+        view_backpack = new View_backpack(v.Get<View>("view_backpack"), index => UiManager.ShowInfo($"选中物品=[{index}]"));
         view_pages = new View_Pages(v.Get<View>("view_pages"),
             PlayerStat_Show,
             PlayerBackpack_Show);
-        Game.RegEvent(GameEvent.Round_Update, b => UpdateOccasion());
+        Game.RegEvent(GameEvent.Round_Puepose_Update, b => UpdateOccasion());
     }
+
+    private void OnRoundConfirm()
+    {
+        var excluded = Game.World.Round.GetExcludedTerms(player);
+        if (excluded.Any())
+        {
+            var excludedText = excluded.Aggregate(string.Empty, (current, term) => current + (term + "\n"));
+            UiManager.ShowInfo($"条件不允许：\n{excludedText}");
+            Game.World.DebugInfo(Game.World.MainRole);
+            Debug.Log("<color=yellow>不能执行下个回合</color>，条件：" + excludedText);
+            return;
+        }
+        UiManager.ShowConfirm("确认?", ChallengeController.Instance);
+    }
+
     private void UpdateOccasion()
     {
         view_player.SetInfo();

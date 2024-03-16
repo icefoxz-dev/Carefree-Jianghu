@@ -19,9 +19,8 @@ namespace _Views.MainPage
 
         private void StartGame()
         {
-            Main.StartGame();
             Hide();
-            UiManager.ShowConfirm("测试版，游戏无法存档", () => { }, () => { });
+            UiManager.ShowInfo("测试版，游戏无法存档", () => Main.StartGame());
         }
     }
 }

@@ -24,6 +24,11 @@ namespace _Config.So
         protected override IEnumerable<IPurpose> GetOccasionPurpose(IRoleData role, IGameRound round) =>
             new IPurpose[] { this };
 
+        public override void CheckTags()
+        {
+            foreach (var field in _occasions) field.CheckTags();
+        }
+
         [Serializable]
         private class OptionField : IWeightElement
         {
@@ -31,6 +36,8 @@ namespace _Config.So
             [SerializeField] private int _weight = 1;
             public double Weight => _weight;
             public IOccasion So => _so;
+
+            public void CheckTags() => _so.CheckTags();
         }
     }
 }

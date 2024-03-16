@@ -8,6 +8,12 @@ onBoardingDoNotAskAgain = true
 showPackageIndexes = false
 showStatusBar = false
 scopes = {
+	"last_search.110DEAF1" = ""
+	"OpenInspectorPreview.110DEAF1" = "0"
+	"currentGroup.110DEAF1" = "asset"
+	"last_search.310DEAF1" = "Asset Dependency Graph"
+	"OpenInspectorPreview.310DEAF1" = "0"
+	"currentGroup.310DEAF1" = "all"
 }
 providers = {
 	packages = {
@@ -59,6 +65,11 @@ providers = {
 objectSelectors = {
 }
 recentSearches = [
+	"Asset Dependency Graph"
+	""
+	"p: t:"
+	"p: t:texture"
+	"h: ref=\"Assets/_ConfigSo/Roles/Skills/读书写字.asset\""
 ]
 searchItemFavorites = [
 ]
@@ -69,7 +80,7 @@ expandedQueries = [
 ]
 queryBuilder = false
 ignoredProperties = "id;name;classname;imagecontentshash"
-helperWidgetCurrentArea = "all"
+helperWidgetCurrentArea = "p:"
 disabledIndexers = ""
 minIndexVariations = 2
 findProviderIndexHelper = true

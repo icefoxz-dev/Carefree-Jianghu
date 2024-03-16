@@ -47,16 +47,8 @@ namespace _Data
     /// </summary>
     public interface IOccasion
     {
-        //ISceneContent SceneContent { get; }
-        /// <summary>
-        /// 获取放置信息
-        /// </summary>
-        /// <returns></returns>
-        //IRolePlacing[] GetPlacingInfos();
-        //string GetLine(RolePlacing.Index role, int index);
         string Description { get; }
         ITagTerm[] GetExcludedTerms(IRoleData role);
-        ITagValue[] GetRewards(IOccasionResult result);
         IChallengeArgs ChallengeArgs { get; }
     }
 

@@ -7,11 +7,11 @@ using UnityEngine;
 
 public class TestGameCommand : MonoBehaviour
 {
-    [Button, GUIColor("yellow"), HideInEditorMode] public void PrintPlayerInfo() => Game.World.DebugInfo(Game.World.Role);
+    [Button, GUIColor("yellow"), HideInEditorMode] public void PrintPlayerInfo() => Game.World.DebugInfo(Game.World.MainRole);
     [Button, GUIColor("cyan"), HideInEditorMode] public void NextRound()
     {
-        var story = Game.GetController<StoryController>();
-        story.ConfirmRound();
-        Game.World.DebugInfo(Game.World.Role);
+        var challenge = Game.GetController<ChallengeController>();
+        challenge.Instance();
+        Game.World.DebugInfo(Game.World.MainRole);
     }
 }

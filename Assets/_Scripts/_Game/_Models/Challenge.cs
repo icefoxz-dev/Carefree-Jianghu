@@ -14,20 +14,28 @@ namespace _Game._Models
         {
             public IRoleData Opponent { get; }
             public IRoleData Player { get; }
+            public bool IsPlayerWin { get; private set; }
+            public IOccasionResult Result { get; private set; }
             private UnityAction<IOccasionResult> _callback;
 
-            public SimpleBattle(IRoleData player,IRoleData opponent, UnityAction<IOccasionResult> callback)
+            public SimpleBattle(IRoleData player, IRoleData opponent, UnityAction<IOccasionResult> callback)
             {
+                _callback = callback;
                 Player = player;
                 Opponent = opponent;
-                _callback = callback;
             }
 
             public void Start()
             {
                 var differ = Player.Power() - Opponent.Power();
-                var isWin = differ >= 0;
-                _callback(new OccasionResult(isWin ? 1 : 0));
+                IsPlayerWin = differ >= 0;
+                Result = new OccasionResult(IsPlayerWin ? 1 : 0);
+            }
+
+            public void Finalize()
+            {
+                _callback(Result);
+                _callback = null;
             }
         }
 

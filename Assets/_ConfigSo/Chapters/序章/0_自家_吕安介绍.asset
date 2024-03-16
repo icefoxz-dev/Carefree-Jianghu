@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29391a5366d28b946a24ad2dc5995fad, type: 3}
+  m_Name: "0_\u81EA\u5BB6_\u5415\u5B89\u4ECB\u7ECD"
+  m_EditorClassIdentifier: 
+  referenceSo: {fileID: 11400000}
+  _name: "\u81EA\u5BB6_\u5415\u5B89\u4ECB\u7ECD"
+  id: 0
+  _title: "\u5415\u5B89\u62DC\u8BBF"
+  _mode: 1
+  Left:
+    PlaceMode: 0
+    Role: {fileID: 0}
+    Lines: []
+  Right:
+    PlaceMode: 2
+    Role: {fileID: 11400000, guid: e09b48937c05ec14bad54608e11d003d, type: 2}
+    Lines: []
+  Solo:
+    PlaceMode: 0
+    Role: {fileID: 0}
+    Lines: []
+  _description: "\u5415\u5B89\uFF1A\u522B\u5BB3\u6015\uFF0C \u6211\u4EEC\u4E0D\u662F\u574F\u4EBA\u3002
+    \u8FD9\u91CC\u7684\u90FD\u662F\u53EF\u601C\u4EBA\uFF0C \u4F60\u591A\u4E86\u89E3\u5C31\u4F1A\u660E\u767D\u4E86\u3002
+    \u5927\u5F53\u5BB6\u8BA9\u6211\u597D\u597D\u5F85\u4F60\uFF0C \u4F60\u5148\u591A\u4F11\u606F\u3002"
+  _sceneContent: {fileID: 0}
+  terms: []
+  rewards: []

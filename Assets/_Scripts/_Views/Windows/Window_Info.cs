@@ -13,7 +13,7 @@ public class Window_Info : WinUiBase
         btn_ok = v.Get<Button>("btn_ok");
     }
 
-    public void Show(string message, UnityAction onClose = null)
+    public void Set(string message, UnityAction onClose = null)
     {
         Display(true);
         text_message.text = message;

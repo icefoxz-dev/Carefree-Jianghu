@@ -17,9 +17,18 @@ MonoBehaviour:
   id: 0
   _prefab: {fileID: 0}
   _description: "\u8FD9\u662F\u4E00\u5934\u7070\u72FC"
+  _combat:
+    _tag: {fileID: 0}
+    _level: 0
+  _force:
+    _tag: {fileID: 0}
+    _level: 0
+  _dodge:
+    _tag: {fileID: 0}
+    _level: 0
   "\u6027\u683C": []
   "\u5C5E\u6027":
-  - _so: {fileID: 11400000, guid: f379862fc79c78840bd6e2acc30b446e, type: 2}
+  - _so: {fileID: 11400000, guid: 1823638c329732044a87b2c62d3e75ef, type: 2}
     _value: 5
   "\u6280\u80FD": []
   "\u72B6\u6001": []

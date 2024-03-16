@@ -1,8 +1,10 @@
 using System;
+using System.Linq;
 using _Data;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Object = UnityEngine.Object;
 
 namespace _Config.So
 {
@@ -10,29 +12,37 @@ namespace _Config.So
     {
         public abstract Occasion.Modes Mode { get; }
         public abstract string Description { get; }
-        public abstract ITagValue[] GetRewards(IOccasionResult result);
         public abstract IChallengeArgs ChallengeArgs { get; }
         public abstract IRolePlacing[] GetPlacingInfos();
         public abstract string GetLine(RolePlacing.Index role, int index);
         public abstract ITagTerm[] GetExcludedTerms(IRoleData role);
-
+        public abstract void CheckTags();
     }
 
-    public abstract class PurposeOccasionBase : OccasionBase,IPurpose
+    public abstract class PurposeOccasionBase : OccasionBase, IPurpose
     {
         [SerializeField] private string _title;
-        [FormerlySerializedAs("Mode")]public Occasion.Modes _mode;
-        [HideIf(nameof(_mode), Occasion.Modes.Solo)] [SerializeField] private InteractionSet Left;
-        [HideIf(nameof(_mode), Occasion.Modes.Solo)] [SerializeField] private InteractionSet Right;
-        [ShowIf(nameof(_mode), Occasion.Modes.Solo)] [SerializeField] private InteractionSet Solo;
-        [TextArea,FormerlySerializedAs("Description")] public string _description;
+        [FormerlySerializedAs("Mode")] public Occasion.Modes _mode;
+
+        [HideIf(nameof(_mode), Occasion.Modes.Solo)] [SerializeField]
+        private InteractionSet Left;
+
+        [HideIf(nameof(_mode), Occasion.Modes.Solo)] [SerializeField]
+        private InteractionSet Right;
+
+        [ShowIf(nameof(_mode), Occasion.Modes.Solo)] [SerializeField]
+        private InteractionSet Solo;
+
+        [TextArea, FormerlySerializedAs("Description")]
+        public string _description;
+
         public override string Name => _title;
         public override Occasion.Modes Mode => _mode;
         public override string Description => _description;
         public abstract bool IsMandatory { get; }
         public IOccasion GetOccasion(IRoleData role) => this;
 
-        public override string GetLine(RolePlacing.Index role,int index)
+        public override string GetLine(RolePlacing.Index role, int index)
         {
             var line = role switch
             {
@@ -75,23 +85,52 @@ namespace _Config.So
             }
         }
 
-        [Serializable] protected class InteractionSet //交互设定
+        [Serializable]
+        protected class InteractionSet //交互设定
         {
-            [FormerlySerializedAs("Type")]public RolePlacing.Modes PlaceMode; //交互类型
-            [ShowIf(nameof(PlaceMode), RolePlacing.Modes.Fixed)] public CharacterSo Role; //交互角色
+            [FormerlySerializedAs("Type")] public RolePlacing.Modes PlaceMode; //交互类型
+
+            [ShowIf(nameof(PlaceMode), RolePlacing.Modes.Fixed)]
+            public CharacterSo Role; //交互角色
+
             [TextArea] public string[] Lines;
         }
 
-        [Serializable] protected class RewardTag : ITagValue
+
+    }
+
+    [Serializable]
+    public class RewardTag : ITagValue
+    {
+        [SerializeField, FormerlySerializedAs("RoleTag")]
+        public RoleTagSoBase _tag;
+
+        [SerializeField] private double _value = 1;
+
+        public double Value => _value;
+
+        public IGameTag Tag => _tag;
+        public string Name => _tag.Name;
+        public TagType TagType => Tag.TagType;
+    }
+
+    [Serializable]
+    public class BattleRewardJudge
+    {
+        [SerializeField] private RewardTag[] _win;
+        [SerializeField] private RewardTag[] _lose;
+
+        public ITagValue[] GetRewards(IOccasionResult result) =>
+            result.Result switch
+            {
+                0 => _lose,
+                _ => _win
+            };
+
+        public void CheckTags(Object o)
         {
-            [SerializeField,FormerlySerializedAs("_gameTag")] public RoleTagSoBase RoleTag;
-            [SerializeField] private double _value = 1;
-
-            public double Value => _value;
-
-            public IGameTag Tag => RoleTag;
-            public string Name => RoleTag.Name;
-            public TagType TagType => Tag.TagType;
+            if (_win.Concat(_lose).Any(t => !t._tag))
+                Debug.LogError("BattleSo CheckTags Failed", o);
         }
     }
 }

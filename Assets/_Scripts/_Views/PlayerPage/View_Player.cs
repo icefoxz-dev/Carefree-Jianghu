@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class View_Player : UiBase
 {
-    private RoleData player => Game.World.Role;
+    private RoleData player => Game.World.MainRole;
     private View_info view_info { get; }
 
     public View_Player(IView v, UnityAction onClickAction) : base(v, true)

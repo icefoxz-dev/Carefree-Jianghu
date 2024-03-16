@@ -30,8 +30,8 @@ namespace _Config.So
 
         public double GetStrength(IRoleData player) => player.Attributes.Ability.GetTagValue(Strength);
         public double GetIntelligent(IRoleData player) => player.Attributes.Ability.GetTagValue(Intelligent);
-        public double GetPower(IRoleData player) => player.Attributes.Ability.GetTagValue(Power);
-        public double GetWisdom(IRoleData player) => player.Attributes.Ability.GetTagValue(Wisdom);
+        public double GetPower(IRoleData player) => player.Attributes.Capable.GetTagValue(Power);
+        public double GetWisdom(IRoleData player) => player.Attributes.Capable.GetTagValue(Wisdom);
         public double GetSilver(IRoleData player) => player.Attributes.Ability.GetTagValue(Silver);
         public double GetStamina(IRoleData player) => player.Attributes.Status.GetTagValue(Stamina.Tag);
         public double GetReputation(IRoleData player) => player.Attributes.Ability.GetTagValue(Reputation);

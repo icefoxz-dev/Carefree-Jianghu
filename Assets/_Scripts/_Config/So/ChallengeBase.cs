@@ -8,5 +8,8 @@ namespace _Config.So
     public abstract class ChallengeArgsBase : AutoUnderscoreNamingObject, IChallengeArgs
     {
         public abstract ChallengeTypes ChallengeType { get; }
+        public abstract ITagValue[] GetRewards(IOccasionResult result);
+
+        public abstract void CheckTags();
     }
 }

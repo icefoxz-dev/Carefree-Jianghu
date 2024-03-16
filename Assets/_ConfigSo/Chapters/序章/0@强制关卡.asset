@@ -9,10 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eec57631497f87a4d8b7fb64db468878, type: 3}
-  m_Name: "0_\u6218\u6597_\u6210\u804B"
+  m_Script: {fileID: 11500000, guid: 7d883182e2de1804fbe0573e7cb32d26, type: 3}
+  m_Name: "0@\u5F3A\u5236\u5173\u5361"
   m_EditorClassIdentifier: 
   referenceSo: {fileID: 11400000}
-  _name: "\u6218\u6597_\u6210\u804B"
+  _name: "\u5F3A\u5236\u5173\u5361"
   id: 0
-  _opponent: {fileID: 11400000, guid: 06bedcd8f7028e64da49d26686cf6d1a, type: 2}
+  _timeTerms:
+  - _term: 1
+    _year: 1
+    _month: 3
+    _round: 0
+  _terms: []
+  _occasions:
+  - {fileID: 11400000, guid: ef334137171e57b49a39f94aa870d96c, type: 2}

@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using _Data;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Object = UnityEngine.Object;
 
 namespace _Config.So
 {
@@ -36,6 +38,23 @@ namespace _Config.So
         public IRoleData GetRoleData(IEnumerable<IFormulaTag> capable) =>
             new RoleData(capable, Traits, Abilities, Status, Skills, Inventory, this);
 
+        [Button]
+        private void GetTagValue(CharacterTagsMapSo map,FormulaTagSo tag)
+        {
+            var role = GetRoleData(map.GetCapableTags);
+            Debug.Log($"{name}, {tag.Name}:{tag.GetValue(role)}");
+        }
+
+        public void CheckTags()
+        {
+            var tags = 性格.Select(t => t._so).Cast<GameTagSoBase>().Concat(属性.Select(t => t._so))
+                .Concat(技能.Select(t => t._so)).Concat(状态.Select(t => t._so)).Concat(物品.Select(t => t._so));
+            if (tags.Any(t => !t))
+                Debug.LogError("game tag not set!", this);
+            //_combat.CheckTags(this);
+            //_force.CheckTags(this);
+            //_dodge.CheckTags(this);
+        }
         [Serializable] private class TagModel<T> : ValueTag where T : IRoleTag
         {
             public T _so;
@@ -45,6 +64,7 @@ namespace _Config.So
 
             public override string Name => _so.Name;
             public override double Value => _value;
+            
         }
 
         [Serializable]
@@ -55,6 +75,10 @@ namespace _Config.So
             public ICombatSkill Tag => _tag;
             public int Level => _level;
             public ISkillSet<ICombatSkill> GetSkillSet() => _tag == null ? null : new SkillSet<ICombatSkill>(Tag, Level);
+            public void CheckTags(Object o)
+            {
+                if (!_tag) Debug.LogError("skill tag not set!", o);
+            }
         }
 
         [Serializable]
@@ -65,6 +89,11 @@ namespace _Config.So
             public ISkillTag Tag => _tag;
             public int Level => _level;
             public ISkillSet<ISkillTag> GetSkillSet() => _tag == null ? null : new SkillSet<ISkillTag>(Tag, Level);
+
+            public void CheckTags(Object o)
+            {
+                if (!_tag) Debug.LogError("skill tag not set!", o);
+            }
         }
 
         private abstract class ValueTag : ITagValue
@@ -105,13 +134,6 @@ namespace _Config.So
             {
                 throw new InvalidOperationException($"参考类型的角色不可以赋值！tag = {tag}");
             }
-
-            public void Deconstruct(out IRoleAttributes Attributes, out ICharacter Character, out IRoleEquipSet EquipSet)
-            {
-                Attributes = this.Attributes;
-                Character = this.Character;
-                EquipSet = this.EquipSet;
-            }
         }
         private record RoleAttributes : IRoleAttributes
         {
@@ -140,5 +162,6 @@ namespace _Config.So
                 this.Story = Story;
             }
         }
+
     }
 }

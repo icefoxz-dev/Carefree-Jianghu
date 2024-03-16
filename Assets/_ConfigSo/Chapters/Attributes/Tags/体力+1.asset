@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19c8b86d0a7d40f49ade5480757b35d9, type: 3}
   m_Name: "\u4F53\u529B+1"
   m_EditorClassIdentifier: 
-  _so: {fileID: 11400000}
+  referenceSo: {fileID: 11400000}
   _name: "\u4F53\u529B+1"
-  _gameTag: {fileID: 11400000, guid: 949d2ca2bdcc55e418405d6f564eb050, type: 2}
+  _gameTag: {fileID: 11400000, guid: a5aa1fd6430a3914190177b241c06474, type: 2}
   _value: 1

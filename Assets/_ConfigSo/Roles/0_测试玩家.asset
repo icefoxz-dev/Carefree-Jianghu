@@ -28,8 +28,6 @@ MonoBehaviour:
     _level: 0
   "\u6027\u683C": []
   "\u5C5E\u6027":
-  - _so: {fileID: 0}
-    _value: 1
   - _so: {fileID: 11400000, guid: 1ce3ddb612c6392418895c4b15fd7d3b, type: 2}
     _value: 3
   - _so: {fileID: 11400000, guid: 1823638c329732044a87b2c62d3e75ef, type: 2}

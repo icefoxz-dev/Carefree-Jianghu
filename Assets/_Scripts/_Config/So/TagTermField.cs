@@ -4,6 +4,7 @@ using _Data;
 using MyBox;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Object = UnityEngine.Object;
 
 namespace _Config.So
 {
@@ -34,6 +35,11 @@ namespace _Config.So
                 TagClauses.Less => "<",
                 _ => throw new ArgumentOutOfRangeException(nameof(clauses), clauses, null)
             };
+        }
+
+        public void CheckTag(Object o)
+        {
+            if(!RoleTag) Debug.LogError("game tag not set!", o);
         }
     }
 }

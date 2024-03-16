@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7d883182e2de1804fbe0573e7cb32d26, type: 3}
-  m_Name: "0@\u5F3A\u5236\u5173\u5361"
+  m_Name: "0@\u5415\u72C4\u820D"
   m_EditorClassIdentifier: 
   referenceSo: {fileID: 11400000}
-  _name: "\u5F3A\u5236\u5173\u5361"
+  _name: "\u5415\u72C4\u820D"
   id: 0
-  _timeTerms:
-  - _term: 1
-    _year: 1
-    _month: 2
-    _round: 0
-  _terms: []
+  _timeTerms: []
+  _terms:
+  - RoleTag: {fileID: 11400000, guid: 25b61b8cf7cedbb49bb39ce8684b2740, type: 2}
+    _clause: 1
+    Value: 0
   _occasions:
-  - {fileID: 11400000, guid: ef334137171e57b49a39f94aa870d96c, type: 2}
+  - {fileID: 11400000, guid: 9a3b2b5476bfe4a4ca56a6c16eaa23bd, type: 2}
+  - {fileID: 11400000, guid: 0bf10296f58382944953f145e857e8ab, type: 2}

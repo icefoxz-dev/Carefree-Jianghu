@@ -9,6 +9,7 @@ namespace _Data
     public interface IChallengeArgs
     {
         ChallengeTypes ChallengeType { get; }
+        ITagValue[] GetRewards(IOccasionResult result);
     }
     ///// <summary>
     ///// 挑战接口, 作为挑战或战斗的基础接口
@@ -17,7 +18,7 @@ namespace _Data
     //{
     //    IChallengeArgs Args { get; }
     //}
-    /// <summary>
+    /// <summary>   
     /// 战斗接口
     /// </summary>
     public interface IChallengeBattleArgs : IChallengeArgs

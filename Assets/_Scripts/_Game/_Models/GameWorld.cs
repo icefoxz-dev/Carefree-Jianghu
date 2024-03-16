@@ -9,30 +9,37 @@ namespace _Game._Models
     public class GameWorld : ModelBase
     {
         public Character[] Team { get; private set; }
-        public RoleData Role { get; private set; }//玩家数据
+        public RoleData MainRole { get; private set; }//玩家数据
         public GameRound Round { get; private set; } //世界信息
         public RewardBoard RewardBoard { get; } = new RewardBoard();
 
         public void Init()
         {
             SendEvent(GameEvent.Game_Start);
-            TestInit();
+            TestRound();
+            return;
+
+            void TestRound()
+            {
+                MainRole = new RoleData(Game.Config.GetPresetPlayer());
+                Team = Game.Config.GetCharacters().Select(r => new Character(r)).ToArray();
+                SetNewGameRound(new GameRound(Game.Config.StoryMap, new GameDate(1, 1, 0)));
+                DebugInfo(MainRole);
+                SendEvent(GameEvent.Episode_Start);
+            }
         }
 
-        private void TestInit()
+        private void SetNewGameRound(GameRound gameRound)
         {
-            Role = new RoleData(Game.Config.GetPresetPlayer());
-            Team = Game.Config.GetCharacters().Select(r=>new Character(r)).ToArray();
-            Round = new GameRound();
-            Round.UpdatePurposes(Role);
-            DebugInfo(Role);
-            SendEvent(GameEvent.Episode_Start);
+            Round = gameRound;
+            SendEvent(GameEvent.Round_New);
+            BeginRound();
         }
 
         public void DebugInfo(RoleData role)
         {
             var sb = new StringBuilder();
-            sb.Append($"<color=yellow>玩家：{role}\n武[{role.Power}]\n学[{role.Wisdom}]\n力[{role.Strength}]\n智[{role.Intelligent}]\n银[{role.Silver}]\n体[{role.Stamina}]");
+            sb.Append($"<color=yellow>玩家：{role} 武[{role.Power}] 学[{role.Wisdom}] 力[{role.Strength}] 智[{role.Intelligent}] 银[{role.Silver}] 体[{role.Stamina}]</color>");
             sb.Append(TagLog(role.Ability.Set,"属性"));
             sb.Append(TagLog(role.Status.Set,"状态"));
             sb.Append(TagLog(role.Skill.Set,"技能"));
@@ -51,26 +58,48 @@ namespace _Game._Models
             }
         }
 
-        public void SetCurrentPurpose(IPurpose purpose) => Round.SelectPurpose(purpose);
+        /// <summary>
+        /// 选中当前的意图
+        /// </summary>
+        /// <param name="purpose"></param>
+        public void SetCurrentPurpose(IPurpose purpose) => Round.SelectPurpose(MainRole, purpose);
 
         /// <summary>
-        /// 尝试进行下个回合，返回不过的条件
+        /// 确定意图，执行活动生成挑战等待结果。
         /// </summary>
         /// <returns></returns>
-        public ITagTerm[] TryProceedRound()
+        public void InstanceChallenge()
         {
-            var notInTerms = Round.SelectedPurpose.GetOccasion(Role).GetExcludedTerms(Role);
-            if (notInTerms.Any()) return notInTerms;
-            var purpose = Round.SelectedPurpose;
-            var occasion = purpose.GetOccasion(Role);
-            Round.InvokeChallenge(Role, result =>
+            Round.InstanceChallenge(MainRole, SetResultProcessNextRound);
+            return;
+
+            void SetResultProcessNextRound(IOccasionResult result)
             {
-                var rewards = occasion.GetRewards(result);
-                RewardBoard.SetReward(rewards, Role, occasion);
-                Round.NextRound(Role);
-                DebugInfo(Role);
-            });
-            return notInTerms;
+                var occasion = Round.Occasion;
+                var rewards = occasion.ChallengeArgs.GetRewards(result);
+                RewardBoard.SetReward(rewards, MainRole);
+                NextRound();
+            }
         }
+
+        // 执行下个回合
+        private void NextRound()
+        {
+            Round.NextRound();
+            BeginRound();
+            DebugInfo(MainRole);
+        }
+
+        // 开始回合，如果是强制活动，直接选择中
+        private void BeginRound()
+        {
+            Round.UpdatePurposes(MainRole);
+            if (!Round.IsMandatory) return;
+            SetCurrentPurpose(Round.Purposes.First());
+        }
+
+        //目前没有特别执行，但为了保持一致性，不让外部调用Round的ChallengeStart和ChallengeFinalize
+        public void StartChallenge() => Round.ChallengeStart();
+        public void FinalizeChallenge() => Round.ChallengeFinalize();
     }
 }

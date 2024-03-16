@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29391a5366d28b946a24ad2dc5995fad, type: 3}
   m_Name: "21_\u6797\u5BB6\u59D0\u59B9\u82B1"
   m_EditorClassIdentifier: 
-  _so: {fileID: 11400000}
+  referenceSo: {fileID: 11400000}
   _name: "\u6797\u5BB6\u59D0\u59B9\u82B1"
   id: 21
-  _sceneContent: {fileID: 8073558838520778418, guid: b61cf77157b7b9e4ba23e748289df75f, type: 3}
-  Mode: 1
+  _title: 
+  _mode: 1
   Left:
     PlaceMode: 2
     Role: {fileID: 11400000, guid: 18c051e97ea6f254b990007097496cf6, type: 2}
@@ -31,4 +31,7 @@ MonoBehaviour:
     PlaceMode: 0
     Role: {fileID: 0}
     Lines: []
-  Description: 
+  _description: 
+  _sceneContent: {fileID: 8073558838520778418, guid: b61cf77157b7b9e4ba23e748289df75f, type: 3}
+  terms: []
+  rewards: []

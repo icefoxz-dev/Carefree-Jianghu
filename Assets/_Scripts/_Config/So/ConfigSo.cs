@@ -17,6 +17,6 @@ namespace _Config.So
         public IRoleData GetPresetPlayer() => _player.GetRoleData(CharacterTagsMap.GetCapableTags);
         [SerializeField] private CharacterTagsMapSo characterTagsMap;
         public ICharacterTagsMap CharacterTagsMap => characterTagsMap;
-        [SerializeField]public ActivityConfigSo ActivityCfg;
+        public StoryMapSo StoryMap;
     }
 }

@@ -10,9 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eec57631497f87a4d8b7fb64db468878, type: 3}
-  m_Name: "0_\u6218\u6597_\u7070\u72FC"
+  m_Name: "0_\u6218\u6597_\u6210\u804B"
   m_EditorClassIdentifier: 
   referenceSo: {fileID: 11400000}
-  _name: "\u6218\u6597_\u7070\u72FC"
+  _name: "\u6218\u6597_\u6210\u804B"
   id: 0
-  _opponent: {fileID: 11400000, guid: b1e2a30b7080cae4ab5d1764bc2ff14e, type: 2}
+  _opponent: {fileID: 11400000, guid: 06bedcd8f7028e64da49d26686cf6d1a, type: 2}
+  _judge:
+    _win:
+    - _tag: {fileID: 11400000, guid: d174f3556efbc594385632ade685aded, type: 2}
+      _value: 1
+    _lose: []

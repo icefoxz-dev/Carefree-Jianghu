@@ -13,19 +13,31 @@ namespace _Game._Models
         public int Year => GameDate.Year;
         public int Month => GameDate.Month;
         public int Round => GameDate.Round;
+        public IStoryMap StoryMap { get; }
+        public IGameDate GameDate => _gameDate;
 
-        private GameDate GameDate { get; set; } = new GameDate(1,1,1);
         public IPurpose[] Purposes { get; private set; }
         //public IChallenge Challenge { get; private set; }
         public IPurpose SelectedPurpose { get; private set; }
         public Challenge.SimpleBattle Battle { get; private set; }
         public ChallengeTypes ChallengeType { get; private set; }
+        public IOccasion Occasion => _currentOccasion;
+        public bool IsMandatory { get; private set; }
 
-        public void NextRound(IRoleData role)
+        private UnityAction<IOccasionResult> _challengeCallback;
+        private IOccasion _currentOccasion;
+        private readonly GameDate _gameDate;
+
+        public GameRound(IStoryMap storyMap, GameDate gameDate)
         {
-            GameDate.NextRound();
+            StoryMap = storyMap;
+            _gameDate = gameDate;
+        }
+
+        public void NextRound()
+        {
+            _gameDate.NextRound();
             SelectedPurpose = null;
-            UpdatePurposes(role);
         }
 
         /// <summary>
@@ -34,51 +46,82 @@ namespace _Game._Models
         /// <param name="role"></param>
         public void UpdatePurposes(IRoleData role)
         {
-            var clusters = Game.Config.ActivityCfg.GetClusters();
+            var mandatory = StoryMap.Activities.GetMandatoryPurposes(role, this);
+            var clusters = StoryMap.Activities.GetClusters();
             var purposes = clusters.SelectMany(c => c.GetPurposes(role, this)).ToArray();
-            var mandotary = purposes.Where(p => p.IsMandatory).ToArray();
-            Purposes = mandotary.Length > 0
-                ? mandotary
+            mandatory = mandatory.Concat(purposes.Where(p => p.IsMandatory)).ToArray();
+            IsMandatory = mandatory.Length > 0;
+            Purposes = IsMandatory
+                ? mandatory
                 : purposes;
-            SendEvent(GameEvent.Round_Update);
+            SendEvent(GameEvent.Round_Puepose_Update);
         }
         /// <summary>
         /// 选择意图
         /// </summary>
-        /// <param name="purpose"></param>
-        public void SelectPurpose(IPurpose purpose)
+        public void SelectPurpose(IRoleData role, IPurpose purpose)
         {
             SelectedPurpose = purpose;
-            SendEvent(GameEvent.Round_Update);
+            _currentOccasion = SelectedPurpose.GetOccasion(role);
+            SendEvent(GameEvent.Round_Puepose_Update);
         }
 
-        public void InvokeChallenge(IRoleData role, UnityAction<IOccasionResult> callback)
+
+        public void InstanceChallenge(IRoleData role, UnityAction<IOccasionResult> callback)
         {
-            var occasion = SelectedPurpose.GetOccasion(role);
-            ChallengeType = occasion.ChallengeArgs.ChallengeType;
-            switch (occasion.ChallengeArgs.ChallengeType)
+            _challengeCallback = callback;
+            SendEvent(GameEvent.Occasion_Update);
+            ChallengeType = _currentOccasion.ChallengeArgs.ChallengeType;
+            switch (_currentOccasion.ChallengeArgs.ChallengeType)
             {
                 case ChallengeTypes.Battle:
-                    var arg = (IChallengeBattleArgs)occasion.ChallengeArgs;
+                    var arg = (IChallengeBattleArgs)_currentOccasion.ChallengeArgs;
                     var opponent = arg.GetOpponent(Game.Config.CharacterTagsMap.GetCapableTags);
-                    Battle = new Challenge.SimpleBattle(role, opponent, r => OnStartBattle(r, callback));
+                    Battle = new Challenge.SimpleBattle(role, opponent, _challengeCallback);
                     break;
                 case ChallengeTypes.MiniGame:
-                    break;
+                    throw new NotImplementedException("暂时没有小游戏!");
                 case ChallengeTypes.None:
-                    callback(Challenge.DefaultResult);
-                    return;
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            SendEvent(GameEvent.Challenge_Start);
+        }
+        public void ChallengeStart()
+        {
+            switch (_currentOccasion.ChallengeArgs.ChallengeType)
+            {
+                case ChallengeTypes.Battle:
+                    Battle.Start();
+                    SendEvent(GameEvent.Challenge_Battle_Start);
+                    break;
+                case ChallengeTypes.MiniGame:
+                    throw new NotImplementedException("暂时没有小游戏!");
+                    SendEvent(GameEvent.Challenge_Mini_Start);
+                case ChallengeTypes.None:
+                    _challengeCallback(Challenge.DefaultResult);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
-        private void OnStartBattle(IOccasionResult result, UnityAction<IOccasionResult> callback)
+        public void ChallengeFinalize()
         {
-            callback(result);
-            Battle = null;
-            SendEvent(GameEvent.Battle_End);
+            switch (_currentOccasion.ChallengeArgs.ChallengeType)
+            {
+                case ChallengeTypes.Battle:
+                    Battle.Finalize();
+                    break;
+                case ChallengeTypes.MiniGame:
+                    throw new NotImplementedException("暂时没有小游戏!");
+                case ChallengeTypes.None:
+                    throw new InvalidOperationException("Challenge.Type.None 应该直接回调。");
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
+
+        public ITagTerm[] GetExcludedTerms(IRoleData role) => _currentOccasion.GetExcludedTerms(role);
     }
 }

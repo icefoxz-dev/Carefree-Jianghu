@@ -21,7 +21,7 @@ namespace _Views.StoryPage
         {
             view_story = new View_Story(v.Get<View>("view_story"), OnOccasionRoleClick);
             view_cardSelector = new View_CardSelector(v.Get<View>("view_cardSelector"), OnRoleDragEvent);
-            Game.RegEvent(GameEvent.Round_Update, b => UpdateOccasion());
+            Game.RegEvent(GameEvent.Round_Puepose_Update, b => UpdateOccasion());
         }
 
         private void OnRoleDragEvent((PointerEventData p, DragHelper.DragEvent e,int cardType ,int index) arg)
@@ -66,11 +66,12 @@ namespace _Views.StoryPage
         private void UpdateOccasion()
         {
             LogEvent();
-            var team = Game.World.Team;
-            var occasions = Game.World.Round.Purposes;
+            var world = Game.World;
+            var team = world.Team;
+            var purposes = world.Round.IsMandatory ? Array.Empty<IPurpose>() : world.Round.Purposes;//如果是强制就不显示可选
             view_story.OnOccasionUpdate();
             var options = team.Select(t => (t.Name, t.Description, 0))
-                .Concat(occasions.Select(o => (o.Name, o.Description, 1)))
+                .Concat(purposes.Select(o => (o.Name, o.Description, 1)))
                 .ToArray();
             view_cardSelector.SetCards(options);
         }

@@ -18,6 +18,10 @@ namespace _Config.So
                 ? _occasions.Where(f => f.IsInTerm(role)).ToArray()
                 : Array.Empty<IPurpose>();
 
+        public override void CheckTags()
+        {
+            foreach (var occasion in _occasions) occasion.CheckTags();
+        }
     }
 
     public abstract class OccasionClusterSoBase : AutoAtNamingObject, IOccasionCluster
@@ -95,5 +99,7 @@ namespace _Config.So
                 }
             }
         }
+
+        public abstract void CheckTags();
     }
 }

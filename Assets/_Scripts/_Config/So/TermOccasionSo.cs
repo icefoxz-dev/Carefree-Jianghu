@@ -13,16 +13,16 @@ namespace _Config.So
         public override ITagTerm[] GetExcludedTerms(IRoleData role) =>
             terms.GetExcludedTerms(role).Concat(_so.GetExcludedTerms(role)).ToArray();
 
-        public override ITagValue[] GetRewards(IOccasionResult result) => _so.GetRewards(result);
+        public override void CheckTags() => _so.CheckTags();
 
         public override IChallengeArgs ChallengeArgs => this;
         public ChallengeTypes ChallengeType => ChallengeTypes.None;
+        public ITagValue[] GetRewards(IOccasionResult result) => _so.ChallengeArgs.GetRewards(result);
         public override Occasion.Modes Mode => _so.Mode;
         public override string Description => _so.Description;
         public override bool IsMandatory => false;
 
         public override IRolePlacing[] GetPlacingInfos() => _so.GetPlacingInfos();
         public override string GetLine(RolePlacing.Index role, int index) => _so.GetLine(role, index);
-
     }
 }

@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47a7f913cabbf3747a80a590ed9a63ee, type: 3}
+  m_Name: "2_\u6210\u804B"
+  m_EditorClassIdentifier: 
+  referenceSo: {fileID: 11400000}
+  _name: "\u6210\u804B"
+  id: 2
+  _prefab: {fileID: 1212601801446756811, guid: 5094621a989db5649947ee0b2db5aebf, type: 3}
+  _description: 
+  _combat:
+    _tag: {fileID: 11400000, guid: 79f044d5f52a40b428780aaa27ac3595, type: 2}
+    _level: 2
+  _force:
+    _tag: {fileID: 11400000, guid: 6efb607f2c1ef1b4e9c1bae596ccec7b, type: 2}
+    _level: 2
+  _dodge:
+    _tag: {fileID: 0}
+    _level: 0
+  "\u6027\u683C": []
+  "\u5C5E\u6027":
+  - _so: {fileID: 11400000, guid: 1823638c329732044a87b2c62d3e75ef, type: 2}
+    _value: 3
+  - _so: {fileID: 11400000, guid: 1ce3ddb612c6392418895c4b15fd7d3b, type: 2}
+    _value: 2
+  "\u6280\u80FD":
+  - _so: {fileID: 11400000, guid: 83e3591ff7d5fa14cbcb5853c1cdffb5, type: 2}
+    _value: 3
+  - _so: {fileID: 11400000, guid: 0c148d16bde3d084d9b4e7f1ad6a4a3f, type: 2}
+    _value: 3
+  - _so: {fileID: 11400000, guid: d57626ed8891e5b499a320ea9e40cbca, type: 2}
+    _value: 1
+  "\u72B6\u6001": []
+  "\u7269\u54C1": []

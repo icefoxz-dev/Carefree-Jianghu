@@ -111,7 +111,11 @@ namespace _Data
         private readonly Dictionary<IGameTag, double> _tags;
 
         public IEnumerable<ITagValue> Set => _tags.Select(t => new ValueTag(t.Key, t.Value));
-        public TagManager(ITagSet set):this(set.Set.Select(s=>s.Tag)){}
+
+        public TagManager(ITagSet set)
+        {
+            _tags = set.Set.ToDictionary(t => t.Tag, t => t.Value);
+        }
         public TagManager(IEnumerable<IGameTag> tags)
         {
             _tags = tags.ToDictionary(t => t, _ => default(double));

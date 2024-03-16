@@ -8,7 +8,14 @@ namespace _Config.So
     public class BattleSo : ChallengeArgsBase,IChallengeBattleArgs
     {
         [SerializeField] private CharacterSo _opponent;
+        [SerializeField] private BattleRewardJudge _judge;
         public override ChallengeTypes ChallengeType => ChallengeTypes.Battle;
+        public override ITagValue[] GetRewards(IOccasionResult result) => _judge.GetRewards(result);
+        public override void CheckTags()
+        {
+            _opponent.CheckTags();
+            _judge.CheckTags(this);
+        }
 
         public IRoleData GetOpponent(IEnumerable<IFormulaTag> capable) => _opponent.GetRoleData(capable);
     }
